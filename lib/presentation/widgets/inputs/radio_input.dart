@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/theme_colors.dart';
-
 class RadioInput extends StatefulWidget {
   final List<String> options;
   final String? label;
@@ -45,7 +43,7 @@ class RadioInputState extends State<RadioInput> {
       child: Text(
         widget.label!,
         style: const TextStyle(
-          color: ThemeColors.blackText,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       ),

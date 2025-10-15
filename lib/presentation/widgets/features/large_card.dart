@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/theme_colors.dart';
-
 class LargeCard extends StatelessWidget {
   final String cardName;
   final String image;
@@ -24,7 +22,7 @@ class LargeCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: ThemeColors.blackText,
+                  color: Colors.black,
                 ),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
@@ -46,7 +44,7 @@ class LargeCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 15,
-                        color: ThemeColors.blackText,
+                        color: Colors.black,
                       ),
                     )
                   ],

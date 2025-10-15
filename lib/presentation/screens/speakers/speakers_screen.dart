@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/models.dart';
+import '../../blocs/speakers/speakers_bloc.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
-import '../../theme/theme_colors.dart';
-import '../../blocs/speakers/speakers_bloc.dart';
 import 'speaker_screen.dart';
 
 part 'widgets/speakers_card.dart';

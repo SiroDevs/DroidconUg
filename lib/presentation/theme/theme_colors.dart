@@ -2,118 +2,51 @@ import 'package:flutter/material.dart';
 
 class ThemeColors {
   ThemeColors._();
-  // General colors
-  static const black2 = Color(0xFF202124);
-  static const grey = Color(0xB3000000); //black 70%
-  static const mediumGrey = Color(0x80000000); //black 50%
-  static const lightGrey = Color(0x33000000); //black 20%
-  static const backgroundGrey = Color(0xFFF1F2F3);
-  static const disabledGrey = Color(0xFFE6E6E6);
-  static const shadow = Color(0x1e000000); //black 12%
-  static const error = Color(0xFFE30000);
+  // Primary Colors (based on #ff6e4d - orange/red)
+  static const primary = Color(0xFFff6e4d); // Main primary color
+  static const primaryLight = Color(0xFFff9e7d); // Lighter variant
+  static const primaryDark = Color(0xFFc53e1d); // Darker variant
+  static const primaryContainer = Color(
+    0xFFffdbd2,
+  ); 
+  
+  // Container color for light theme
 
-  static const whiteGrey = Color(0xFF868B9B);
-  static const gray = Color(0xFFEEEEEE);
-  static const success = Color(0xff116d5a);
-  static const error1 = Color(0xFFfadcd3);
-  static const green = Color(0xFF1A821A);
-  static const yellow = Color(0xFFF1AF3A);
+  // Secondary Colors (based on #009688 - teal)
+  static const secondary = Color.fromARGB(255, 115, 207, 198); // Main secondary color
+  static const secondaryLight = Color(0xFF52c7b8); // Lighter variant
+  static const secondaryDark = Color(0xFF00675b); // Darker variant
+  static const secondaryContainer = Color(
+    0xFFb2dfdb,
+  ); 
+  
+  // Container color for light theme
 
-  static const Color midGray = Color.fromARGB(255, 198, 198, 198);
-  static const Color darkGray = Color.fromARGB(255, 157, 161, 174);
-  static const Color textGray = Color.fromARGB(255, 134, 139, 155);
-  static const Color lightGray = Color.fromARGB(255, 242, 249, 253);
-  static const Color blackText = Color.fromARGB(255, 36, 40, 45);
-  static const Color trafficAmber = Color.fromARGB(255, 241, 175, 58);
-  static const Color trafficRed = Color.fromARGB(255, 246, 0, 1);
-  static const Color trafficGreen = Color.fromARGB(255, 0, 247, 0);
-// Supportive theme
-static const primary = Color(0xFFff6e4d);  // Red
-static const primaryDark = Color(0xFFC62828);  // Dark Red
-static const accent = Color(0xFF009688);  // Teal Green
-static const accent1 = Color(0xFF01e2c4);  // Light Teal Green
+  // Neutral Colors
+  static const background = Color(0xFFf8f9fa);
+  static const surface = Color(0xFFffffff);
+  static const surfaceVariant = Color(0xFFe9ecef);
+  static const onBackground = Color(0xFF1a1a1a);
+  static const onSurface = Color(0xFF1a1a1a);
+  static const onSurfaceVariant = Color(0xFF495057);
 
-// Light Mode Colors
-/// Main color for the app, used in branding and key elements
-static const Color kPrimaryRed = Color(0xFFD32F2F);  // Red
+  // Dark Theme Neutral Colors
+  static const darkBackground = Color(0xFF121212);
+  static const darkSurface = Color(0xFF1e1e1e);
+  static const darkSurfaceVariant = Color(0xFF2d2d2d);
+  static const darkOnBackground = Color(0xFFf8f9fa);
+  static const darkOnSurface = Color(0xFFf8f9fa);
+  static const darkOnSurfaceVariant = Color(0xFFadb5bd);
 
-/// Used for headers and prominent UI elements
-static const Color kDarkRed = Color(0xFFB71C1C);  // Dark Red
+  // Semantic Colors
+  static const error = Color(0xFFba1a1a);
+  static const errorContainer = Color(0xFFffdad6);
+  static const onError = Color(0xFFffffff);
+  static const onErrorContainer = Color(0xFF410002);
 
-/// Background color for sections like chats
-static const Color kLightTeal = Color(0xFFB2DFDB);  // Light Teal Green
-
-/// Provides variation and depth in the color scheme
-static const Color kComplementaryRed = Color(0xFFE57373);  // Light Red
-
-// Dark Mode Colors
-/// Primary background color in dark mode
-static const Color kDarkGrayBlack = Color(0xFF121212);  // Dark Gray
-
-/// Used for headers and prominent UI elements in dark mode
-static const Color kPrimaryDeepRed = Color(0xFF9C1B1B);  // Deep Red
-
-/// Used for headers and prominent UI elements in dark mode
-static const Color kDeepRed = Color(0xFFB71C1C);  // Dark Red
-
-/// Complementary dark color for various UI elements in dark mode
-static const Color kDarkTealGreen = Color(0xFF00695C);  // Dark Teal Green
-
-/// Background color for message bubbles and other elements in dark mode
-static const Color kMediumGray = Color(0xFF303030);  // Medium Gray
-
-/// Text color for readability against dark background
-static const Color kLightGrayDarkMode = Color(0xFFAEBAC1);  // Light Gray
-
-/// Used for icons and action buttons in dark mode
-static const Color kAccentTealGreen = Color(0xFF80CBC4);  // Lighter Teal Green
-
-
-  static Color bgColorPrimary(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.primary
-        : ThemeColors.kDarkTealGreen;
-  }
-
-  static Color bgColorPrimary2(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.primary
-        : ThemeColors.accent;
-  }
-
-  static Color bgColorPrimary3(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.accent1
-        : Colors.black;
-  }
-
-  static Color bgColorPrimary4(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.primary
-        : ThemeColors.accent;
-  }
-
-  static Color bgColorPrimary5(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.primary
-        : Colors.black;
-  }
-
-  static Color bgColorAccent(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? ThemeColors.accent
-        : ThemeColors.kDarkTealGreen;
-  }
-
-  static Color bgColorBW(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? Colors.white
-        : Colors.black;
-  }
-
-  static Color bgColorWB(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? Colors.black
-        : Colors.white;
-  }
+  // Additional Colors
+  static const outline = Color(0xFF6c757d);
+  static const outlineVariant = Color(0xFFdee2e6);
+  static const shadow = Color(0x52000000);
+  static const scrim = Color(0x52000000);
 }

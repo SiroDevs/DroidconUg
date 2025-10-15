@@ -2,8 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/app_assets.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/utils/date_util.dart';
 import '../../navigator/route_names.dart';
 import '../../theme/theme_colors.dart';
@@ -48,7 +48,7 @@ class SplashScreenState extends State<SplashScreen> {
                   textStyle: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: ThemeColors.accent,
+                    color: ThemeColors.secondaryDark,
                   ),
                   speed: const Duration(milliseconds: 110),
                 ),

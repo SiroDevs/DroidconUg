@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/theme_colors.dart';
-import '../../theme/theme_styles.dart';
+import '../../../core/utils/date_util.dart';
 import '../../../core/utils/utils.dart';
 import '../../../data/models/models.dart';
-import '../../../core/utils/date_util.dart';
+import '../../theme/theme_styles.dart';
 import 'tag_item.dart';
 
 class SessionItem extends StatelessWidget {
@@ -74,7 +73,7 @@ class SessionItem extends StatelessWidget {
 
     return Card(
       elevation: 2,
-      color: ThemeColors.bgColorBW(context),
+      color: Theme.of(context).colorScheme.onSurface,
       margin: const EdgeInsets.only(top: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

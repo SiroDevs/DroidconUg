@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:textstyle_extensions/textstyle_extensions.dart';
 
-import '../../theme/theme_colors.dart';
 import '../../theme/theme_fonts.dart';
 import '../../theme/theme_styles.dart';
 
@@ -21,9 +20,7 @@ class TagItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           margin: const EdgeInsets.only(right: Sizes.xs),
           decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.light
-                ? ThemeColors.primary
-                : ThemeColors.kPrimaryDeepRed,
+            color: Theme.of(context).colorScheme.onSurface,
             borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),
           child: Text(tagText,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'presentation/theme/bloc/theme_bloc.dart';
+import 'presentation/blocs/theme/theme_bloc.dart';
 import 'presentation/theme/theme_data.dart';
 import 'domain/repository/preferences_repository.dart';
 import 'core/di/injectable.dart';

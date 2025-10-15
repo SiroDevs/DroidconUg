@@ -10,7 +10,7 @@ class SpeakerCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.all(8.0),
       elevation: 4,
-      color: ThemeColors.bgColorBW(context),
+      color: Theme.of(context).colorScheme.onSurface,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

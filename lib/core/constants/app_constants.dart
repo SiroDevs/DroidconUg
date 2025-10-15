@@ -25,6 +25,7 @@ class AppConstants {
   static const appTitle = "DroidconUg";
   static const appTitle1 = "droidcon uganda";
   static const appCredits = "© Siro Devs";
+  static const kFontFamily = 'TrebuchetMS';
 
   static Future<String> get databaseFile async {
     Directory dbFolder = await getApplicationDocumentsDirectory();

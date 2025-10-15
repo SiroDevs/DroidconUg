@@ -150,7 +150,7 @@ class AppButtonState extends State<AppButton> {
               shape: RoundedRectangleBorder(
                 side: const BorderSide(
                   width: 1.8,
-                  color: ThemeColors.accent,
+                  color: ThemeColors.secondary,
                 ),
                 borderRadius: widget.borderRadius,
               ),
@@ -219,7 +219,7 @@ class DropDownWidget extends StatelessWidget {
     var labelWidget = Text(
       label,
       style: const TextStyle(
-        color: ThemeColors.blackText,
+        color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
     ).padding(left: 5, top: 15, bottom: 5);
@@ -227,7 +227,7 @@ class DropDownWidget extends StatelessWidget {
     var inputWidget = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: ThemeColors.darkGray, width: 1),
+        border: Border.all(color: ThemeColors.onSurfaceVariant, width: 1),
       ),
       child: DropdownButton<String>(
         isExpanded: true,
@@ -242,7 +242,7 @@ class DropDownWidget extends StatelessWidget {
               value,
               style: const TextStyle(
                 fontSize: 16,
-                color: ThemeColors.blackText,
+                color: Colors.black,
                 fontWeight: FontWeight.w600,
               ),
             ).padding(left: 10),
@@ -250,7 +250,7 @@ class DropDownWidget extends StatelessWidget {
         }).toList(),
         icon: const Icon(
           Icons.arrow_drop_down,
-          color: ThemeColors.blackText,
+          color: Colors.black,
         ).padding(horizontal: 10),
         underline: const SizedBox.shrink(),
       ),
@@ -291,9 +291,7 @@ class IconTextBtn extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.light
-              ? ThemeColors.primary
-              : ThemeColors.kPrimaryDeepRed,
+          color: Theme.of(context).colorScheme.onSurface,
           borderRadius: const BorderRadius.all(
             Radius.circular(5),
           ),

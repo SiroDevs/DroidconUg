@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/di/injectable.dart';
 import '../../../core/utils/app_util.dart';
 import '../../../domain/repository/preferences_repository.dart';
 import '../../widgets/inputs/radio_input.dart';
-import '../../../core/di/injectable.dart';
-import '../../theme/bloc/theme_bloc.dart';
-import '../../theme/theme_colors.dart';
+import '../../blocs/theme/theme_bloc.dart';
 import '../../theme/theme_styles.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../blocs/settings/settings_bloc.dart';
@@ -53,7 +52,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             children: [
               Card(
                 margin: EdgeInsets.all(Sizes.xs),
-                color: ThemeColors.bgColorBW(context),
+                color: Theme.of(context).colorScheme.onSurface,
                 child: ListTile(
                   leading: Icon(Icons.color_lens),
                   title: const Text('App Theme'),

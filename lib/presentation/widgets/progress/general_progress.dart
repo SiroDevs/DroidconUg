@@ -9,7 +9,7 @@ import '../../theme/theme_styles.dart';
 import '../action/base_buttons.dart';
 
 class CircularProgress extends StatelessWidget {
-  const CircularProgress({Key? key}) : super(key: key);
+  const CircularProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CircularProgress extends StatelessWidget {
 }
 
 class SmallCircularProgress extends StatelessWidget {
-  const SmallCircularProgress({Key? key}) : super(key: key);
+  const SmallCircularProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +47,13 @@ class EmptyState extends StatelessWidget {
   final bool showRetry;
   final VoidCallback? onRetry;
   const EmptyState({
-    Key? key,
+    super.key,
     this.title =
         'Sorry, no data is available at the moment. Please check back later.',
     this.titleRetry = 'RETRY',
     this.showRetry = false,
     this.onRetry,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

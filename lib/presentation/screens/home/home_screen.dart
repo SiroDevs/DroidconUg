@@ -8,13 +8,14 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../data/models/models.dart';
+import '../../blocs/home/home_bloc.dart';
 import '../../navigator/route_names.dart';
+import '../../theme/theme_colors.dart';
+import '../../theme/theme_styles.dart';
+import '../../widgets/action/theme_button.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/skeleton.dart';
-import '../../theme/theme_colors.dart';
-import '../../theme/theme_styles.dart';
-import '../../blocs/home/home_bloc.dart';
 
 part 'widgets/sessions_preview.dart';
 part 'widgets/speakers_carousel.dart';
@@ -44,10 +45,10 @@ class HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           var appBar = AppBar(
-            title: GestureDetector(
-              child: Image.asset(AppAssets.droidconIcon, height: 50),
-              onTap: () => Navigator.pushNamed(context, RouteNames.settings),
-            ),
+            title: Image.asset(AppAssets.droidconIcon, height: 40),
+            actions: [
+              ThemeButton()
+            ]
           );
 
           return state.when(

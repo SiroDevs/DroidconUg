@@ -44,7 +44,7 @@ class SessionsPreview extends StatelessWidget {
       margin: const EdgeInsets.all(Sizes.sm),
       child: Card(
         elevation: 4,
-        color: ThemeColors.bgColorPrimary3(context),
+        color: Theme.of(context).colorScheme.onSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Sizes.sm),
         ),
@@ -127,7 +127,7 @@ class _SessionInfo extends StatelessWidget {
           decoration: BoxDecoration(
             color: ThemeColors.primary,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: ThemeColors.bgColorPrimary(context)),
+            border: Border.all(color: Theme.of(context).colorScheme.onSurface),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -44,7 +44,7 @@ class SmallCard extends StatelessWidget {
                   cardName,
                   style: const TextStyle(
                     fontSize: 15,
-                    color: ThemeColors.blackText,
+                    color: Colors.black,
                   ),
                 )
               ],

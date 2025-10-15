@@ -1,65 +1,148 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_constants.dart';
+import '../../core/utils/app_util.dart';
+import '../../core/di/injectable.dart';
+import '../../domain/repository/preferences_repository.dart';
 import 'theme_colors.dart';
 
 class AppTheme {
   AppTheme._();
 
+  static String currentTheme() {
+    var prefRepo = getIt<PreferencesRepository>();
+    return getThemeModeString(prefRepo.getThemeMode());
+  }
+
   static ThemeData lightTheme() {
     return ThemeData(
-      //fontFamily: ThemeFonts.lato,
-      scaffoldBackgroundColor: ThemeColors.kLightTeal,
-      colorScheme: const ColorScheme(
-        brightness: Brightness.light,
-        primary: ThemeColors.kPrimaryRed,
-        primaryContainer: ThemeColors.kPrimaryRed,
+      scaffoldBackgroundColor: ThemeColors.background,
+      fontFamily: AppConstants.kFontFamily,
+      colorScheme: const ColorScheme.light(
+        primary: ThemeColors.primary,
         onPrimary: Colors.white,
-        secondary: ThemeColors.kComplementaryRed,
-        secondaryContainer: ThemeColors.kComplementaryRed,
-        onSecondary: ThemeColors.kDarkGrayBlack,
-        surface: ThemeColors.kLightTeal,
-        onSurface: Colors.black,
-        error: Colors.red,
-        onError: Colors.white,
+        primaryContainer: ThemeColors.primaryContainer,
+        secondary: ThemeColors.secondary,
+        onSecondary: Colors.white,
+        secondaryContainer: ThemeColors.secondaryContainer,
+        tertiary: ThemeColors.primaryLight,
+        onTertiary: Colors.white,
+        tertiaryContainer: ThemeColors.secondaryLight,
+        surface: ThemeColors.surface,
+        onSurface: ThemeColors.onSurface,
+        surfaceVariant: ThemeColors.surfaceVariant,
+        onSurfaceVariant: ThemeColors.onSurfaceVariant,
+        background: ThemeColors.background,
+        onBackground: ThemeColors.onBackground,
+        error: ThemeColors.error,
+        onError: ThemeColors.onError,
+        errorContainer: ThemeColors.errorContainer,
+        onErrorContainer: ThemeColors.onErrorContainer,
+        outline: ThemeColors.outline,
+        outlineVariant: ThemeColors.outlineVariant,
+        shadow: ThemeColors.shadow,
+        surfaceTint: ThemeColors.primary,
+        inverseSurface: ThemeColors.onBackground,
+        onInverseSurface: ThemeColors.background,
+        inversePrimary: ThemeColors.primaryLight,
+        scrim: ThemeColors.scrim,
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: ThemeColors.kPrimaryDeepRed,
-        foregroundColor: ThemeColors.accent,
-        shadowColor: Colors.black,
-        elevation: 3,
-      ),
-      navigationBarTheme: const NavigationBarThemeData(
+      appBarTheme: const AppBarThemeData(
         backgroundColor: Colors.white,
-        indicatorColor: ThemeColors.accent,
+        foregroundColor: ThemeColors.secondaryDark,
         elevation: 3,
+        iconTheme: IconThemeData(color: ThemeColors.secondaryDark),
+        actionsIconTheme: IconThemeData(color: ThemeColors.secondaryDark),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: ThemeColors.surface,
+        indicatorColor: ThemeColors.primaryContainer,
+        elevation: 3,
+        iconTheme: MaterialStateProperty.all(const IconThemeData(color: ThemeColors.primary)),
+        labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(color: ThemeColors.primary, fontFamily: AppConstants.kFontFamily),
+        ),
+      ),
+      cardTheme: const CardThemeData(
+        color: ThemeColors.surface,
+        surfaceTintColor: ThemeColors.surface,
+        shadowColor: Colors.black,
+        elevation: 2,
+      ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: ThemeColors.surface,
+        surfaceTintColor: ThemeColors.surface,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: ThemeColors.primary,
+        foregroundColor: Colors.white,
       ),
     );
   }
 
   static ThemeData darkTheme() {
     return ThemeData(
-      //fontFamily: ThemeFonts.lato,
-      colorScheme: const ColorScheme(
-        brightness: Brightness.dark,
-        primary: Colors.white,
-        primaryContainer: Colors.white,
-        onPrimary: Colors.white,
-        secondary: ThemeColors.kLightGrayDarkMode,
-        secondaryContainer: ThemeColors.kLightGrayDarkMode,
-        onSecondary: ThemeColors.kDarkTealGreen,
-        surface: Colors.grey,
-        onSurface: Colors.white,
-        error: Colors.red,
-        onError: Colors.black,
+      scaffoldBackgroundColor: ThemeColors.darkBackground,
+      fontFamily: AppConstants.kFontFamily,
+      colorScheme: const ColorScheme.dark(
+        primary: ThemeColors.primaryLight,
+        onPrimary: ThemeColors.darkBackground,
+        primaryContainer: ThemeColors.primaryDark,
+        secondary: ThemeColors.secondaryLight,
+        onSecondary: ThemeColors.darkBackground,
+        secondaryContainer: ThemeColors.secondaryDark,
+        tertiary: ThemeColors.secondary,
+        onTertiary: ThemeColors.darkBackground,
+        tertiaryContainer: ThemeColors.primary,
+        surface: ThemeColors.darkSurface,
+        onSurface: ThemeColors.darkOnSurface,
+        surfaceVariant: ThemeColors.darkSurfaceVariant,
+        onSurfaceVariant: ThemeColors.darkOnSurfaceVariant,
+        background: ThemeColors.darkBackground,
+        onBackground: ThemeColors.darkOnBackground,
+        error: Color(0xFFFFB4AB),
+        onError: Color(0xFF690005),
+        errorContainer: Color(0xFF93000A),
+        onErrorContainer: Color(0xFFFFDAD6),
+        outline: ThemeColors.secondaryLight,
+        outlineVariant: ThemeColors.darkSurfaceVariant,
+        shadow: Colors.black,
+        surfaceTint: ThemeColors.primaryLight,
+        inverseSurface: ThemeColors.darkOnSurface,
+        onInverseSurface: ThemeColors.darkSurface,
+        inversePrimary: ThemeColors.primaryDark,
+        scrim: ThemeColors.scrim,
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+      appBarTheme: const AppBarThemeData(
+        backgroundColor: ThemeColors.darkSurface,
+        foregroundColor: ThemeColors.darkOnSurface,
+        elevation: 1,
+        iconTheme: IconThemeData(color: ThemeColors.darkOnSurface),
+        actionsIconTheme: IconThemeData(color: ThemeColors.darkOnSurface),
       ),
-      navigationBarTheme: const NavigationBarThemeData(
-        backgroundColor: Colors.black,
-        indicatorColor: ThemeColors.accent,
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: ThemeColors.darkSurface,
+        indicatorColor: ThemeColors.primaryDark,
+        elevation: 3,
+        iconTheme: MaterialStateProperty.all(const IconThemeData(color: ThemeColors.darkOnSurface)),
+        labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(color: ThemeColors.darkOnSurface, fontFamily: AppConstants.kFontFamily),
+        ),
+      ),
+      cardTheme: const CardThemeData(
+        color: ThemeColors.darkSurfaceVariant,
+        surfaceTintColor: ThemeColors.darkSurfaceVariant,
+        shadowColor: Colors.black,
+        elevation: 2,
+      ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: ThemeColors.darkSurface,
+        surfaceTintColor: ThemeColors.darkSurface,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: ThemeColors.secondary,
+        foregroundColor: ThemeColors.darkBackground,
       ),
     );
-  }
+  }  
 }
