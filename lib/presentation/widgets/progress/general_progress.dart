@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:textstyle_extensions/textstyle_extensions.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../theme/theme_colors.dart';
 import '../../theme/theme_fonts.dart';
 import '../../theme/theme_styles.dart';
-import '../../../core/utils/constants/app_assets.dart';
 import '../action/base_buttons.dart';
 
 class CircularProgress extends StatelessWidget {
@@ -18,7 +18,7 @@ class CircularProgress extends StatelessWidget {
         child: CircularProgressIndicator(
           color: ThemeColors.primary,
           strokeWidth: 5,
-          backgroundColor: Colors.white.withOpacity(0.3),
+          backgroundColor: Colors.white.withValues(alpha:0.3),
         ),
       ),
     );
@@ -35,7 +35,7 @@ class SmallCircularProgress extends StatelessWidget {
       child: CircularProgressIndicator(
         color: ThemeColors.primary,
         strokeWidth: 3,
-        backgroundColor: Colors.white.withOpacity(0.3),
+        backgroundColor: Colors.white.withValues(alpha:0.3),
       ),
     );
   }

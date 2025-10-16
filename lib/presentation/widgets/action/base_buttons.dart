@@ -174,7 +174,7 @@ class AppButtonState extends State<AppButton> {
         fillColor: Colors.transparent,
         hoverColor: widget.hoverColor,
         highlightColor: widget.downColor,
-        focusColor: Colors.grey.withOpacity(0.35),
+        focusColor: Colors.grey.withValues(alpha:0.35),
         constraints: BoxConstraints(
           minHeight: widget.bigMode ? 60 : 42,
           minWidth: widget.bigMode ? 160 : 78,

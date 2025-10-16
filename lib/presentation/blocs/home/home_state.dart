@@ -4,24 +4,21 @@ part of 'home_bloc.dart';
 class HomeState with _$HomeState {
   const factory HomeState.initial() = _HomeState;
 
-  const factory HomeState.loaded() = HomeLoadedState;
+  const factory HomeState.loaded() = LoadedState;
 
-  const factory HomeState.progress() = HomeProgressState;
+  const factory HomeState.progress() = ProgressState;
 
-  const factory HomeState.success() = HomeSuccessState;
+  const factory HomeState.success() = HomeSuccess;
 
-  const factory HomeState.fetchedOnline(
-    bool fetched,
-  ) = HomeFetchedOnlineState;
-
-  const factory HomeState.fetchedLocal(
+  const factory HomeState.fetched(
     List<Bookmark> bookmarks,
     List<Room> rooms,
     List<Speaker> speakers,
     List<Session> sessions,
-  ) = HomeFetchedLocalState;
+  ) = DataFetched;
 
-  const factory HomeState.bookmarked(bool bookmarked) = HomeBookmarkedState;
+  const factory HomeState.bookmarked(bool bookmarked) = SessionBookmarked;
 
-  const factory HomeState.failure(String feedback) = HomeFailureState;
+  const factory HomeState.noInternet() = NoInternetState;
+  const factory HomeState.failure(String feedback) = FailureState;
 }

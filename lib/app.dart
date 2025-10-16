@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'presentation/theme/bloc/theme_bloc.dart';
 import 'presentation/theme/theme_data.dart';
-import 'domain/repository/auth_repository.dart';
 import 'domain/repository/preferences_repository.dart';
 import 'core/di/injectable.dart';
 import 'presentation/navigator/main_navigator.dart';
@@ -22,18 +21,10 @@ class MyAppState extends State<MyApp> {
   final navigatorKey = MainNavigatorState.navigationKey;
   NavigatorState get navigator =>
       MainNavigatorState.navigationKey.currentState!;
-  late final AuthRepository _authRepo;
 
   @override
   void initState() {
     super.initState();
-    _authRepo = AuthRepository();
-  }
-
-  @override
-  void dispose() {
-    _authRepo.dispose();
-    super.dispose();
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../data/models/models.dart';
-import '../../../core/utils/constants/app_assets.dart';
 import '../../widgets/features/session_item.dart';
 
 class SpeakerScreen extends StatelessWidget {
@@ -103,7 +103,7 @@ class _SpeakerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var defaultPic = Image.asset(
-      AppAssets.dcugIcon,
+      AppAssets.appIcon,
       fit: BoxFit.cover,
     );
     return ClipRRect(

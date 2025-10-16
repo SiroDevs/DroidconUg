@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../data/models/models.dart';
-import '../../../core/utils/constants/app_assets.dart';
+import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
+import '../../../data/models/models.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/skeleton.dart';
@@ -35,27 +35,14 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc()..add(const FetchOnlineData()),
+      create: (context) => HomeBloc()..add(const FetchData()),
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
-          if (state is HomeFetchedOnlineState) {
-            if (state.fetched) {
-              CustomSnackbar.show(
-                context,
-                'Sessions are available, please proceed to your session',
-                isSuccess: true,
-              );
-            } else {
-              CustomSnackbar.show(context, 'Unable to fetch sessions');
-            }
-            context.read<HomeBloc>().add(const FetchLocalData());
-          }
-          if (state is HomeFetchedLocalState) {
-            bookmarks = state.bookmarks;
-            rooms = state.rooms;
-            sessions = state.sessions;
-            speakers = state.speakers;
-          }
+          state.whenOrNull(
+            failure: (feedback) {
+              CustomSnackbar.show(context, 'Unable to fetch sessions: $feedback');
+            },
+          );
         },
         builder: (context, state) {
           var appBar = AppBar(
@@ -64,31 +51,53 @@ class HomeScreenState extends State<HomeScreen> {
               onTap: () => Navigator.pushNamed(context, RouteNames.settings),
             ),
           );
-          var emptyState = EmptyState(
-            title: 'Sorry nothing to show here at the moment.',
-            showRetry: true,
-            onRetry: () =>
-                context.read<HomeBloc>().add(const FetchOnlineData()),
-          );
 
-          return state.maybeWhen(
-            orElse: () => Scaffold(appBar: appBar, body: emptyState),
+          return state.when(
+            initial: () => Scaffold(appBar: appBar, body: _buildEmptyState("Loading...", false)),
             progress: () => const Scaffold(body: SkeletonLoading()),
-            failure: (feedback) => Scaffold(appBar: appBar, body: emptyState),
-            fetchedLocal: (bookmarks, rooms, speakers, sessions) => Scaffold(
-              appBar: appBar,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SpeakersCarousel(parent: this),
-                    SessionsPreview(parent: this),
-                  ],
+            loaded: () => Scaffold(appBar: appBar, body: _buildEmptyState("Loading...", false)),
+            success: () => Scaffold(appBar: appBar, body: _buildEmptyState("Success!", true)),
+            fetched: (bookmarks, rooms, speakers, sessions) {
+              this.bookmarks = bookmarks;
+              this.rooms = rooms;
+              this.speakers = speakers;
+              this.sessions = sessions;
+              
+              return Scaffold(
+                appBar: appBar,
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      SpeakersCarousel(parent: this),
+                      SessionsPreview(parent: this),
+                    ],
+                  ),
                 ),
-              ),
+              );
+            },
+            bookmarked: (bookmarked) => Scaffold(appBar: appBar, body: _buildEmptyState("Bookmarked!", true)),
+            noInternet: () => Scaffold(
+              appBar: appBar, 
+              body: _buildEmptyState(
+                "No internet connection. Showing cached data if available.",
+                true
+              )
+            ),
+            failure: (feedback) => Scaffold(
+              appBar: appBar, 
+              body: _buildEmptyState(feedback, true)
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildEmptyState(String message, bool showRetry) {
+    return EmptyState(
+      title: message,
+      showRetry: showRetry,
+      onRetry: () => context.read<HomeBloc>().add(const FetchData()),
     );
   }
 }

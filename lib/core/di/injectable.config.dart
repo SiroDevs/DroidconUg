@@ -11,7 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:droidconug/core/di/injectable.dart' as _i137;
 import 'package:droidconug/data/sources/local/app_database.dart' as _i767;
-import 'package:droidconug/domain/repository/auth_repository.dart' as _i17;
 import 'package:droidconug/domain/repository/database_repository.dart' as _i807;
 import 'package:droidconug/domain/repository/preferences_repository.dart'
     as _i932;
@@ -35,7 +34,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.provideAppDatabase(),
       preResolve: true,
     );
-    gh.lazySingleton<_i17.AuthRepository>(() => _i17.AuthRepository());
     gh.lazySingleton<_i807.DatabaseRepository>(
       () => registerModule.provideDatabaseRepository(gh<_i767.AppDatabase>()),
     );

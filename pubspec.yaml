@@ -7,7 +7,9 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  animated_text_kit: ^4.3.0
   card_swiper: ^3.0.1
+  connectivity_plus: ^7.0.0
   cupertino_icons: ^1.0.8
   dartx: ^1.2.0
   flutter:

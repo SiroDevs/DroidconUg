@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../app_util.dart';
+import '../utils/app_util.dart';
 
 class AppConstants {
   AppConstants._();
@@ -24,9 +23,8 @@ class AppConstants {
       'ORDER BY tbl1.id ASC';
 
   static const appTitle = "DroidconUg";
-  static const appCredits = "Siro Devs";
-  static const IconData whatsapp =
-      IconData(0xf05a6, fontFamily: 'MaterialIcons');
+  static const appTitle1 = "droidcon uganda";
+  static const appCredits = "© Siro Devs";
 
   static Future<String> get databaseFile async {
     Directory dbFolder = await getApplicationDocumentsDirectory();

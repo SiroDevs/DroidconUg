@@ -28,10 +28,10 @@ class ThemeColors {
   static const Color trafficRed = Color.fromARGB(255, 246, 0, 1);
   static const Color trafficGreen = Color.fromARGB(255, 0, 247, 0);
 // Supportive theme
-static const primary = Color(0xFFD32F2F);  // Red
+static const primary = Color(0xFFff6e4d);  // Red
 static const primaryDark = Color(0xC62828);  // Dark Red
 static const accent = Color(0xFF009688);  // Teal Green
-static const accent1 = Color(0xFF4DB6AC);  // Light Teal Green
+static const accent1 = Color(0xFF01e2c4);  // Light Teal Green
 
 // Light Mode Colors
 /// Main color for the app, used in branding and key elements

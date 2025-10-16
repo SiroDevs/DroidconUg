@@ -83,7 +83,7 @@ class _SpeakerCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withValues(alpha:0.5),
             ),
           ),
           Positioned(
@@ -109,7 +109,7 @@ class _SpeakerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var defaultPic = Image.asset(
-      AppAssets.dcugIcon,
+      AppAssets.appIcon,
       fit: BoxFit.cover,
     );
     return ClipRRect(

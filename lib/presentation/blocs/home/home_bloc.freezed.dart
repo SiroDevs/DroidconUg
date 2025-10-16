@@ -55,12 +55,11 @@ extension HomeEventPatterns on HomeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( FetchOnlineData value)?  fetchonline,TResult Function( FetchLocalData value)?  fetchLocal,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( FetchData value)?  fetchData,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case FetchOnlineData() when fetchonline != null:
-return fetchonline(_that);case FetchLocalData() when fetchLocal != null:
-return fetchLocal(_that);case _:
+case FetchData() when fetchData != null:
+return fetchData(_that);case _:
   return orElse();
 
 }
@@ -78,12 +77,11 @@ return fetchLocal(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( FetchOnlineData value)  fetchonline,required TResult Function( FetchLocalData value)  fetchLocal,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( FetchData value)  fetchData,}){
 final _that = this;
 switch (_that) {
-case FetchOnlineData():
-return fetchonline(_that);case FetchLocalData():
-return fetchLocal(_that);}
+case FetchData():
+return fetchData(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +95,11 @@ return fetchLocal(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( FetchOnlineData value)?  fetchonline,TResult? Function( FetchLocalData value)?  fetchLocal,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( FetchData value)?  fetchData,}){
 final _that = this;
 switch (_that) {
-case FetchOnlineData() when fetchonline != null:
-return fetchonline(_that);case FetchLocalData() when fetchLocal != null:
-return fetchLocal(_that);case _:
+case FetchData() when fetchData != null:
+return fetchData(_that);case _:
   return null;
 
 }
@@ -119,11 +116,10 @@ return fetchLocal(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchonline,TResult Function()?  fetchLocal,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchData,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case FetchOnlineData() when fetchonline != null:
-return fetchonline();case FetchLocalData() when fetchLocal != null:
-return fetchLocal();case _:
+case FetchData() when fetchData != null:
+return fetchData();case _:
   return orElse();
 
 }
@@ -141,11 +137,10 @@ return fetchLocal();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchonline,required TResult Function()  fetchLocal,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchData,}) {final _that = this;
 switch (_that) {
-case FetchOnlineData():
-return fetchonline();case FetchLocalData():
-return fetchLocal();}
+case FetchData():
+return fetchData();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +154,10 @@ return fetchLocal();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchonline,TResult? Function()?  fetchLocal,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchData,}) {final _that = this;
 switch (_that) {
-case FetchOnlineData() when fetchonline != null:
-return fetchonline();case FetchLocalData() when fetchLocal != null:
-return fetchLocal();case _:
+case FetchData() when fetchData != null:
+return fetchData();case _:
   return null;
 
 }
@@ -174,8 +168,8 @@ return fetchLocal();case _:
 /// @nodoc
 
 
-class FetchOnlineData implements HomeEvent {
-  const FetchOnlineData();
+class FetchData implements HomeEvent {
+  const FetchData();
   
 
 
@@ -185,7 +179,7 @@ class FetchOnlineData implements HomeEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FetchOnlineData);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FetchData);
 }
 
 
@@ -194,39 +188,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.fetchonline()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class FetchLocalData implements HomeEvent {
-  const FetchLocalData();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FetchLocalData);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'HomeEvent.fetchLocal()';
+  return 'HomeEvent.fetchData()';
 }
 
 
@@ -279,17 +241,17 @@ extension HomeStatePatterns on HomeState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeState value)?  initial,TResult Function( HomeLoadedState value)?  loaded,TResult Function( HomeProgressState value)?  progress,TResult Function( HomeSuccessState value)?  success,TResult Function( HomeFetchedOnlineState value)?  fetchedOnline,TResult Function( HomeFetchedLocalState value)?  fetchedLocal,TResult Function( HomeBookmarkedState value)?  bookmarked,TResult Function( HomeFailureState value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeState value)?  initial,TResult Function( LoadedState value)?  loaded,TResult Function( ProgressState value)?  progress,TResult Function( HomeSuccess value)?  success,TResult Function( DataFetched value)?  fetched,TResult Function( SessionBookmarked value)?  bookmarked,TResult Function( NoInternetState value)?  noInternet,TResult Function( FailureState value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
-return initial(_that);case HomeLoadedState() when loaded != null:
-return loaded(_that);case HomeProgressState() when progress != null:
-return progress(_that);case HomeSuccessState() when success != null:
-return success(_that);case HomeFetchedOnlineState() when fetchedOnline != null:
-return fetchedOnline(_that);case HomeFetchedLocalState() when fetchedLocal != null:
-return fetchedLocal(_that);case HomeBookmarkedState() when bookmarked != null:
-return bookmarked(_that);case HomeFailureState() when failure != null:
+return initial(_that);case LoadedState() when loaded != null:
+return loaded(_that);case ProgressState() when progress != null:
+return progress(_that);case HomeSuccess() when success != null:
+return success(_that);case DataFetched() when fetched != null:
+return fetched(_that);case SessionBookmarked() when bookmarked != null:
+return bookmarked(_that);case NoInternetState() when noInternet != null:
+return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
   return orElse();
 
@@ -308,17 +270,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeState value)  initial,required TResult Function( HomeLoadedState value)  loaded,required TResult Function( HomeProgressState value)  progress,required TResult Function( HomeSuccessState value)  success,required TResult Function( HomeFetchedOnlineState value)  fetchedOnline,required TResult Function( HomeFetchedLocalState value)  fetchedLocal,required TResult Function( HomeBookmarkedState value)  bookmarked,required TResult Function( HomeFailureState value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeState value)  initial,required TResult Function( LoadedState value)  loaded,required TResult Function( ProgressState value)  progress,required TResult Function( HomeSuccess value)  success,required TResult Function( DataFetched value)  fetched,required TResult Function( SessionBookmarked value)  bookmarked,required TResult Function( NoInternetState value)  noInternet,required TResult Function( FailureState value)  failure,}){
 final _that = this;
 switch (_that) {
 case _HomeState():
-return initial(_that);case HomeLoadedState():
-return loaded(_that);case HomeProgressState():
-return progress(_that);case HomeSuccessState():
-return success(_that);case HomeFetchedOnlineState():
-return fetchedOnline(_that);case HomeFetchedLocalState():
-return fetchedLocal(_that);case HomeBookmarkedState():
-return bookmarked(_that);case HomeFailureState():
+return initial(_that);case LoadedState():
+return loaded(_that);case ProgressState():
+return progress(_that);case HomeSuccess():
+return success(_that);case DataFetched():
+return fetched(_that);case SessionBookmarked():
+return bookmarked(_that);case NoInternetState():
+return noInternet(_that);case FailureState():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -336,17 +298,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeState value)?  initial,TResult? Function( HomeLoadedState value)?  loaded,TResult? Function( HomeProgressState value)?  progress,TResult? Function( HomeSuccessState value)?  success,TResult? Function( HomeFetchedOnlineState value)?  fetchedOnline,TResult? Function( HomeFetchedLocalState value)?  fetchedLocal,TResult? Function( HomeBookmarkedState value)?  bookmarked,TResult? Function( HomeFailureState value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeState value)?  initial,TResult? Function( LoadedState value)?  loaded,TResult? Function( ProgressState value)?  progress,TResult? Function( HomeSuccess value)?  success,TResult? Function( DataFetched value)?  fetched,TResult? Function( SessionBookmarked value)?  bookmarked,TResult? Function( NoInternetState value)?  noInternet,TResult? Function( FailureState value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
-return initial(_that);case HomeLoadedState() when loaded != null:
-return loaded(_that);case HomeProgressState() when progress != null:
-return progress(_that);case HomeSuccessState() when success != null:
-return success(_that);case HomeFetchedOnlineState() when fetchedOnline != null:
-return fetchedOnline(_that);case HomeFetchedLocalState() when fetchedLocal != null:
-return fetchedLocal(_that);case HomeBookmarkedState() when bookmarked != null:
-return bookmarked(_that);case HomeFailureState() when failure != null:
+return initial(_that);case LoadedState() when loaded != null:
+return loaded(_that);case ProgressState() when progress != null:
+return progress(_that);case HomeSuccess() when success != null:
+return success(_that);case DataFetched() when fetched != null:
+return fetched(_that);case SessionBookmarked() when bookmarked != null:
+return bookmarked(_that);case NoInternetState() when noInternet != null:
+return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
   return null;
 
@@ -364,16 +326,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( bool fetched)?  fetchedOnline,TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetchedLocal,TResult Function( bool bookmarked)?  bookmarked,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
-return initial();case HomeLoadedState() when loaded != null:
-return loaded();case HomeProgressState() when progress != null:
-return progress();case HomeSuccessState() when success != null:
-return success();case HomeFetchedOnlineState() when fetchedOnline != null:
-return fetchedOnline(_that.fetched);case HomeFetchedLocalState() when fetchedLocal != null:
-return fetchedLocal(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case HomeBookmarkedState() when bookmarked != null:
-return bookmarked(_that.bookmarked);case HomeFailureState() when failure != null:
+return initial();case LoadedState() when loaded != null:
+return loaded();case ProgressState() when progress != null:
+return progress();case HomeSuccess() when success != null:
+return success();case DataFetched() when fetched != null:
+return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked() when bookmarked != null:
+return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
+return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
   return orElse();
 
@@ -392,16 +354,16 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( bool fetched)  fetchedOnline,required TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)  fetchedLocal,required TResult Function( bool bookmarked)  bookmarked,required TResult Function( String feedback)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
 switch (_that) {
 case _HomeState():
-return initial();case HomeLoadedState():
-return loaded();case HomeProgressState():
-return progress();case HomeSuccessState():
-return success();case HomeFetchedOnlineState():
-return fetchedOnline(_that.fetched);case HomeFetchedLocalState():
-return fetchedLocal(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case HomeBookmarkedState():
-return bookmarked(_that.bookmarked);case HomeFailureState():
+return initial();case LoadedState():
+return loaded();case ProgressState():
+return progress();case HomeSuccess():
+return success();case DataFetched():
+return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked():
+return bookmarked(_that.bookmarked);case NoInternetState():
+return noInternet();case FailureState():
 return failure(_that.feedback);case _:
   throw StateError('Unexpected subclass');
 
@@ -419,16 +381,16 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( bool fetched)?  fetchedOnline,TResult? Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetchedLocal,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function( String feedback)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
-return initial();case HomeLoadedState() when loaded != null:
-return loaded();case HomeProgressState() when progress != null:
-return progress();case HomeSuccessState() when success != null:
-return success();case HomeFetchedOnlineState() when fetchedOnline != null:
-return fetchedOnline(_that.fetched);case HomeFetchedLocalState() when fetchedLocal != null:
-return fetchedLocal(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case HomeBookmarkedState() when bookmarked != null:
-return bookmarked(_that.bookmarked);case HomeFailureState() when failure != null:
+return initial();case LoadedState() when loaded != null:
+return loaded();case ProgressState() when progress != null:
+return progress();case HomeSuccess() when success != null:
+return success();case DataFetched() when fetched != null:
+return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked() when bookmarked != null:
+return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
+return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
   return null;
 
@@ -472,8 +434,8 @@ String toString() {
 /// @nodoc
 
 
-class HomeLoadedState implements HomeState {
-  const HomeLoadedState();
+class LoadedState implements HomeState {
+  const LoadedState();
   
 
 
@@ -483,7 +445,7 @@ class HomeLoadedState implements HomeState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeLoadedState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadedState);
 }
 
 
@@ -504,8 +466,8 @@ String toString() {
 /// @nodoc
 
 
-class HomeProgressState implements HomeState {
-  const HomeProgressState();
+class ProgressState implements HomeState {
+  const ProgressState();
   
 
 
@@ -515,7 +477,7 @@ class HomeProgressState implements HomeState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeProgressState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProgressState);
 }
 
 
@@ -536,8 +498,8 @@ String toString() {
 /// @nodoc
 
 
-class HomeSuccessState implements HomeState {
-  const HomeSuccessState();
+class HomeSuccess implements HomeState {
+  const HomeSuccess();
   
 
 
@@ -547,7 +509,7 @@ class HomeSuccessState implements HomeState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeSuccessState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeSuccess);
 }
 
 
@@ -568,74 +530,8 @@ String toString() {
 /// @nodoc
 
 
-class HomeFetchedOnlineState implements HomeState {
-  const HomeFetchedOnlineState(this.fetched);
-  
-
- final  bool fetched;
-
-/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$HomeFetchedOnlineStateCopyWith<HomeFetchedOnlineState> get copyWith => _$HomeFetchedOnlineStateCopyWithImpl<HomeFetchedOnlineState>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeFetchedOnlineState&&(identical(other.fetched, fetched) || other.fetched == fetched));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,fetched);
-
-@override
-String toString() {
-  return 'HomeState.fetchedOnline(fetched: $fetched)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $HomeFetchedOnlineStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory $HomeFetchedOnlineStateCopyWith(HomeFetchedOnlineState value, $Res Function(HomeFetchedOnlineState) _then) = _$HomeFetchedOnlineStateCopyWithImpl;
-@useResult
-$Res call({
- bool fetched
-});
-
-
-
-
-}
-/// @nodoc
-class _$HomeFetchedOnlineStateCopyWithImpl<$Res>
-    implements $HomeFetchedOnlineStateCopyWith<$Res> {
-  _$HomeFetchedOnlineStateCopyWithImpl(this._self, this._then);
-
-  final HomeFetchedOnlineState _self;
-  final $Res Function(HomeFetchedOnlineState) _then;
-
-/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? fetched = null,}) {
-  return _then(HomeFetchedOnlineState(
-null == fetched ? _self.fetched : fetched // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class HomeFetchedLocalState implements HomeState {
-  const HomeFetchedLocalState(final  List<Bookmark> bookmarks, final  List<Room> rooms, final  List<Speaker> speakers, final  List<Session> sessions): _bookmarks = bookmarks,_rooms = rooms,_speakers = speakers,_sessions = sessions;
+class DataFetched implements HomeState {
+  const DataFetched(final  List<Bookmark> bookmarks, final  List<Room> rooms, final  List<Speaker> speakers, final  List<Session> sessions): _bookmarks = bookmarks,_rooms = rooms,_speakers = speakers,_sessions = sessions;
   
 
  final  List<Bookmark> _bookmarks;
@@ -671,13 +567,13 @@ class HomeFetchedLocalState implements HomeState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$HomeFetchedLocalStateCopyWith<HomeFetchedLocalState> get copyWith => _$HomeFetchedLocalStateCopyWithImpl<HomeFetchedLocalState>(this, _$identity);
+$DataFetchedCopyWith<DataFetched> get copyWith => _$DataFetchedCopyWithImpl<DataFetched>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeFetchedLocalState&&const DeepCollectionEquality().equals(other._bookmarks, _bookmarks)&&const DeepCollectionEquality().equals(other._rooms, _rooms)&&const DeepCollectionEquality().equals(other._speakers, _speakers)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataFetched&&const DeepCollectionEquality().equals(other._bookmarks, _bookmarks)&&const DeepCollectionEquality().equals(other._rooms, _rooms)&&const DeepCollectionEquality().equals(other._speakers, _speakers)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
 }
 
 
@@ -686,15 +582,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'HomeState.fetchedLocal(bookmarks: $bookmarks, rooms: $rooms, speakers: $speakers, sessions: $sessions)';
+  return 'HomeState.fetched(bookmarks: $bookmarks, rooms: $rooms, speakers: $speakers, sessions: $sessions)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $HomeFetchedLocalStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory $HomeFetchedLocalStateCopyWith(HomeFetchedLocalState value, $Res Function(HomeFetchedLocalState) _then) = _$HomeFetchedLocalStateCopyWithImpl;
+abstract mixin class $DataFetchedCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $DataFetchedCopyWith(DataFetched value, $Res Function(DataFetched) _then) = _$DataFetchedCopyWithImpl;
 @useResult
 $Res call({
  List<Bookmark> bookmarks, List<Room> rooms, List<Speaker> speakers, List<Session> sessions
@@ -705,17 +601,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$HomeFetchedLocalStateCopyWithImpl<$Res>
-    implements $HomeFetchedLocalStateCopyWith<$Res> {
-  _$HomeFetchedLocalStateCopyWithImpl(this._self, this._then);
+class _$DataFetchedCopyWithImpl<$Res>
+    implements $DataFetchedCopyWith<$Res> {
+  _$DataFetchedCopyWithImpl(this._self, this._then);
 
-  final HomeFetchedLocalState _self;
-  final $Res Function(HomeFetchedLocalState) _then;
+  final DataFetched _self;
+  final $Res Function(DataFetched) _then;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? bookmarks = null,Object? rooms = null,Object? speakers = null,Object? sessions = null,}) {
-  return _then(HomeFetchedLocalState(
+  return _then(DataFetched(
 null == bookmarks ? _self._bookmarks : bookmarks // ignore: cast_nullable_to_non_nullable
 as List<Bookmark>,null == rooms ? _self._rooms : rooms // ignore: cast_nullable_to_non_nullable
 as List<Room>,null == speakers ? _self._speakers : speakers // ignore: cast_nullable_to_non_nullable
@@ -730,8 +626,8 @@ as List<Session>,
 /// @nodoc
 
 
-class HomeBookmarkedState implements HomeState {
-  const HomeBookmarkedState(this.bookmarked);
+class SessionBookmarked implements HomeState {
+  const SessionBookmarked(this.bookmarked);
   
 
  final  bool bookmarked;
@@ -740,13 +636,13 @@ class HomeBookmarkedState implements HomeState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$HomeBookmarkedStateCopyWith<HomeBookmarkedState> get copyWith => _$HomeBookmarkedStateCopyWithImpl<HomeBookmarkedState>(this, _$identity);
+$SessionBookmarkedCopyWith<SessionBookmarked> get copyWith => _$SessionBookmarkedCopyWithImpl<SessionBookmarked>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBookmarkedState&&(identical(other.bookmarked, bookmarked) || other.bookmarked == bookmarked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionBookmarked&&(identical(other.bookmarked, bookmarked) || other.bookmarked == bookmarked));
 }
 
 
@@ -762,8 +658,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $HomeBookmarkedStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory $HomeBookmarkedStateCopyWith(HomeBookmarkedState value, $Res Function(HomeBookmarkedState) _then) = _$HomeBookmarkedStateCopyWithImpl;
+abstract mixin class $SessionBookmarkedCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $SessionBookmarkedCopyWith(SessionBookmarked value, $Res Function(SessionBookmarked) _then) = _$SessionBookmarkedCopyWithImpl;
 @useResult
 $Res call({
  bool bookmarked
@@ -774,17 +670,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$HomeBookmarkedStateCopyWithImpl<$Res>
-    implements $HomeBookmarkedStateCopyWith<$Res> {
-  _$HomeBookmarkedStateCopyWithImpl(this._self, this._then);
+class _$SessionBookmarkedCopyWithImpl<$Res>
+    implements $SessionBookmarkedCopyWith<$Res> {
+  _$SessionBookmarkedCopyWithImpl(this._self, this._then);
 
-  final HomeBookmarkedState _self;
-  final $Res Function(HomeBookmarkedState) _then;
+  final SessionBookmarked _self;
+  final $Res Function(SessionBookmarked) _then;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? bookmarked = null,}) {
-  return _then(HomeBookmarkedState(
+  return _then(SessionBookmarked(
 null == bookmarked ? _self.bookmarked : bookmarked // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -796,8 +692,40 @@ as bool,
 /// @nodoc
 
 
-class HomeFailureState implements HomeState {
-  const HomeFailureState(this.feedback);
+class NoInternetState implements HomeState {
+  const NoInternetState();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoInternetState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeState.noInternet()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class FailureState implements HomeState {
+  const FailureState(this.feedback);
   
 
  final  String feedback;
@@ -806,13 +734,13 @@ class HomeFailureState implements HomeState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$HomeFailureStateCopyWith<HomeFailureState> get copyWith => _$HomeFailureStateCopyWithImpl<HomeFailureState>(this, _$identity);
+$FailureStateCopyWith<FailureState> get copyWith => _$FailureStateCopyWithImpl<FailureState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeFailureState&&(identical(other.feedback, feedback) || other.feedback == feedback));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FailureState&&(identical(other.feedback, feedback) || other.feedback == feedback));
 }
 
 
@@ -828,8 +756,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $HomeFailureStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory $HomeFailureStateCopyWith(HomeFailureState value, $Res Function(HomeFailureState) _then) = _$HomeFailureStateCopyWithImpl;
+abstract mixin class $FailureStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory $FailureStateCopyWith(FailureState value, $Res Function(FailureState) _then) = _$FailureStateCopyWithImpl;
 @useResult
 $Res call({
  String feedback
@@ -840,17 +768,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$HomeFailureStateCopyWithImpl<$Res>
-    implements $HomeFailureStateCopyWith<$Res> {
-  _$HomeFailureStateCopyWithImpl(this._self, this._then);
+class _$FailureStateCopyWithImpl<$Res>
+    implements $FailureStateCopyWith<$Res> {
+  _$FailureStateCopyWithImpl(this._self, this._then);
 
-  final HomeFailureState _self;
-  final $Res Function(HomeFailureState) _then;
+  final FailureState _self;
+  final $Res Function(FailureState) _then;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? feedback = null,}) {
-  return _then(HomeFailureState(
+  return _then(FailureState(
 null == feedback ? _self.feedback : feedback // ignore: cast_nullable_to_non_nullable
 as String,
   ));

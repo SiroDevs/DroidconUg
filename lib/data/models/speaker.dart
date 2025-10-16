@@ -1,6 +1,6 @@
 import 'package:froom/froom.dart';
 
-import '../../core/utils/constants/app_constants.dart';
+import '../../core/constants/app_constants.dart';
 
 @Entity(tableName: AppConstants.speakersTable)
 class Speaker {
