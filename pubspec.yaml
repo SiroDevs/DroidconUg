@@ -1,33 +1,33 @@
 name: droidconug
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.2
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.9.2
 
 dependencies:
   card_swiper: ^3.0.1
   cupertino_icons: ^1.0.8
   dartx: ^1.2.0
-  floor: ^1.5.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
-  freezed_annotation: ^2.4.4
-  get_it: ^8.0.2
-  http: ^1.2.2
-  injectable: ^2.5.0
-  intl: ^0.19.0
+  freezed_annotation: ^3.1.0
+  froom: ^4.0.0
+  get_it: ^8.2.0
+  http: ^1.5.0
+  injectable: ^2.5.2
+  intl: ^0.20.2
   json_annotation: ^4.9.0
-  package_info_plus: ^8.1.1
+  package_info_plus: ^9.0.0
   rxdart: ^0.28.0
-  sentry_flutter: ^8.10.1
-  share_plus: ^10.1.2
+  sentry_flutter: ^9.7.0
+  share_plus: ^10.1.4
   shared_preferences: ^2.3.3
-  sizer: ^3.0.4
+  sizer: ^3.0.5
   skeleton_loader: ^2.0.0+4
   sqflite: ^2.4.1
   styled_widget: ^0.4.1
@@ -35,14 +35,14 @@ dependencies:
   url_launcher: ^6.3.1
 
 dev_dependencies:
-  build_runner: ^2.4.13
-  floor_generator: ^1.5.0
-  flutter_lints: ^4.0.0
+  build_runner: ^2.9.0
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.7
-  injectable_generator: ^2.6.2
-  json_serializable: ^6.8.0
+  freezed: ^3.2.3
+  froom_generator: ^4.0.0
+  injectable_generator: ^2.9.0
+  json_serializable: ^6.9.0
 
 flutter:
   generate: true
