@@ -22,7 +22,6 @@ dependencies:
   injectable: ^2.5.2
   intl: ^0.20.2
   json_annotation: ^4.9.0
-  package_info_plus: ^9.0.0
   rxdart: ^0.28.0
   sentry_flutter: ^9.7.0
   share_plus: ^10.1.4
