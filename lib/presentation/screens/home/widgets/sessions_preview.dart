@@ -15,36 +15,37 @@ class SessionsPreview extends StatelessWidget {
     var widgetTitle = Row(
       children: [
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Text(
             'SESSIONS ...',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ).expanded(),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            textStyle: const TextStyle(fontSize: 18),
-            backgroundColor: ThemeColors.primary,
+            textStyle: const TextStyle(fontSize: 14),
+            backgroundColor: Theme.of(context).colorScheme.surfaceTint,
           ),
           onPressed: () {
             Navigator.pushNamed(context, RouteNames.sessions);
           },
-          child: const Text('View All'),
+          child: Text(
+            'View All',
+            style: TextStyle(color: Theme.of(context).colorScheme.scrim),
+          ),
         ),
       ],
     );
     final displayedRooms = rooms.take(2).toList();
     List<Session> getSessionsForRoom(Room room) {
-      return sessions
-          .where((session) => session.room == room.id)
-          .toList();
+      return sessions.where((session) => session.roomId == room.id).toList();
     }
 
     return Container(
       margin: const EdgeInsets.all(Sizes.sm),
       child: Card(
         elevation: 4,
-        color: Theme.of(context).colorScheme.onSurface,
+        color: Theme.of(context).colorScheme.inverseSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Sizes.sm),
         ),
@@ -92,7 +93,7 @@ class RoomCard extends StatelessWidget {
               itemBuilder: (context, index) =>
                   _SessionInfo(session: sessions[index]),
               autoplay: false,
-              itemCount: 10, //sessions.length,
+              itemCount: 10,
               itemWidth: (MediaQuery.of(context).size.height / 4) - 10,
               itemHeight: (MediaQuery.of(context).size.height / 4) - 10,
               layout: SwiperLayout.TINDER,
@@ -142,11 +143,11 @@ class _SessionInfo extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'By: ${session.speakerNames}',
-                maxLines: 1,
-                style: const TextStyle(fontSize: 12),
-              ),
+              // Text(
+              //   'By: ${session.speakerNames}',
+              //   maxLines: 1,
+              //   style: const TextStyle(fontSize: 12),
+              // ),
               const SizedBox(height: 5),
               Text(
                 'From: ${formatTime(session.startsAt!)}',

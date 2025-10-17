@@ -10,22 +10,22 @@ class SpeakersCarousel extends StatelessWidget {
     final randomSpeakers = List.from(speakers)..shuffle(Random());
     final displayedSpeakers = randomSpeakers.take(5).toList();
     var widgetTitle = Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Padding(
             padding: EdgeInsets.only(left: 8.0),
             child: Text(
               'OUR SPEAKERS ... ',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-          ),
+          ).expanded(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 18),
-              backgroundColor: ThemeColors.primary,
+              textStyle: const TextStyle(fontSize: 14),
+              backgroundColor: Theme.of(context).colorScheme.inverseSurface,
             ),
             onPressed: () {
               Navigator.pushNamed(context, RouteNames.speakers);
@@ -68,7 +68,7 @@ class _SpeakerCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          _SpeakerImage(profilePicUrl: speaker.profilePic),
+          _SpeakerImage(profilePicUrl: speaker.avatar),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
@@ -97,7 +97,7 @@ class _SpeakerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var defaultPic = Image.asset(AppAssets.appIcon, fit: BoxFit.cover);
+    var defaultPic = Image.asset(AppAssets.imgSpeaker, fit: BoxFit.cover);
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: profilePicUrl != null

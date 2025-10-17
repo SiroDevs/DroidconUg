@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:intl/intl.dart';
 
-import '../../data/models/session.dart';
+import '../../domain/entity/session.dart';
 
 String dateNow() {
   return DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
@@ -76,3 +76,18 @@ String getCurrentDayDate({String separator = '-', bool reverse = false}) {
         .format(DateTime.now());
   }
 }
+
+  String formatDate(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final tomorrow = today.add(const Duration(days: 1));
+    
+    if (parsedDate == today) {
+      return 'Today';
+    } else if (parsedDate == tomorrow) {
+      return 'Tomorrow';
+    } else {
+      return '${parsedDate.day}/${parsedDate.month}';
+    }
+  }

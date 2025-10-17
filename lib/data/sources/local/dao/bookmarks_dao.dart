@@ -1,7 +1,7 @@
 import 'package:froom/froom.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../models/bookmark.dart';
+import '../../../../domain/entity/bookmark.dart';
 
 @dao
 abstract class BookmarksDao {

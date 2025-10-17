@@ -29,7 +29,8 @@ Future<http.Response> makeApiGetRequest(
       },
     );
 
-    logger('Api Response: [${response.statusCode}] ${response.body}');
+    // logger('Api Response: [${response.statusCode}] ${response.body}');
+    logger('Api Response: [${response.statusCode}]');
 
     return response;
   } catch (e) {

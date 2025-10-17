@@ -9,5 +9,4 @@ class RouteNames {
   static const home = 'home';
   static const sessions = 'sessions';
   static const speakers = 'speakers';
-  static const settings = 'settings';
 }

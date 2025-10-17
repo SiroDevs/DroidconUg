@@ -5,18 +5,15 @@ import '../../core/constants/app_constants.dart';
 @Entity(tableName: AppConstants.sessionsTable)
 class Session {
   @PrimaryKey()
-  int? id;
+  String? id;
   String? title;
   String? description;
   String? startsAt;
   String? endsAt;
-  String? categories;
-  String? speakerIds;
-  String? speakerNames;
-  int? room;
+  String? liveUrl;
+  String? recordingUrl;
+  int? roomId;
   bool? bookmarked;
-  String? createdAt;
-  String? updatedAt;
 
   Session({
     this.id,
@@ -24,12 +21,9 @@ class Session {
     this.description,
     this.startsAt,
     this.endsAt,
-    this.speakerIds,
-    this.speakerNames,
-    this.categories,
-    this.room,
+    this.liveUrl,
+    this.recordingUrl,
+    this.roomId,
     this.bookmarked,
-    this.createdAt,
-    this.updatedAt,
   });
 }

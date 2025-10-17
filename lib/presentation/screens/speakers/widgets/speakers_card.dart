@@ -16,7 +16,7 @@ class SpeakerCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 70,
-            backgroundImage: NetworkImage(speaker.profilePic ?? ''),
+            backgroundImage: NetworkImage(speaker.avatar ?? ''),
           ),
           const SizedBox(height: 8),
           Text(

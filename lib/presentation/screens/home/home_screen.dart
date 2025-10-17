@@ -7,18 +7,20 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
-import '../../../data/models/models.dart';
+import '../../../domain/entity/models.dart';
 import '../../blocs/home/home_bloc.dart';
 import '../../navigator/route_names.dart';
 import '../../theme/theme_colors.dart';
 import '../../theme/theme_styles.dart';
 import '../../widgets/action/theme_button.dart';
-import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/custom_snackbar.dart';
+import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
 
-part 'widgets/sessions_preview.dart';
+part 'home_view.dart';
+part 'widgets/session_card.dart';
 part 'widgets/speakers_carousel.dart';
+part 'widgets/sessions_preview.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,67 +48,65 @@ class HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           var appBar = AppBar(
             title: Image.asset(AppAssets.droidconIcon, height: 40),
-            actions: [
-              ThemeButton()
-            ]
+            actions: [ThemeButton()],
           );
+          Widget buildEmptyState(String message, bool showRetry) {
+            return EmptyState(
+              title: message,
+              showRetry: showRetry,
+              onRetry: () => context.read<HomeBloc>().add(const FetchData()),
+            );
+          }
 
           return state.when(
             initial: () => Scaffold(
               appBar: appBar,
-              body: _buildEmptyState("Loading...", false),
+              body: buildEmptyState("Loading...", false),
             ),
             progress: () => const Scaffold(body: SkeletonLoading()),
             loaded: () => Scaffold(
               appBar: appBar,
-              body: _buildEmptyState("Loading...", false),
+              body: buildEmptyState("Loading...", false),
             ),
             success: () => Scaffold(
               appBar: appBar,
-              body: _buildEmptyState("Success!", true),
+              body: buildEmptyState("Success!", true),
             ),
             fetched: (droidcon) {
               return Scaffold(
                 appBar: appBar,
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      SpeakersCarousel(speakers: droidcon.speakers),
-                      SessionsPreview(
-                        sessions: droidcon.sessions,
-                        rooms: droidcon.rooms,
-                      ),
-                    ],
-                  ),
+                body: HomeView(
+                  sessions: droidcon.sessions,
                 ),
+                // body: SingleChildScrollView(
+                //   child: Column(
+                //     children: <Widget>[
+                //       SpeakersCarousel(speakers: droidcon.speakers),
+                //       SessionsPreview(
+                //         sessions: droidcon.sessions,
+                //         rooms: droidcon.rooms,
+                //       ),
+                //     ],
+                //   ),
+                // ),
               );
             },
             bookmarked: (bookmarked) => Scaffold(
               appBar: appBar,
-              body: _buildEmptyState("Bookmarked!", true),
+              body: buildEmptyState("Bookmarked!", true),
             ),
             noInternet: () => Scaffold(
               appBar: appBar,
-              body: _buildEmptyState(
+              body: buildEmptyState(
                 "You need an active internet connection to get the sessions",
                 true,
               ),
             ),
-            failure: (feedback) => Scaffold(
-              appBar: appBar,
-              body: _buildEmptyState(feedback, true),
-            ),
+            failure: (feedback) =>
+                Scaffold(appBar: appBar, body: buildEmptyState(feedback, true)),
           );
         },
       ),
-    );
-  }
-
-  Widget _buildEmptyState(String message, bool showRetry) {
-    return EmptyState(
-      title: message,
-      showRetry: showRetry,
-      onRetry: () => context.read<HomeBloc>().add(const FetchData()),
     );
   }
 }

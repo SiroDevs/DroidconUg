@@ -1,11 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/models.dart';
-import '../../../core/utils/app_util.dart';
-import '../../../domain/repository/database_repository.dart';
-import '../../../core/utils/date_util.dart';
 import '../../../core/di/injectable.dart';
+import '../../../core/utils/app_util.dart';
+import '../../../core/utils/date_util.dart';
+import '../../../domain/entity/droidcon.dart';
+import '../../../domain/entity/models.dart';
+import '../../../domain/repository/database_repository.dart';
+import '../../../domain/repository/home_repository.dart';
 
 part 'sessions_event.dart';
 part 'sessions_state.dart';
@@ -18,27 +20,22 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     on<BookmarkSession>(_onBookmarkSession);
   }
 
+  final _homeRepo = HomeRepository();
   final _dbRepo = getIt<DatabaseRepository>();
 
-  void _onFetchData(
-    FetchData event,
-    Emitter<SessionsState> emit,
-  ) async {
-    emit(const SessionsProgressState());
-    List<Bookmark> bookmarks = [];
-    List<Room> rooms = [];
-    List<Speaker> speakers = [];
-    List<Session> sessions = [];
+  void _onFetchData(FetchData event, Emitter<SessionsState> emit) async {
+    emit(const ProgressState());
 
     try {
-      bookmarks = await _dbRepo.fetchBookmarks();
-      rooms = await _dbRepo.fetchRooms();
-      sessions = await _dbRepo.fetchSessions();
-      speakers = await _dbRepo.fetchSpeakers();
-      emit(SessionsFetchedState(bookmarks, rooms, speakers, sessions));
+      final droidcon = await _homeRepo.fetchLocalData();
+      if (droidcon.hasData) {
+        emit(DataFetched(droidcon));
+      } else {
+        emit(const FailureState("No data available"));
+      }
     } catch (e) {
       logger("Error log: $e");
-      emit(SessionsFetchedState(bookmarks, rooms, speakers, sessions));
+      emit(const FailureState("No data available"));
     }
   }
 
@@ -46,7 +43,7 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
     BookmarkSession event,
     Emitter<SessionsState> emit,
   ) async {
-    emit(const SessionsProgressState());
+    emit(const ProgressState());
     try {
       await _dbRepo.bookmarkSession(
         event.session.id!,
@@ -54,15 +51,12 @@ class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
         getIso8601Date(),
       );
       await _dbRepo.saveBookmark(
-        Bookmark(
-          session: event.session.id!,
-          createdAt: getIso8601Date(),
-        ),
+        Bookmark(session: event.session.id!, createdAt: getIso8601Date()),
       );
     } catch (e) {
       logger('Unable to bookmark session: $e');
     }
 
-    emit(SessionsBookmarkedState(!event.session.bookmarked!));
+    emit(Bookmarked(!event.session.bookmarked!));
   }
 }

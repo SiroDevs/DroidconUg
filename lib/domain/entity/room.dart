@@ -8,12 +8,10 @@ class Room {
   int? id;
   String? name;
   int? sort;
-  String? createdAt;
 
   Room({
     this.id,
     this.name,
     this.sort,
-    this.createdAt,
   });
 }

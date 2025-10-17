@@ -4,20 +4,17 @@ part of 'sessions_bloc.dart';
 class SessionsState with _$SessionsState {
   const factory SessionsState.initial() = _SessionsState;
 
-  const factory SessionsState.loaded() = SessionsLoadedState;
+  const factory SessionsState.loaded() = LoadedState;
 
-  const factory SessionsState.progress() = SessionsProgressState;
+  const factory SessionsState.progress() = ProgressState;
 
-  const factory SessionsState.success() = SessionsSuccessState;
+  const factory SessionsState.success() = SuccessState;
 
-  const factory SessionsState.fetched(
-    List<Bookmark> bookmarks,
-    List<Room> rooms,
-    List<Speaker> speakers,
-    List<Session> sessions,
-  ) = SessionsFetchedState;
+  const factory SessionsState.fetched(Droidcon droidcon) = DataFetched;
 
-  const factory SessionsState.bookmarked(bool bookmarked) = SessionsBookmarkedState;
+  const factory SessionsState.bookmarked(bool bookmarked) = Bookmarked;
 
-  const factory SessionsState.failure(String feedback) = SessionsFailureState;
+  const factory SessionsState.noInternet() = NoInternetState;
+  
+  const factory SessionsState.failure(String feedback) = FailureState;
 }

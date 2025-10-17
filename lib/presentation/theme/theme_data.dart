@@ -16,7 +16,7 @@ class AppTheme {
 
   static ThemeData lightTheme() {
     return ThemeData(
-      scaffoldBackgroundColor: ThemeColors.background,
+      scaffoldBackgroundColor: ThemeColors.surfaceVariant,
       fontFamily: AppConstants.kFontFamily,
       colorScheme: const ColorScheme.light(
         primary: ThemeColors.primary,
@@ -42,7 +42,7 @@ class AppTheme {
         outlineVariant: ThemeColors.outlineVariant,
         shadow: ThemeColors.shadow,
         surfaceTint: ThemeColors.primary,
-        inverseSurface: ThemeColors.onBackground,
+        inverseSurface: Colors.white,
         onInverseSurface: ThemeColors.background,
         inversePrimary: ThemeColors.primaryLight,
         scrim: ThemeColors.scrim,
@@ -51,6 +51,7 @@ class AppTheme {
         backgroundColor: Colors.white,
         foregroundColor: ThemeColors.secondaryDark,
         elevation: 3,
+        shadowColor: Colors.black,
         iconTheme: IconThemeData(color: ThemeColors.secondaryDark),
         actionsIconTheme: IconThemeData(color: ThemeColors.secondaryDark),
       ),
@@ -82,7 +83,7 @@ class AppTheme {
 
   static ThemeData darkTheme() {
     return ThemeData(
-      scaffoldBackgroundColor: ThemeColors.darkBackground,
+      scaffoldBackgroundColor: ThemeColors.darkSurface,
       fontFamily: AppConstants.kFontFamily,
       colorScheme: const ColorScheme.dark(
         primary: ThemeColors.primaryLight,
@@ -108,13 +109,13 @@ class AppTheme {
         outlineVariant: ThemeColors.darkSurfaceVariant,
         shadow: Colors.black,
         surfaceTint: ThemeColors.primaryLight,
-        inverseSurface: ThemeColors.darkOnSurface,
+        inverseSurface: Colors.black,
         onInverseSurface: ThemeColors.darkSurface,
         inversePrimary: ThemeColors.primaryDark,
-        scrim: ThemeColors.scrim,
+        scrim: Colors.white,
       ),
       appBarTheme: const AppBarThemeData(
-        backgroundColor: ThemeColors.darkSurface,
+        backgroundColor: Colors.black,
         foregroundColor: ThemeColors.darkOnSurface,
         elevation: 1,
         iconTheme: IconThemeData(color: ThemeColors.darkOnSurface),

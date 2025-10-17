@@ -15,21 +15,6 @@ class HomeState with _$HomeState {
   const factory HomeState.bookmarked(bool bookmarked) = SessionBookmarked;
 
   const factory HomeState.noInternet() = NoInternetState;
+  
   const factory HomeState.failure(String feedback) = FailureState;
-}
-
-class Droidcon {
-  final List<Bookmark> bookmarks;
-  final List<Room> rooms;
-  final List<Speaker> speakers;
-  final List<Session> sessions;
-  final bool hasData;
-
-  Droidcon({
-    required this.bookmarks,
-    required this.rooms,
-    required this.speakers,
-    required this.sessions,
-    required this.hasData,
-  });
 }

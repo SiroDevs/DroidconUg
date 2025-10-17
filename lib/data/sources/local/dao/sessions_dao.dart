@@ -1,15 +1,16 @@
 import 'package:froom/froom.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../models/session.dart';
+import '../../../../domain/entity/session.dart';
+import '../../../../domain/entity/session_ext.dart';
 
 @dao
 abstract class SessionsDao {
   @Query('SELECT * FROM ${AppConstants.sessionsTable} WHERE id = :id')
   Future<Session?> findSessionById(int id);
 
-  @Query('SELECT * FROM ${AppConstants.sessionsTable}')
-  Future<List<Session>> fetchSessions();
+  @Query('SELECT * FROM ${AppConstants.sessionTableViews}')
+  Future<List<SessionExt>> fetchSessions();
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertSession(Session session);
@@ -19,7 +20,7 @@ abstract class SessionsDao {
     'SET bookmark = :bookmark, updated = :updated WHERE id = :id',
   )
   Future<void> bookmarkSession(
-    int id,
+    String id,
     bool bookmark,
     String updated,
   );

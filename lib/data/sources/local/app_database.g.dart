@@ -70,11 +70,15 @@ class _$AppDatabase extends AppDatabase {
 
   BookmarksDao? _bookmarksDaoInstance;
 
+  LinksDao? _linksDaoInstance;
+
   RoomsDao? _roomsDaoInstance;
 
   SessionsDao? _sessionsDaoInstance;
 
   SpeakersDao? _speakersDaoInstance;
+
+  SessionizesDao? _sessionizesDaoInstance;
 
   Future<sqflite.Database> open(
     String path,
@@ -82,7 +86,7 @@ class _$AppDatabase extends AppDatabase {
     Callback? callback,
   ]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
-      version: 1,
+      version: 2,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
         await callback?.onConfigure?.call(database);
@@ -102,16 +106,26 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-          'CREATE TABLE IF NOT EXISTS `bookmarks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `session` INTEGER, `createdAt` TEXT)',
+          'CREATE TABLE IF NOT EXISTS `bookmarks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `session` TEXT, `createdAt` TEXT)',
         );
         await database.execute(
-          'CREATE TABLE IF NOT EXISTS `rooms` (`id` INTEGER, `name` TEXT, `sort` INTEGER, `createdAt` TEXT, PRIMARY KEY (`id`))',
+          'CREATE TABLE IF NOT EXISTS `links` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `speakerId` TEXT, `title` TEXT, `url` TEXT)',
         );
         await database.execute(
-          'CREATE TABLE IF NOT EXISTS `sessions` (`id` INTEGER, `title` TEXT, `description` TEXT, `startsAt` TEXT, `endsAt` TEXT, `categories` TEXT, `speakerIds` TEXT, `speakerNames` TEXT, `room` INTEGER, `bookmarked` INTEGER, `createdAt` TEXT, `updatedAt` TEXT, PRIMARY KEY (`id`))',
+          'CREATE TABLE IF NOT EXISTS `rooms` (`id` INTEGER, `name` TEXT, `sort` INTEGER, PRIMARY KEY (`id`))',
         );
         await database.execute(
-          'CREATE TABLE IF NOT EXISTS `speakers` (`id` INTEGER, `firstName` TEXT, `lastName` TEXT, `bio` TEXT, `tagLine` TEXT, `profilePic` TEXT, `links` TEXT, `sessions` TEXT, `createdAt` TEXT, PRIMARY KEY (`id`))',
+          'CREATE TABLE IF NOT EXISTS `sessions` (`id` TEXT, `title` TEXT, `description` TEXT, `startsAt` TEXT, `endsAt` TEXT, `liveUrl` TEXT, `recordingUrl` TEXT, `roomId` INTEGER, `bookmarked` INTEGER, PRIMARY KEY (`id`))',
+        );
+        await database.execute(
+          'CREATE TABLE IF NOT EXISTS `speakers` (`id` TEXT, `firstName` TEXT, `lastName` TEXT, `fullName` TEXT, `bio` TEXT, `tagLine` TEXT, `avatar` TEXT, PRIMARY KEY (`id`))',
+        );
+        await database.execute(
+          'CREATE TABLE IF NOT EXISTS `sessionizes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `sessionId` TEXT, `speakerId` TEXT)',
+        );
+
+        await database.execute(
+          'CREATE VIEW IF NOT EXISTS `session_views` AS SELECT \n  tbl1.sessionId,\n  tbl1.speakerId,\n  tbl3.roomId,\n  tbl4.name AS venue,\n  tbl2.firstName,\n  tbl2.lastName,\n  tbl2.fullName,\n  tbl2.avatar,\n  tbl3.title,\n  tbl3.startsAt,\n  tbl3.endsAt,\n  tbl3.bookmarked \nFROM sessionizes AS tbl1\nLEFT JOIN speakers AS tbl2 ON tbl1.speakerId = tbl2.id\nLEFT JOIN sessions AS tbl3 ON tbl1.sessionId = tbl3.id\nLEFT JOIN rooms AS tbl4 ON tbl3.roomId = tbl4.id \nORDER BY tbl1.id ASC;\n;',
         );
 
         await callback?.onCreate?.call(database, version);
@@ -123,6 +137,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   BookmarksDao get bookmarksDao {
     return _bookmarksDaoInstance ??= _$BookmarksDao(database, changeListener);
+  }
+
+  @override
+  LinksDao get linksDao {
+    return _linksDaoInstance ??= _$LinksDao(database, changeListener);
   }
 
   @override
@@ -138,6 +157,14 @@ class _$AppDatabase extends AppDatabase {
   @override
   SpeakersDao get speakersDao {
     return _speakersDaoInstance ??= _$SpeakersDao(database, changeListener);
+  }
+
+  @override
+  SessionizesDao get sessionizesDao {
+    return _sessionizesDaoInstance ??= _$SessionizesDao(
+      database,
+      changeListener,
+    );
   }
 }
 
@@ -180,7 +207,7 @@ class _$BookmarksDao extends BookmarksDao {
       'SELECT * FROM bookmarks WHERE id = ?1',
       mapper: (Map<String, Object?> row) => Bookmark(
         id: row['id'] as int?,
-        session: row['session'] as int?,
+        session: row['session'] as String?,
         createdAt: row['createdAt'] as String?,
       ),
       arguments: [id],
@@ -193,7 +220,7 @@ class _$BookmarksDao extends BookmarksDao {
       'SELECT * FROM bookmarks',
       mapper: (Map<String, Object?> row) => Bookmark(
         id: row['id'] as int?,
-        session: row['session'] as int?,
+        session: row['session'] as String?,
         createdAt: row['createdAt'] as String?,
       ),
     );
@@ -218,6 +245,66 @@ class _$BookmarksDao extends BookmarksDao {
   }
 }
 
+class _$LinksDao extends LinksDao {
+  _$LinksDao(this.database, this.changeListener)
+    : _queryAdapter = QueryAdapter(database),
+      _linkInsertionAdapter = InsertionAdapter(
+        database,
+        'links',
+        (Link item) => <String, Object?>{
+          'id': item.id,
+          'speakerId': item.speakerId,
+          'title': item.title,
+          'url': item.url,
+        },
+      );
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<Link> _linkInsertionAdapter;
+
+  @override
+  Future<Link?> findLinkById(int id) async {
+    return _queryAdapter.query(
+      'SELECT * FROM links WHERE id = ?1',
+      mapper: (Map<String, Object?> row) => Link(
+        id: row['id'] as int?,
+        speakerId: row['speakerId'] as String?,
+        title: row['title'] as String?,
+        url: row['url'] as String?,
+      ),
+      arguments: [id],
+    );
+  }
+
+  @override
+  Future<List<Link>> fetchLinks() async {
+    return _queryAdapter.queryList(
+      'SELECT * FROM links',
+      mapper: (Map<String, Object?> row) => Link(
+        id: row['id'] as int?,
+        speakerId: row['speakerId'] as String?,
+        title: row['title'] as String?,
+        url: row['url'] as String?,
+      ),
+    );
+  }
+
+  @override
+  Future<void> deleteAllLinks() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM links');
+  }
+
+  @override
+  Future<void> insertLink(Link link) async {
+    await _linkInsertionAdapter.insert(link, OnConflictStrategy.replace);
+  }
+}
+
 class _$RoomsDao extends RoomsDao {
   _$RoomsDao(this.database, this.changeListener)
     : _queryAdapter = QueryAdapter(database),
@@ -228,7 +315,6 @@ class _$RoomsDao extends RoomsDao {
           'id': item.id,
           'name': item.name,
           'sort': item.sort,
-          'createdAt': item.createdAt,
         },
       );
 
@@ -248,7 +334,6 @@ class _$RoomsDao extends RoomsDao {
         id: row['id'] as int?,
         name: row['name'] as String?,
         sort: row['sort'] as int?,
-        createdAt: row['createdAt'] as String?,
       ),
       arguments: [id],
     );
@@ -262,7 +347,6 @@ class _$RoomsDao extends RoomsDao {
         id: row['id'] as int?,
         name: row['name'] as String?,
         sort: row['sort'] as int?,
-        createdAt: row['createdAt'] as String?,
       ),
     );
   }
@@ -290,15 +374,12 @@ class _$SessionsDao extends SessionsDao {
           'description': item.description,
           'startsAt': item.startsAt,
           'endsAt': item.endsAt,
-          'categories': item.categories,
-          'speakerIds': item.speakerIds,
-          'speakerNames': item.speakerNames,
-          'room': item.room,
+          'liveUrl': item.liveUrl,
+          'recordingUrl': item.recordingUrl,
+          'roomId': item.roomId,
           'bookmarked': item.bookmarked == null
               ? null
               : (item.bookmarked! ? 1 : 0),
-          'createdAt': item.createdAt,
-          'updatedAt': item.updatedAt,
         },
       );
 
@@ -315,50 +396,47 @@ class _$SessionsDao extends SessionsDao {
     return _queryAdapter.query(
       'SELECT * FROM sessions WHERE id = ?1',
       mapper: (Map<String, Object?> row) => Session(
-        id: row['id'] as int?,
+        id: row['id'] as String?,
         title: row['title'] as String?,
         description: row['description'] as String?,
         startsAt: row['startsAt'] as String?,
         endsAt: row['endsAt'] as String?,
-        speakerIds: row['speakerIds'] as String?,
-        speakerNames: row['speakerNames'] as String?,
-        categories: row['categories'] as String?,
-        room: row['room'] as int?,
+        liveUrl: row['liveUrl'] as String?,
+        recordingUrl: row['recordingUrl'] as String?,
+        roomId: row['roomId'] as int?,
         bookmarked: row['bookmarked'] == null
             ? null
             : (row['bookmarked'] as int) != 0,
-        createdAt: row['createdAt'] as String?,
-        updatedAt: row['updatedAt'] as String?,
       ),
       arguments: [id],
     );
   }
 
   @override
-  Future<List<Session>> fetchSessions() async {
+  Future<List<SessionExt>> fetchSessions() async {
     return _queryAdapter.queryList(
-      'SELECT * FROM sessions',
-      mapper: (Map<String, Object?> row) => Session(
-        id: row['id'] as int?,
+      'SELECT * FROM session_views',
+      mapper: (Map<String, Object?> row) => SessionExt(
+        sessionId: row['sessionId'] as String?,
+        speakerId: row['speakerId'] as String?,
+        roomId: row['roomId'] as int?,
+        venue: row['venue'] as String?,
+        firstName: row['firstName'] as String?,
+        lastName: row['lastName'] as String?,
+        fullName: row['fullName'] as String?,
+        avatar: row['avatar'] as String?,
         title: row['title'] as String?,
-        description: row['description'] as String?,
         startsAt: row['startsAt'] as String?,
         endsAt: row['endsAt'] as String?,
-        speakerIds: row['speakerIds'] as String?,
-        speakerNames: row['speakerNames'] as String?,
-        categories: row['categories'] as String?,
-        room: row['room'] as int?,
         bookmarked: row['bookmarked'] == null
             ? null
             : (row['bookmarked'] as int) != 0,
-        createdAt: row['createdAt'] as String?,
-        updatedAt: row['updatedAt'] as String?,
       ),
     );
   }
 
   @override
-  Future<void> bookmarkSession(int id, bool bookmark, String updated) async {
+  Future<void> bookmarkSession(String id, bool bookmark, String updated) async {
     await _queryAdapter.queryNoReturn(
       'UPDATE sessions SET bookmark = ?2, updated = ?3 WHERE id = ?1',
       arguments: [id, bookmark ? 1 : 0, updated],
@@ -386,12 +464,10 @@ class _$SpeakersDao extends SpeakersDao {
           'id': item.id,
           'firstName': item.firstName,
           'lastName': item.lastName,
+          'fullName': item.fullName,
           'bio': item.bio,
           'tagLine': item.tagLine,
-          'profilePic': item.profilePic,
-          'links': item.links,
-          'sessions': item.sessions,
-          'createdAt': item.createdAt,
+          'avatar': item.avatar,
         },
       );
 
@@ -408,15 +484,13 @@ class _$SpeakersDao extends SpeakersDao {
     return _queryAdapter.query(
       'SELECT * FROM speakers WHERE id = ?1',
       mapper: (Map<String, Object?> row) => Speaker(
-        id: row['id'] as int?,
+        id: row['id'] as String?,
         firstName: row['firstName'] as String?,
         lastName: row['lastName'] as String?,
+        fullName: row['fullName'] as String?,
         bio: row['bio'] as String?,
         tagLine: row['tagLine'] as String?,
-        profilePic: row['profilePic'] as String?,
-        links: row['links'] as String?,
-        sessions: row['sessions'] as String?,
-        createdAt: row['createdAt'] as String?,
+        avatar: row['avatar'] as String?,
       ),
       arguments: [id],
     );
@@ -427,15 +501,13 @@ class _$SpeakersDao extends SpeakersDao {
     return _queryAdapter.queryList(
       'SELECT * FROM speakers',
       mapper: (Map<String, Object?> row) => Speaker(
-        id: row['id'] as int?,
+        id: row['id'] as String?,
         firstName: row['firstName'] as String?,
         lastName: row['lastName'] as String?,
+        fullName: row['fullName'] as String?,
         bio: row['bio'] as String?,
         tagLine: row['tagLine'] as String?,
-        profilePic: row['profilePic'] as String?,
-        links: row['links'] as String?,
-        sessions: row['sessions'] as String?,
-        createdAt: row['createdAt'] as String?,
+        avatar: row['avatar'] as String?,
       ),
     );
   }
@@ -448,5 +520,65 @@ class _$SpeakersDao extends SpeakersDao {
   @override
   Future<void> insertSpeaker(Speaker speaker) async {
     await _speakerInsertionAdapter.insert(speaker, OnConflictStrategy.replace);
+  }
+}
+
+class _$SessionizesDao extends SessionizesDao {
+  _$SessionizesDao(this.database, this.changeListener)
+    : _queryAdapter = QueryAdapter(database),
+      _sessionizeInsertionAdapter = InsertionAdapter(
+        database,
+        'sessionizes',
+        (Sessionize item) => <String, Object?>{
+          'id': item.id,
+          'sessionId': item.sessionId,
+          'speakerId': item.speakerId,
+        },
+      );
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<Sessionize> _sessionizeInsertionAdapter;
+
+  @override
+  Future<Sessionize?> findSessionizeById(int id) async {
+    return _queryAdapter.query(
+      'SELECT * FROM sessionizes WHERE id = ?1',
+      mapper: (Map<String, Object?> row) => Sessionize(
+        id: row['id'] as int?,
+        sessionId: row['sessionId'] as String?,
+        speakerId: row['speakerId'] as String?,
+      ),
+      arguments: [id],
+    );
+  }
+
+  @override
+  Future<List<Sessionize>> fetchSessionizes() async {
+    return _queryAdapter.queryList(
+      'SELECT * FROM sessionizes',
+      mapper: (Map<String, Object?> row) => Sessionize(
+        id: row['id'] as int?,
+        sessionId: row['sessionId'] as String?,
+        speakerId: row['speakerId'] as String?,
+      ),
+    );
+  }
+
+  @override
+  Future<void> deleteAllSessionizes() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM sessionizes');
+  }
+
+  @override
+  Future<void> insertSessionize(Sessionize sessionizes) async {
+    await _sessionizeInsertionAdapter.insert(
+      sessionizes,
+      OnConflictStrategy.replace,
+    );
   }
 }

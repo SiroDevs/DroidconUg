@@ -1,5 +1,5 @@
 import '../../data/sources/local/app_database.dart';
-import '../../data/models/models.dart';
+import '../entity/models.dart';
 import 'database_repository.dart';
 
 /// Implementor of Database Repository
@@ -44,6 +44,21 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
+  Future<List<Link>> fetchLinks() async {
+    return _appDB.linksDao.fetchLinks();
+  }
+
+  @override
+  Future<void> saveLink(Link link) async {
+    return _appDB.linksDao.insertLink(link);
+  }
+
+  @override
+  Future<void> removeAllLinks() async {
+    return _appDB.linksDao.deleteAllLinks();
+  }
+
+  @override
   Future<List<Speaker>> fetchSpeakers() async {
     return _appDB.speakersDao.fetchSpeakers();
   }
@@ -59,7 +74,7 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<List<Session>> fetchSessions() async {
+  Future<List<SessionExt>> fetchSessions() async {
     return _appDB.sessionsDao.fetchSessions();
   }
 
@@ -69,12 +84,22 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<void> bookmarkSession(int id, bool bookmark, String updated) async {
+  Future<void> bookmarkSession(String id, bool bookmark, String updated) async {
     return _appDB.sessionsDao.bookmarkSession(id, bookmark, updated);
   }
 
   @override
   Future<void> removeAllSessions() async {
     return _appDB.sessionsDao.deleteAllSessions();
+  }
+
+  @override
+  Future<void> saveSessionize(Sessionize sessionizes) async {
+    return _appDB.sessionizesDao.insertSessionize(sessionizes);
+  }
+
+  @override
+  Future<void> removeAllSessionizes() async {
+    return _appDB.sessionizesDao.deleteAllSessionizes();
   }
 }

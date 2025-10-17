@@ -313,16 +313,17 @@ extension SessionsStatePatterns on SessionsState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SessionsState value)?  initial,TResult Function( SessionsLoadedState value)?  loaded,TResult Function( SessionsProgressState value)?  progress,TResult Function( SessionsSuccessState value)?  success,TResult Function( SessionsFetchedState value)?  fetched,TResult Function( SessionsBookmarkedState value)?  bookmarked,TResult Function( SessionsFailureState value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SessionsState value)?  initial,TResult Function( LoadedState value)?  loaded,TResult Function( ProgressState value)?  progress,TResult Function( SuccessState value)?  success,TResult Function( DataFetched value)?  fetched,TResult Function( Bookmarked value)?  bookmarked,TResult Function( NoInternetState value)?  noInternet,TResult Function( FailureState value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _SessionsState() when initial != null:
-return initial(_that);case SessionsLoadedState() when loaded != null:
-return loaded(_that);case SessionsProgressState() when progress != null:
-return progress(_that);case SessionsSuccessState() when success != null:
-return success(_that);case SessionsFetchedState() when fetched != null:
-return fetched(_that);case SessionsBookmarkedState() when bookmarked != null:
-return bookmarked(_that);case SessionsFailureState() when failure != null:
+return initial(_that);case LoadedState() when loaded != null:
+return loaded(_that);case ProgressState() when progress != null:
+return progress(_that);case SuccessState() when success != null:
+return success(_that);case DataFetched() when fetched != null:
+return fetched(_that);case Bookmarked() when bookmarked != null:
+return bookmarked(_that);case NoInternetState() when noInternet != null:
+return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
   return orElse();
 
@@ -341,16 +342,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SessionsState value)  initial,required TResult Function( SessionsLoadedState value)  loaded,required TResult Function( SessionsProgressState value)  progress,required TResult Function( SessionsSuccessState value)  success,required TResult Function( SessionsFetchedState value)  fetched,required TResult Function( SessionsBookmarkedState value)  bookmarked,required TResult Function( SessionsFailureState value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SessionsState value)  initial,required TResult Function( LoadedState value)  loaded,required TResult Function( ProgressState value)  progress,required TResult Function( SuccessState value)  success,required TResult Function( DataFetched value)  fetched,required TResult Function( Bookmarked value)  bookmarked,required TResult Function( NoInternetState value)  noInternet,required TResult Function( FailureState value)  failure,}){
 final _that = this;
 switch (_that) {
 case _SessionsState():
-return initial(_that);case SessionsLoadedState():
-return loaded(_that);case SessionsProgressState():
-return progress(_that);case SessionsSuccessState():
-return success(_that);case SessionsFetchedState():
-return fetched(_that);case SessionsBookmarkedState():
-return bookmarked(_that);case SessionsFailureState():
+return initial(_that);case LoadedState():
+return loaded(_that);case ProgressState():
+return progress(_that);case SuccessState():
+return success(_that);case DataFetched():
+return fetched(_that);case Bookmarked():
+return bookmarked(_that);case NoInternetState():
+return noInternet(_that);case FailureState():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -368,16 +370,17 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SessionsState value)?  initial,TResult? Function( SessionsLoadedState value)?  loaded,TResult? Function( SessionsProgressState value)?  progress,TResult? Function( SessionsSuccessState value)?  success,TResult? Function( SessionsFetchedState value)?  fetched,TResult? Function( SessionsBookmarkedState value)?  bookmarked,TResult? Function( SessionsFailureState value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SessionsState value)?  initial,TResult? Function( LoadedState value)?  loaded,TResult? Function( ProgressState value)?  progress,TResult? Function( SuccessState value)?  success,TResult? Function( DataFetched value)?  fetched,TResult? Function( Bookmarked value)?  bookmarked,TResult? Function( NoInternetState value)?  noInternet,TResult? Function( FailureState value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _SessionsState() when initial != null:
-return initial(_that);case SessionsLoadedState() when loaded != null:
-return loaded(_that);case SessionsProgressState() when progress != null:
-return progress(_that);case SessionsSuccessState() when success != null:
-return success(_that);case SessionsFetchedState() when fetched != null:
-return fetched(_that);case SessionsBookmarkedState() when bookmarked != null:
-return bookmarked(_that);case SessionsFailureState() when failure != null:
+return initial(_that);case LoadedState() when loaded != null:
+return loaded(_that);case ProgressState() when progress != null:
+return progress(_that);case SuccessState() when success != null:
+return success(_that);case DataFetched() when fetched != null:
+return fetched(_that);case Bookmarked() when bookmarked != null:
+return bookmarked(_that);case NoInternetState() when noInternet != null:
+return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
   return null;
 
@@ -395,15 +398,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( Droidcon droidcon)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SessionsState() when initial != null:
-return initial();case SessionsLoadedState() when loaded != null:
-return loaded();case SessionsProgressState() when progress != null:
-return progress();case SessionsSuccessState() when success != null:
-return success();case SessionsFetchedState() when fetched != null:
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionsBookmarkedState() when bookmarked != null:
-return bookmarked(_that.bookmarked);case SessionsFailureState() when failure != null:
+return initial();case LoadedState() when loaded != null:
+return loaded();case ProgressState() when progress != null:
+return progress();case SuccessState() when success != null:
+return success();case DataFetched() when fetched != null:
+return fetched(_that.droidcon);case Bookmarked() when bookmarked != null:
+return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
+return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
   return orElse();
 
@@ -422,15 +426,16 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function( String feedback)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( Droidcon droidcon)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
 switch (_that) {
 case _SessionsState():
-return initial();case SessionsLoadedState():
-return loaded();case SessionsProgressState():
-return progress();case SessionsSuccessState():
-return success();case SessionsFetchedState():
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionsBookmarkedState():
-return bookmarked(_that.bookmarked);case SessionsFailureState():
+return initial();case LoadedState():
+return loaded();case ProgressState():
+return progress();case SuccessState():
+return success();case DataFetched():
+return fetched(_that.droidcon);case Bookmarked():
+return bookmarked(_that.bookmarked);case NoInternetState():
+return noInternet();case FailureState():
 return failure(_that.feedback);case _:
   throw StateError('Unexpected subclass');
 
@@ -448,15 +453,16 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function( String feedback)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( Droidcon droidcon)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
 switch (_that) {
 case _SessionsState() when initial != null:
-return initial();case SessionsLoadedState() when loaded != null:
-return loaded();case SessionsProgressState() when progress != null:
-return progress();case SessionsSuccessState() when success != null:
-return success();case SessionsFetchedState() when fetched != null:
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionsBookmarkedState() when bookmarked != null:
-return bookmarked(_that.bookmarked);case SessionsFailureState() when failure != null:
+return initial();case LoadedState() when loaded != null:
+return loaded();case ProgressState() when progress != null:
+return progress();case SuccessState() when success != null:
+return success();case DataFetched() when fetched != null:
+return fetched(_that.droidcon);case Bookmarked() when bookmarked != null:
+return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
+return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
   return null;
 
@@ -500,8 +506,8 @@ String toString() {
 /// @nodoc
 
 
-class SessionsLoadedState implements SessionsState {
-  const SessionsLoadedState();
+class LoadedState implements SessionsState {
+  const LoadedState();
   
 
 
@@ -511,7 +517,7 @@ class SessionsLoadedState implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsLoadedState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadedState);
 }
 
 
@@ -532,8 +538,8 @@ String toString() {
 /// @nodoc
 
 
-class SessionsProgressState implements SessionsState {
-  const SessionsProgressState();
+class ProgressState implements SessionsState {
+  const ProgressState();
   
 
 
@@ -543,7 +549,7 @@ class SessionsProgressState implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsProgressState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProgressState);
 }
 
 
@@ -564,8 +570,8 @@ String toString() {
 /// @nodoc
 
 
-class SessionsSuccessState implements SessionsState {
-  const SessionsSuccessState();
+class SuccessState implements SessionsState {
+  const SuccessState();
   
 
 
@@ -575,7 +581,7 @@ class SessionsSuccessState implements SessionsState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsSuccessState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuccessState);
 }
 
 
@@ -596,70 +602,43 @@ String toString() {
 /// @nodoc
 
 
-class SessionsFetchedState implements SessionsState {
-  const SessionsFetchedState(final  List<Bookmark> bookmarks, final  List<Room> rooms, final  List<Speaker> speakers, final  List<Session> sessions): _bookmarks = bookmarks,_rooms = rooms,_speakers = speakers,_sessions = sessions;
+class DataFetched implements SessionsState {
+  const DataFetched(this.droidcon);
   
 
- final  List<Bookmark> _bookmarks;
- List<Bookmark> get bookmarks {
-  if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_bookmarks);
-}
-
- final  List<Room> _rooms;
- List<Room> get rooms {
-  if (_rooms is EqualUnmodifiableListView) return _rooms;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_rooms);
-}
-
- final  List<Speaker> _speakers;
- List<Speaker> get speakers {
-  if (_speakers is EqualUnmodifiableListView) return _speakers;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_speakers);
-}
-
- final  List<Session> _sessions;
- List<Session> get sessions {
-  if (_sessions is EqualUnmodifiableListView) return _sessions;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_sessions);
-}
-
+ final  Droidcon droidcon;
 
 /// Create a copy of SessionsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SessionsFetchedStateCopyWith<SessionsFetchedState> get copyWith => _$SessionsFetchedStateCopyWithImpl<SessionsFetchedState>(this, _$identity);
+$DataFetchedCopyWith<DataFetched> get copyWith => _$DataFetchedCopyWithImpl<DataFetched>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsFetchedState&&const DeepCollectionEquality().equals(other._bookmarks, _bookmarks)&&const DeepCollectionEquality().equals(other._rooms, _rooms)&&const DeepCollectionEquality().equals(other._speakers, _speakers)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataFetched&&(identical(other.droidcon, droidcon) || other.droidcon == droidcon));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bookmarks),const DeepCollectionEquality().hash(_rooms),const DeepCollectionEquality().hash(_speakers),const DeepCollectionEquality().hash(_sessions));
+int get hashCode => Object.hash(runtimeType,droidcon);
 
 @override
 String toString() {
-  return 'SessionsState.fetched(bookmarks: $bookmarks, rooms: $rooms, speakers: $speakers, sessions: $sessions)';
+  return 'SessionsState.fetched(droidcon: $droidcon)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SessionsFetchedStateCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
-  factory $SessionsFetchedStateCopyWith(SessionsFetchedState value, $Res Function(SessionsFetchedState) _then) = _$SessionsFetchedStateCopyWithImpl;
+abstract mixin class $DataFetchedCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
+  factory $DataFetchedCopyWith(DataFetched value, $Res Function(DataFetched) _then) = _$DataFetchedCopyWithImpl;
 @useResult
 $Res call({
- List<Bookmark> bookmarks, List<Room> rooms, List<Speaker> speakers, List<Session> sessions
+ Droidcon droidcon
 });
 
 
@@ -667,22 +646,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$SessionsFetchedStateCopyWithImpl<$Res>
-    implements $SessionsFetchedStateCopyWith<$Res> {
-  _$SessionsFetchedStateCopyWithImpl(this._self, this._then);
+class _$DataFetchedCopyWithImpl<$Res>
+    implements $DataFetchedCopyWith<$Res> {
+  _$DataFetchedCopyWithImpl(this._self, this._then);
 
-  final SessionsFetchedState _self;
-  final $Res Function(SessionsFetchedState) _then;
+  final DataFetched _self;
+  final $Res Function(DataFetched) _then;
 
 /// Create a copy of SessionsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? bookmarks = null,Object? rooms = null,Object? speakers = null,Object? sessions = null,}) {
-  return _then(SessionsFetchedState(
-null == bookmarks ? _self._bookmarks : bookmarks // ignore: cast_nullable_to_non_nullable
-as List<Bookmark>,null == rooms ? _self._rooms : rooms // ignore: cast_nullable_to_non_nullable
-as List<Room>,null == speakers ? _self._speakers : speakers // ignore: cast_nullable_to_non_nullable
-as List<Speaker>,null == sessions ? _self._sessions : sessions // ignore: cast_nullable_to_non_nullable
-as List<Session>,
+@pragma('vm:prefer-inline') $Res call({Object? droidcon = null,}) {
+  return _then(DataFetched(
+null == droidcon ? _self.droidcon : droidcon // ignore: cast_nullable_to_non_nullable
+as Droidcon,
   ));
 }
 
@@ -692,8 +668,8 @@ as List<Session>,
 /// @nodoc
 
 
-class SessionsBookmarkedState implements SessionsState {
-  const SessionsBookmarkedState(this.bookmarked);
+class Bookmarked implements SessionsState {
+  const Bookmarked(this.bookmarked);
   
 
  final  bool bookmarked;
@@ -702,13 +678,13 @@ class SessionsBookmarkedState implements SessionsState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SessionsBookmarkedStateCopyWith<SessionsBookmarkedState> get copyWith => _$SessionsBookmarkedStateCopyWithImpl<SessionsBookmarkedState>(this, _$identity);
+$BookmarkedCopyWith<Bookmarked> get copyWith => _$BookmarkedCopyWithImpl<Bookmarked>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsBookmarkedState&&(identical(other.bookmarked, bookmarked) || other.bookmarked == bookmarked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Bookmarked&&(identical(other.bookmarked, bookmarked) || other.bookmarked == bookmarked));
 }
 
 
@@ -724,8 +700,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $SessionsBookmarkedStateCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
-  factory $SessionsBookmarkedStateCopyWith(SessionsBookmarkedState value, $Res Function(SessionsBookmarkedState) _then) = _$SessionsBookmarkedStateCopyWithImpl;
+abstract mixin class $BookmarkedCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
+  factory $BookmarkedCopyWith(Bookmarked value, $Res Function(Bookmarked) _then) = _$BookmarkedCopyWithImpl;
 @useResult
 $Res call({
  bool bookmarked
@@ -736,17 +712,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$SessionsBookmarkedStateCopyWithImpl<$Res>
-    implements $SessionsBookmarkedStateCopyWith<$Res> {
-  _$SessionsBookmarkedStateCopyWithImpl(this._self, this._then);
+class _$BookmarkedCopyWithImpl<$Res>
+    implements $BookmarkedCopyWith<$Res> {
+  _$BookmarkedCopyWithImpl(this._self, this._then);
 
-  final SessionsBookmarkedState _self;
-  final $Res Function(SessionsBookmarkedState) _then;
+  final Bookmarked _self;
+  final $Res Function(Bookmarked) _then;
 
 /// Create a copy of SessionsState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? bookmarked = null,}) {
-  return _then(SessionsBookmarkedState(
+  return _then(Bookmarked(
 null == bookmarked ? _self.bookmarked : bookmarked // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -758,8 +734,40 @@ as bool,
 /// @nodoc
 
 
-class SessionsFailureState implements SessionsState {
-  const SessionsFailureState(this.feedback);
+class NoInternetState implements SessionsState {
+  const NoInternetState();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoInternetState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SessionsState.noInternet()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class FailureState implements SessionsState {
+  const FailureState(this.feedback);
   
 
  final  String feedback;
@@ -768,13 +776,13 @@ class SessionsFailureState implements SessionsState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SessionsFailureStateCopyWith<SessionsFailureState> get copyWith => _$SessionsFailureStateCopyWithImpl<SessionsFailureState>(this, _$identity);
+$FailureStateCopyWith<FailureState> get copyWith => _$FailureStateCopyWithImpl<FailureState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionsFailureState&&(identical(other.feedback, feedback) || other.feedback == feedback));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FailureState&&(identical(other.feedback, feedback) || other.feedback == feedback));
 }
 
 
@@ -790,8 +798,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $SessionsFailureStateCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
-  factory $SessionsFailureStateCopyWith(SessionsFailureState value, $Res Function(SessionsFailureState) _then) = _$SessionsFailureStateCopyWithImpl;
+abstract mixin class $FailureStateCopyWith<$Res> implements $SessionsStateCopyWith<$Res> {
+  factory $FailureStateCopyWith(FailureState value, $Res Function(FailureState) _then) = _$FailureStateCopyWithImpl;
 @useResult
 $Res call({
  String feedback
@@ -802,17 +810,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$SessionsFailureStateCopyWithImpl<$Res>
-    implements $SessionsFailureStateCopyWith<$Res> {
-  _$SessionsFailureStateCopyWithImpl(this._self, this._then);
+class _$FailureStateCopyWithImpl<$Res>
+    implements $FailureStateCopyWith<$Res> {
+  _$FailureStateCopyWithImpl(this._self, this._then);
 
-  final SessionsFailureState _self;
-  final $Res Function(SessionsFailureState) _then;
+  final FailureState _self;
+  final $Res Function(FailureState) _then;
 
 /// Create a copy of SessionsState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? feedback = null,}) {
-  return _then(SessionsFailureState(
+  return _then(FailureState(
 null == feedback ? _self.feedback : feedback // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -4,20 +4,18 @@ part of 'speakers_bloc.dart';
 class SpeakersState with _$SpeakersState {
   const factory SpeakersState.initial() = _SpeakersState;
 
-  const factory SpeakersState.loaded() = SpeakersLoadedState;
+  const factory SpeakersState.loaded() = LoadedState;
 
-  const factory SpeakersState.progress() = SpeakersProgressState;
+  const factory SpeakersState.progress() = ProgressState;
 
-  const factory SpeakersState.success() = SpeakersSuccessState;
+  const factory SpeakersState.success() = SuccessState;
 
-  const factory SpeakersState.fetched(
-    List<Bookmark> bookmarks,
-    List<Room> rooms,
-    List<Speaker> speakers,
-    List<Session> sessions,
-  ) = SpeakersFetchedState;
+  const factory SpeakersState.fetched(Droidcon droidcon) = DataFetched;
 
-  const factory SpeakersState.bookmarked(bool bookmarked) = SpeakersBookmarkedState;
 
-  const factory SpeakersState.failure(String feedback) = SpeakersFailureState;
+  const factory SpeakersState.bookmarked(bool bookmarked) = Bookmarked;
+
+  const factory SpeakersState.noInternet() = NoInternetState;
+  
+  const factory SpeakersState.failure(String feedback) = FailureState;
 }

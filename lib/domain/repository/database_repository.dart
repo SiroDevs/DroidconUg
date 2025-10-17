@@ -1,4 +1,4 @@
-import '../../data/models/models.dart';
+import '../entity/models.dart';
 
 abstract class DatabaseRepository {
   Future<List<Bookmark>> fetchBookmarks();
@@ -9,17 +9,23 @@ abstract class DatabaseRepository {
 
   Future<void> removeAllBookmarks();
 
+  Future<List<Link>> fetchLinks();
+
+  Future<void> saveLink(Link link);
+
+  Future<void> removeAllLinks();
+
   Future<List<Room>> fetchRooms();
 
   Future<void> saveRoom(Room room);
 
   Future<void> removeAllRooms();
 
-  Future<List<Session>> fetchSessions();
+  Future<List<SessionExt>> fetchSessions();
 
   Future<void> saveSession(Session session);
 
-  Future<void> bookmarkSession(int id, bool bookmark, String updated);
+  Future<void> bookmarkSession(String id, bool bookmark, String updated);
 
   Future<void> removeAllSessions();
 
@@ -28,4 +34,9 @@ abstract class DatabaseRepository {
   Future<void> saveSpeaker(Speaker speaker);
 
   Future<void> removeAllSpeakers();
+
+  Future<void> saveSessionize(Sessionize sessionizes);
+
+  Future<void> removeAllSessionizes();
+
 }

@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/models.dart';
+import '../../../domain/entity/models.dart';
 import '../../blocs/speakers/speakers_bloc.dart';
+import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
 import 'speaker_screen.dart';
@@ -31,12 +30,11 @@ class SpeakersScreenState extends State<SpeakersScreen>
       create: (context) => SpeakersBloc()..add(const FetchData()),
       child: BlocConsumer<SpeakersBloc, SpeakersState>(
         listener: (context, state) {
-          if (state is SpeakersFetchedState) {
-            bookmarks = state.bookmarks;
-            rooms = state.rooms;
-            sessions = state.sessions;
-            speakers = List.from(state.speakers)..shuffle(Random());
-          }
+          state.whenOrNull(
+            failure: (feedback) {
+              CustomSnackbar.show(context, 'Unable to fetch data: $feedback');
+            },
+          );
         },
         builder: (context, state) {
           return state.maybeWhen(
@@ -62,7 +60,7 @@ class SpeakersScreenState extends State<SpeakersScreen>
                     context.read<SpeakersBloc>().add(const FetchData()),
               ),
             ),
-            fetched: (bookmarks, rooms, speakers, sessions) {
+            fetched: (droidcon) {
               if (rooms.isEmpty) {
                 return Scaffold(
                   appBar: AppBar(title: const Text('Speakers')),
@@ -74,9 +72,7 @@ class SpeakersScreenState extends State<SpeakersScreen>
               }
 
               return Scaffold(
-                appBar: AppBar(
-                  title: const Text('Speakers'),
-                ),
+                appBar: AppBar(title: const Text('Speakers')),
                 body: GridView.builder(
                   itemCount: speakers.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,7 +1,7 @@
 import 'package:froom/froom.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../models/room.dart';
+import '../../../../domain/entity/room.dart';
 
 @dao
 abstract class RoomsDao {

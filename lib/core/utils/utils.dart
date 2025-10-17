@@ -1,4 +1,4 @@
-import '../../data/models/models.dart';
+import '../../domain/entity/models.dart';
 
 String? getRoomName(List<Room> rooms, int roomId) {
   try {
@@ -18,18 +18,15 @@ List<Session> sortSessions(List<Session> dateSessions) {
         id: session.id,
         title: session.title,
         description: session.description,
-        speakerIds: session.speakerIds,
-        speakerNames: session.speakerNames,
         startsAt: session.startsAt,
         endsAt: session.endsAt,
         bookmarked: session.bookmarked,
-        categories: session.startsAt!.split('T').last,
-        room: session.room,
-        createdAt: session.createdAt,
-        updatedAt: session.updatedAt,
+        liveUrl: session.liveUrl,
+        recordingUrl: session.recordingUrl,
+        roomId: session.roomId,
       ),
     );
   }
-  sessions.sort((a, b) => a.categories!.compareTo(b.categories!));
+  // sessions.sort((a, b) => a.categories!.compareTo(b.categories!));
   return sessions;
 }

@@ -8,4 +8,5 @@ class AppAssets {
   static const String droidconIcon = '$assetsImages/droidcon-uganda.png';
   static const String droidconUgIcon = '$assetsImages/droidconug.png';
   static const String imgZeroState = '$assetsImages/empty.png';
+  static const String imgSpeaker = '$assetsImages/speaker.png';
 }

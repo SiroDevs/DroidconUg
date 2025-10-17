@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../data/models/models.dart';
 import '../../../core/utils/date_util.dart';
+import '../../../domain/entity/models.dart';
 import '../../widgets/features/session_item.dart';
 import '../../widgets/features/tag_item.dart';
 import '../../../core/utils/utils.dart';
@@ -47,7 +47,7 @@ class SessionScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                session.speakerNames ?? 'Untitled Session',
+                session.title ?? 'Untitled Session',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class SessionScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TagItem(
-                tagText: getRoomName(rooms, session.room!)!,
+                tagText: getRoomName(rooms, session.roomId!)!,
               ),
             ].toRow(),
             const SizedBox(height: 16),

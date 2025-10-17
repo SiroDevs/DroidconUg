@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
-import '../../../data/models/models.dart';
+import '../../../domain/entity/models.dart';
 import '../../widgets/features/session_item.dart';
 
 class SpeakerScreen extends StatelessWidget {
@@ -18,99 +18,94 @@ class SpeakerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final speakerSessions = sessions
-        .where((session) =>
-            session.speakerNames?.contains(speaker.firstName!) ?? false)
-        .toList();
+    return Scaffold();
+    // List<int> sessionIds = speaker.sessions!
+    //     .split(',')
+    //     .map((id) => int.parse(id))
+    //     .toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${speaker.firstName} ${speaker.lastName}'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 16),
-                    _SpeakerImage(profilePicUrl: speaker.profilePic),
-                    const SizedBox(height: 16),
-                    Text(
-                      speaker.tagLine ?? '',
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      speaker.bio ?? '',
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Sessions',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 5),
-              if (speakerSessions.isEmpty)
-                const Center(
-                  child: Text(
-                    'No sessions available for this speaker.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                )
-              else
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: speakerSessions.length,
-                  itemBuilder: (context, index) {
-                    return SessionItem(
-                      session: speakerSessions[index],
-                      rooms: rooms,
-                    );
-                  },
-                ),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ),
-      ),
-    );
+    // final speakerSessions = sessions
+    //     .where((session) => sessionIds.contains(session.id!))
+    //     .toList();
+
+    // return Scaffold(
+    //   appBar: AppBar(title: Text('${speaker.firstName} ${speaker.lastName}')),
+    //   body: SingleChildScrollView(
+    //     child: Padding(
+    //       padding: const EdgeInsets.symmetric(horizontal: 10),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           Center(
+    //             child: Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               mainAxisAlignment: MainAxisAlignment.start,
+    //               children: [
+    //                 const SizedBox(height: 16),
+    //                 _SpeakerImage(avatar: speaker.avatar),
+    //                 const SizedBox(height: 16),
+    //                 Text(
+    //                   speaker.tagLine ?? '',
+    //                   style: const TextStyle(
+    //                     fontSize: 24,
+    //                     fontWeight: FontWeight.bold,
+    //                   ),
+    //                 ),
+    //                 const SizedBox(height: 8),
+    //                 Text(
+    //                   speaker.bio ?? '',
+    //                   style: const TextStyle(fontSize: 16),
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //           const SizedBox(height: 10),
+    //           const Text(
+    //             'Sessions',
+    //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    //           ),
+    //           const SizedBox(height: 5),
+    //           if (speakerSessions.isEmpty)
+    //             const Center(
+    //               child: Text(
+    //                 'No sessions available for this speaker.',
+    //                 style: TextStyle(fontSize: 16),
+    //               ),
+    //             )
+    //           else
+    //             ListView.builder(
+    //               shrinkWrap: true,
+    //               physics: const NeverScrollableScrollPhysics(),
+    //               itemCount: speakerSessions.length,
+    //               itemBuilder: (context, index) {
+    //                 return SessionItem(
+    //                   session: speakerSessions[index],
+    //                   rooms: rooms,
+    //                 );
+    //               },
+    //             ),
+    //           const SizedBox(height: 10),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 
 class _SpeakerImage extends StatelessWidget {
-  final String? profilePicUrl;
+  final String? avatar;
 
-  const _SpeakerImage({required this.profilePicUrl});
+  const _SpeakerImage({required this.avatar});
 
   @override
   Widget build(BuildContext context) {
-    var defaultPic = Image.asset(
-      AppAssets.appIcon,
-      fit: BoxFit.cover,
-    );
+    var defaultPic = Image.asset(AppAssets.appIcon, fit: BoxFit.cover);
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: profilePicUrl != null
+      child: avatar != null
           ? Image.network(
-              profilePicUrl!,
+              avatar!,
               fit: BoxFit.cover,
               width: double.infinity,
               errorBuilder: (context, error, stackTrace) => defaultPic,

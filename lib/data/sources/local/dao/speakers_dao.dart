@@ -1,7 +1,7 @@
 import 'package:froom/froom.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../models/speaker.dart';
+import '../../../../domain/entity/speaker.dart';
 
 @dao
 abstract class SpeakersDao {

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/text_scale_factor.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/sessions/sessions_screen.dart';
-import '../screens/settings/settings_screen.dart';
 import '../screens/speakers/speakers_screen.dart';
 import '../screens/splash/splash_screen.dart';
+import '../widgets/text_scale_factor.dart';
 import 'route_names.dart';
 
 class MainNavigator extends StatefulWidget {
   final Widget? child;
 
-  const MainNavigator({this.child, Key? key}) : super(key: key);
+  const MainNavigator({this.child, super.key});
 
   @override
   MainNavigatorState createState() => MainNavigatorState();
@@ -62,7 +61,6 @@ class MainNavigatorState extends State<MainNavigator> with MainNavigationMixin {
       RouteNames.home: (context) => const HomeScreen(),
       RouteNames.sessions: (context) => const SessionsScreen(),
       RouteNames.speakers: (context) => const SpeakersScreen(),
-      RouteNames.settings: (context) => const SettingsScreen(),
     };
 
     defaultRoute(context) => const SplashScreen();

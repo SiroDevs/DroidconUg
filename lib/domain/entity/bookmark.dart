@@ -6,7 +6,7 @@ import '../../core/constants/app_constants.dart';
 class Bookmark {
   @PrimaryKey(autoGenerate: true)
   int? id;
-  int? session;
+  String? session;
   String? createdAt;
 
   Bookmark({

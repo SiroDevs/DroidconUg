@@ -1,11 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/utils/network_utils.dart';
-import '../../../data/models/models.dart';
 import '../../../core/utils/app_util.dart';
-import '../../../domain/repository/database_repository.dart';
-import '../../../core/di/injectable.dart';
+import '../../../core/utils/network_utils.dart';
+import '../../../domain/entity/droidcon.dart';
 import '../../../domain/repository/home_repository.dart';
 
 part 'home_event.dart';
@@ -19,7 +17,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   final _homeRepo = HomeRepository();
-  final _dbRepo = getIt<DatabaseRepository>();
 
   void _onFetchData(FetchData event, Emitter<HomeState> emit) async {
     emit(const ProgressState());
@@ -27,32 +24,37 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final hasInternet = await NetworkUtil.hasInternetConnection();
 
     try {
-      final droidcon = await _fetchLocalData();
-
       if (hasInternet) {
         try {
           final resp = await _homeRepo.getSessions();
           if (resp.statusCode == 200) {
+            final droidcon = await _homeRepo.fetchLocalData();
             if (droidcon.hasData) {
               emit(DataFetched(droidcon));
             } else {
               emit(const FailureState("No data available"));
             }
           } else {
+            final droidcon = await _homeRepo.fetchLocalData();
             if (droidcon.hasData) {
               emit(DataFetched(droidcon));
             } else {
+              logger("No internet connection");
               emit(const NoInternetState());
             }
           }
         } catch (e) {
+          logger("Unable to fetch remote data: $e");
+          final droidcon = await _homeRepo.fetchLocalData();
           if (droidcon.hasData) {
             emit(DataFetched(droidcon));
           } else {
+            logger("Unable to fetch local data: $e");
             emit(FailureState(e.toString()));
           }
         }
       } else {
+        final droidcon = await _homeRepo.fetchLocalData();
         if (droidcon.hasData) {
           emit(DataFetched(droidcon));
         } else {
@@ -66,34 +68,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       } else {
         emit(FailureState(e.toString()));
       }
-    }
-  }
-
-  Future<Droidcon> _fetchLocalData() async {
-    try {
-      final bookmarks = await _dbRepo.fetchBookmarks();
-      final rooms = await _dbRepo.fetchRooms();
-      final sessions = await _dbRepo.fetchSessions();
-      final speakers = await _dbRepo.fetchSpeakers();
-
-      final hasData =
-          rooms.isNotEmpty || speakers.isNotEmpty || sessions.isNotEmpty;
-
-      return Droidcon(
-        bookmarks: bookmarks,
-        rooms: rooms,
-        speakers: speakers,
-        sessions: sessions,
-        hasData: hasData,
-      );
-    } catch (e) {
-      return Droidcon(
-        bookmarks: [],
-        rooms: [],
-        speakers: [],
-        sessions: [],
-        hasData: false,
-      );
     }
   }
 }
