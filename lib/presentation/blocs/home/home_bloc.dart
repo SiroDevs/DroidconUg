@@ -27,62 +27,34 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final hasInternet = await NetworkUtil.hasInternetConnection();
 
     try {
-      final localData = await _fetchLocalData();
+      final droidcon = await _fetchLocalData();
 
       if (hasInternet) {
         try {
           final resp = await _homeRepo.getSessions();
           if (resp.statusCode == 200) {
-            if (localData.hasData) {
-              emit(
-                DataFetched(
-                  localData.bookmarks,
-                  localData.rooms,
-                  localData.speakers,
-                  localData.sessions,
-                ),
-              );
+            if (droidcon.hasData) {
+              emit(DataFetched(droidcon));
             } else {
               emit(const FailureState("No data available"));
             }
           } else {
-            if (localData.hasData) {
-              emit(
-                DataFetched(
-                  localData.bookmarks,
-                  localData.rooms,
-                  localData.speakers,
-                  localData.sessions,
-                ),
-              );
+            if (droidcon.hasData) {
+              emit(DataFetched(droidcon));
             } else {
-              emit(FailureState("Failed to fetch data: ${resp.statusCode}"));
+              emit(const NoInternetState());
             }
           }
         } catch (e) {
-          if (localData.hasData) {
-            emit(
-              DataFetched(
-                localData.bookmarks,
-                localData.rooms,
-                localData.speakers,
-                localData.sessions,
-              ),
-            );
+          if (droidcon.hasData) {
+            emit(DataFetched(droidcon));
           } else {
             emit(FailureState(e.toString()));
           }
         }
       } else {
-        if (localData.hasData) {
-          emit(
-            DataFetched(
-              localData.bookmarks,
-              localData.rooms,
-              localData.speakers,
-              localData.sessions,
-            ),
-          );
+        if (droidcon.hasData) {
+          emit(DataFetched(droidcon));
         } else {
           emit(const NoInternetState());
         }
@@ -97,16 +69,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<
-    ({
-      List<Bookmark> bookmarks,
-      List<Room> rooms,
-      List<Speaker> speakers,
-      List<Session> sessions,
-      bool hasData,
-    })?
-  >
-  _fetchLocalData() async {
+  Future<Droidcon> _fetchLocalData() async {
     try {
       final bookmarks = await _dbRepo.fetchBookmarks();
       final rooms = await _dbRepo.fetchRooms();
@@ -116,7 +79,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final hasData =
           rooms.isNotEmpty || speakers.isNotEmpty || sessions.isNotEmpty;
 
-      return (
+      return Droidcon(
         bookmarks: bookmarks,
         rooms: rooms,
         speakers: speakers,
@@ -124,7 +87,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         hasData: hasData,
       );
     } catch (e) {
-      return (
+      return Droidcon(
         bookmarks: [],
         rooms: [],
         speakers: [],

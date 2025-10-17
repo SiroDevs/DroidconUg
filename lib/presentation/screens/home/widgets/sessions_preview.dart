@@ -1,9 +1,14 @@
 part of '../home_screen.dart';
 
 class SessionsPreview extends StatelessWidget {
-  final HomeScreenState parent;
+  final List<Session> sessions;
+  final List<Room> rooms;
 
-  const SessionsPreview({required this.parent, super.key});
+  const SessionsPreview({
+    this.sessions = const [],
+    this.rooms = const [],
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,29 +18,24 @@ class SessionsPreview extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Text(
             'SESSIONS ...',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
         ).expanded(),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 18),
-              backgroundColor: ThemeColors.primary),
+            textStyle: const TextStyle(fontSize: 18),
+            backgroundColor: ThemeColors.primary,
+          ),
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              RouteNames.sessions,
-            );
+            Navigator.pushNamed(context, RouteNames.sessions);
           },
           child: const Text('View All'),
         ),
       ],
     );
-    final displayedRooms = parent.rooms.take(2).toList();
+    final displayedRooms = rooms.take(2).toList();
     List<Session> getSessionsForRoom(Room room) {
-      return parent.sessions
+      return sessions
           .where((session) => session.room == room.id)
           .toList();
     }
@@ -57,12 +57,14 @@ class SessionsPreview extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: displayedRooms
-                    .map((room) => Expanded(
-                          child: RoomCard(
-                            room: room,
-                            sessions: getSessionsForRoom(room),
-                          ),
-                        ))
+                    .map(
+                      (room) => Expanded(
+                        child: RoomCard(
+                          room: room,
+                          sessions: getSessionsForRoom(room),
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ],
@@ -87,9 +89,8 @@ class RoomCard extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 4,
           child: Center(
             child: Swiper(
-              itemBuilder: (context, index) => _SessionInfo(
-                session: sessions[index],
-              ),
+              itemBuilder: (context, index) =>
+                  _SessionInfo(session: sessions[index]),
               autoplay: false,
               itemCount: 10, //sessions.length,
               itemWidth: (MediaQuery.of(context).size.height / 4) - 10,
@@ -100,10 +101,7 @@ class RoomCard extends StatelessWidget {
         ),
         Text(
           room.name ?? "Room",
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ],
@@ -122,9 +120,7 @@ class _SessionInfo extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(Sizes.sm),
@@ -137,7 +133,9 @@ class _SessionInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                session.title ?? 'Session Title' '...',
+                session.title ??
+                    'Session Title'
+                        '...',
                 maxLines: 3,
                 style: const TextStyle(
                   fontSize: 14,
@@ -147,24 +145,18 @@ class _SessionInfo extends StatelessWidget {
               Text(
                 'By: ${session.speakerNames}',
                 maxLines: 1,
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
+                style: const TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 5),
               Text(
                 'From: ${formatTime(session.startsAt!)}',
                 maxLines: 1,
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
+                style: const TextStyle(fontSize: 12),
               ),
               Text(
                 'To: ${formatTime(session.endsAt!)}',
                 maxLines: 1,
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
+                style: const TextStyle(fontSize: 12),
               ),
               const SizedBox(height: 4),
             ],

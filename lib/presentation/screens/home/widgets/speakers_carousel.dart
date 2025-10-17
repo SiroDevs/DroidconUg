@@ -1,14 +1,14 @@
 part of '../home_screen.dart';
 
 class SpeakersCarousel extends StatelessWidget {
-  final HomeScreenState parent;
+  final List<Speaker> speakers;
 
-  const SpeakersCarousel({required this.parent, super.key});
+  const SpeakersCarousel({this.speakers = const [], super.key});
 
   @override
   Widget build(BuildContext context) {
-    final speakers = List.from(parent.speakers)..shuffle(Random());
-    final displayedSpeakers = speakers.take(5).toList();
+    final randomSpeakers = List.from(speakers)..shuffle(Random());
+    final displayedSpeakers = randomSpeakers.take(5).toList();
     var widgetTitle = Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
       child: Row(
@@ -19,21 +19,16 @@ class SpeakersCarousel extends StatelessWidget {
             padding: EdgeInsets.only(left: 8.0),
             child: Text(
               'OUR SPEAKERS ... ',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 18),
-                backgroundColor: ThemeColors.primary),
+              textStyle: const TextStyle(fontSize: 18),
+              backgroundColor: ThemeColors.primary,
+            ),
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                RouteNames.speakers,
-              );
+              Navigator.pushNamed(context, RouteNames.speakers);
             },
             child: const Text('View All'),
           ),
@@ -45,9 +40,8 @@ class SpeakersCarousel extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 2.5,
       padding: const EdgeInsets.all(Sizes.sm),
       child: Swiper(
-        itemBuilder: (context, index) => _SpeakerCard(
-          speaker: displayedSpeakers[index],
-        ),
+        itemBuilder: (context, index) =>
+            _SpeakerCard(speaker: displayedSpeakers[index]),
         indicatorLayout: PageIndicatorLayout.COLOR,
         autoplay: true,
         itemCount: displayedSpeakers.length,
@@ -56,12 +50,7 @@ class SpeakersCarousel extends StatelessWidget {
       ),
     );
 
-    return Column(
-      children: [
-        widgetTitle,
-        speakersWidget,
-      ],
-    );
+    return Column(children: [widgetTitle, speakersWidget]);
   }
 }
 
@@ -83,7 +72,7 @@ class _SpeakerCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Colors.black.withValues(alpha:0.5),
+              color: Colors.black.withValues(alpha: 0.5),
             ),
           ),
           Positioned(
@@ -108,10 +97,7 @@ class _SpeakerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var defaultPic = Image.asset(
-      AppAssets.appIcon,
-      fit: BoxFit.cover,
-    );
+    var defaultPic = Image.asset(AppAssets.appIcon, fit: BoxFit.cover);
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: profilePicUrl != null
@@ -140,19 +126,13 @@ class _SpeakerInfo extends StatelessWidget {
         children: [
           Text(
             '${speaker.firstName ?? ''} ${speaker.lastName ?? ''}',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           Text(
             speaker.tagLine ?? '',
             maxLines: 2,
-            style: const TextStyle(
-              fontSize: 14,
-              fontStyle: FontStyle.italic,
-            ),
+            style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),

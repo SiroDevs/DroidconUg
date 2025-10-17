@@ -8,10 +8,10 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../data/models/models.dart';
+import '../../navigator/route_names.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/skeleton.dart';
-import '../../navigator/route_names.dart';
 import '../../theme/theme_colors.dart';
 import '../../theme/theme_styles.dart';
 import '../../blocs/home/home_bloc.dart';
@@ -27,11 +27,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<Bookmark> bookmarks = [];
-  List<Room> rooms = [];
-  List<Speaker> speakers = [];
-  List<Session> sessions = [];
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -40,7 +35,10 @@ class HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           state.whenOrNull(
             failure: (feedback) {
-              CustomSnackbar.show(context, 'Unable to fetch sessions: $feedback');
+              CustomSnackbar.show(
+                context,
+                'Unable to fetch sessions: $feedback',
+              );
             },
           );
         },
@@ -53,39 +51,49 @@ class HomeScreenState extends State<HomeScreen> {
           );
 
           return state.when(
-            initial: () => Scaffold(appBar: appBar, body: _buildEmptyState("Loading...", false)),
+            initial: () => Scaffold(
+              appBar: appBar,
+              body: _buildEmptyState("Loading...", false),
+            ),
             progress: () => const Scaffold(body: SkeletonLoading()),
-            loaded: () => Scaffold(appBar: appBar, body: _buildEmptyState("Loading...", false)),
-            success: () => Scaffold(appBar: appBar, body: _buildEmptyState("Success!", true)),
-            fetched: (bookmarks, rooms, speakers, sessions) {
-              this.bookmarks = bookmarks;
-              this.rooms = rooms;
-              this.speakers = speakers;
-              this.sessions = sessions;
-              
+            loaded: () => Scaffold(
+              appBar: appBar,
+              body: _buildEmptyState("Loading...", false),
+            ),
+            success: () => Scaffold(
+              appBar: appBar,
+              body: _buildEmptyState("Success!", true),
+            ),
+            fetched: (droidcon) {
               return Scaffold(
                 appBar: appBar,
                 body: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SpeakersCarousel(parent: this),
-                      SessionsPreview(parent: this),
+                      SpeakersCarousel(speakers: droidcon.speakers),
+                      SessionsPreview(
+                        sessions: droidcon.sessions,
+                        rooms: droidcon.rooms,
+                      ),
                     ],
                   ),
                 ),
               );
             },
-            bookmarked: (bookmarked) => Scaffold(appBar: appBar, body: _buildEmptyState("Bookmarked!", true)),
+            bookmarked: (bookmarked) => Scaffold(
+              appBar: appBar,
+              body: _buildEmptyState("Bookmarked!", true),
+            ),
             noInternet: () => Scaffold(
-              appBar: appBar, 
+              appBar: appBar,
               body: _buildEmptyState(
-                "No internet connection. Showing cached data if available.",
-                true
-              )
+                "You need an active internet connection to get the sessions",
+                true,
+              ),
             ),
             failure: (feedback) => Scaffold(
-              appBar: appBar, 
-              body: _buildEmptyState(feedback, true)
+              appBar: appBar,
+              body: _buildEmptyState(feedback, true),
             ),
           );
         },

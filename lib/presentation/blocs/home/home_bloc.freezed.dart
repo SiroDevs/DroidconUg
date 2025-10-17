@@ -326,14 +326,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( Droidcon droidcon)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
 return initial();case LoadedState() when loaded != null:
 return loaded();case ProgressState() when progress != null:
 return progress();case HomeSuccess() when success != null:
 return success();case DataFetched() when fetched != null:
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked() when bookmarked != null:
+return fetched(_that.droidcon);case SessionBookmarked() when bookmarked != null:
 return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
 return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
@@ -354,14 +354,14 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( Droidcon droidcon)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
 switch (_that) {
 case _HomeState():
 return initial();case LoadedState():
 return loaded();case ProgressState():
 return progress();case HomeSuccess():
 return success();case DataFetched():
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked():
+return fetched(_that.droidcon);case SessionBookmarked():
 return bookmarked(_that.bookmarked);case NoInternetState():
 return noInternet();case FailureState():
 return failure(_that.feedback);case _:
@@ -381,14 +381,14 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( List<Bookmark> bookmarks,  List<Room> rooms,  List<Speaker> speakers,  List<Session> sessions)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( Droidcon droidcon)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
 switch (_that) {
 case _HomeState() when initial != null:
 return initial();case LoadedState() when loaded != null:
 return loaded();case ProgressState() when progress != null:
 return progress();case HomeSuccess() when success != null:
 return success();case DataFetched() when fetched != null:
-return fetched(_that.bookmarks,_that.rooms,_that.speakers,_that.sessions);case SessionBookmarked() when bookmarked != null:
+return fetched(_that.droidcon);case SessionBookmarked() when bookmarked != null:
 return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
 return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
@@ -531,37 +531,10 @@ String toString() {
 
 
 class DataFetched implements HomeState {
-  const DataFetched(final  List<Bookmark> bookmarks, final  List<Room> rooms, final  List<Speaker> speakers, final  List<Session> sessions): _bookmarks = bookmarks,_rooms = rooms,_speakers = speakers,_sessions = sessions;
+  const DataFetched(this.droidcon);
   
 
- final  List<Bookmark> _bookmarks;
- List<Bookmark> get bookmarks {
-  if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_bookmarks);
-}
-
- final  List<Room> _rooms;
- List<Room> get rooms {
-  if (_rooms is EqualUnmodifiableListView) return _rooms;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_rooms);
-}
-
- final  List<Speaker> _speakers;
- List<Speaker> get speakers {
-  if (_speakers is EqualUnmodifiableListView) return _speakers;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_speakers);
-}
-
- final  List<Session> _sessions;
- List<Session> get sessions {
-  if (_sessions is EqualUnmodifiableListView) return _sessions;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_sessions);
-}
-
+ final  Droidcon droidcon;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -573,16 +546,16 @@ $DataFetchedCopyWith<DataFetched> get copyWith => _$DataFetchedCopyWithImpl<Data
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataFetched&&const DeepCollectionEquality().equals(other._bookmarks, _bookmarks)&&const DeepCollectionEquality().equals(other._rooms, _rooms)&&const DeepCollectionEquality().equals(other._speakers, _speakers)&&const DeepCollectionEquality().equals(other._sessions, _sessions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataFetched&&(identical(other.droidcon, droidcon) || other.droidcon == droidcon));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bookmarks),const DeepCollectionEquality().hash(_rooms),const DeepCollectionEquality().hash(_speakers),const DeepCollectionEquality().hash(_sessions));
+int get hashCode => Object.hash(runtimeType,droidcon);
 
 @override
 String toString() {
-  return 'HomeState.fetched(bookmarks: $bookmarks, rooms: $rooms, speakers: $speakers, sessions: $sessions)';
+  return 'HomeState.fetched(droidcon: $droidcon)';
 }
 
 
@@ -593,7 +566,7 @@ abstract mixin class $DataFetchedCopyWith<$Res> implements $HomeStateCopyWith<$R
   factory $DataFetchedCopyWith(DataFetched value, $Res Function(DataFetched) _then) = _$DataFetchedCopyWithImpl;
 @useResult
 $Res call({
- List<Bookmark> bookmarks, List<Room> rooms, List<Speaker> speakers, List<Session> sessions
+ Droidcon droidcon
 });
 
 
@@ -610,13 +583,10 @@ class _$DataFetchedCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? bookmarks = null,Object? rooms = null,Object? speakers = null,Object? sessions = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? droidcon = null,}) {
   return _then(DataFetched(
-null == bookmarks ? _self._bookmarks : bookmarks // ignore: cast_nullable_to_non_nullable
-as List<Bookmark>,null == rooms ? _self._rooms : rooms // ignore: cast_nullable_to_non_nullable
-as List<Room>,null == speakers ? _self._speakers : speakers // ignore: cast_nullable_to_non_nullable
-as List<Speaker>,null == sessions ? _self._sessions : sessions // ignore: cast_nullable_to_non_nullable
-as List<Session>,
+null == droidcon ? _self.droidcon : droidcon // ignore: cast_nullable_to_non_nullable
+as Droidcon,
   ));
 }
 
