@@ -17,27 +17,17 @@ String getIso8601Date() {
   return '${now.toIso8601String()}Z';
 }
 
-String formatTime(String dateTimeString) {
-  try {
-    // Parse the string into a DateTime object
-    DateTime dateTime = DateTime.parse(dateTimeString);
-
-    // Format the time to "hh:mm a" (e.g., 10:30 AM)
-    String formattedTime = DateFormat('hh:mm a').format(dateTime);
-    return formattedTime;
-  } catch (e) {
-    return 'Invalid date format';
-  }
-}
-
 String getDayNumber(String date, List<Session> sessions) {
   final dateTime = DateTime.parse(date);
 
-  final firstDate =
-      DateTime.parse(sessions.first.startsAt?.substring(0, 10) ?? '');
-  return (DateTime(dateTime.year, dateTime.month, dateTime.day)
-              .difference(firstDate)
-              .inDays +
+  final firstDate = DateTime.parse(
+    sessions.first.startsAt?.substring(0, 10) ?? '',
+  );
+  return (DateTime(
+            dateTime.year,
+            dateTime.month,
+            dateTime.day,
+          ).difference(firstDate).inDays +
           1)
       .toString();
 }
@@ -69,25 +59,37 @@ String getCurrentDate() {
 
 String getCurrentDayDate({String separator = '-', bool reverse = false}) {
   if (reverse) {
-    return DateFormat('yyyy${separator}MM${separator}dd')
-        .format(DateTime.now());
+    return DateFormat(
+      'yyyy${separator}MM${separator}dd',
+    ).format(DateTime.now());
   } else {
-    return DateFormat('dd${separator}MM${separator}yyyy')
-        .format(DateTime.now());
+    return DateFormat(
+      'dd${separator}MM${separator}yyyy',
+    ).format(DateTime.now());
   }
 }
 
-  String formatDate(String date) {
-    final DateTime parsedDate = DateTime.parse(date);
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final tomorrow = today.add(const Duration(days: 1));
-    
-    if (parsedDate == today) {
-      return 'Today';
-    } else if (parsedDate == tomorrow) {
-      return 'Tomorrow';
-    } else {
-      return '${parsedDate.day}/${parsedDate.month}';
-    }
+String formatDate(String date) {
+  final DateTime parsedDate = DateTime.parse(date);
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final tomorrow = today.add(const Duration(days: 1));
+
+  if (parsedDate == today) {
+    return 'Today';
+  } else if (parsedDate == tomorrow) {
+    return 'Tomorrow';
+  } else {
+    return '${parsedDate.day}/${parsedDate.month}';
   }
+}
+
+String formatTime(String? timeString) {
+  if (timeString == null) return '';
+  try {
+    final time = timeString.substring(11, 16);
+    return time;
+  } catch (e) {
+    return '';
+  }
+}

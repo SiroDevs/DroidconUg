@@ -77,18 +77,8 @@ class HomeScreenState extends State<HomeScreen> {
                 appBar: appBar,
                 body: HomeView(
                   sessions: droidcon.sessions,
+                  rooms: droidcon.rooms,
                 ),
-                // body: SingleChildScrollView(
-                //   child: Column(
-                //     children: <Widget>[
-                //       SpeakersCarousel(speakers: droidcon.speakers),
-                //       SessionsPreview(
-                //         sessions: droidcon.sessions,
-                //         rooms: droidcon.rooms,
-                //       ),
-                //     ],
-                //   ),
-                // ),
               );
             },
             bookmarked: (bookmarked) => Scaffold(
