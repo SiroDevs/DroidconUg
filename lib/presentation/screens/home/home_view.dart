@@ -59,7 +59,13 @@ class HomeViewState extends State<HomeView> {
 
     return Column(
       children: [
-        _buildDateSelector(uniqueDates),
+        DatesHeader(
+          dates: uniqueDates,
+          selectedDate: _selectedDate,
+          onDateSelected: (date) {
+            setState(() => _selectedDate = date);
+          },
+        ),
         Expanded(
           child: ListView.builder(
             controller: _scrollController,
@@ -76,47 +82,6 @@ class HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildDateSelector(List<String> dates) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: dates.map((date) {
-            final isSelected = _selectedDate == date;
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: FilterChip(
-                label: Text(
-                  formatDate(date),
-                  style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.grey[700],
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                selected: isSelected,
-                onSelected: (selected) {
-                  setState(() => _selectedDate = date);
-                },
-                shadowColor: Colors.black,
-                backgroundColor: Theme.of(context).colorScheme.inverseSurface,
-                selectedColor: ThemeColors.primary,
-                checkmarkColor: Colors.white,
-                shape: StadiumBorder(
-                  side: BorderSide(
-                    color: isSelected
-                        ? Colors.transparent
-                        : ThemeColors.primary,
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
-  }
-
   Widget _buildTimeSlot(String time, List<SessionExt> sessions) {
     return Container(
       margin: const EdgeInsets.only(bottom: 5),
@@ -124,12 +89,10 @@ class HomeViewState extends State<HomeView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTimeIndicator(time),
-
           const SizedBox(width: 5),
-
           Expanded(
             child: sessions.length == 1
-                ? _buildSingleSessionCard(sessions.first)
+                ? SessionCard(session: sessions.first)
                 : _buildParallelSessions(sessions),
           ),
         ],
@@ -163,10 +126,6 @@ class HomeViewState extends State<HomeView> {
         ),
       ],
     );
-  }
-
-  Widget _buildSingleSessionCard(SessionExt session) {
-    return SessionCard(session: session);
   }
 
   Widget _buildParallelSessions(List<SessionExt> sessions) {

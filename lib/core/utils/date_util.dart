@@ -93,3 +93,46 @@ String formatTime(String? timeString) {
     return '';
   }
 }
+
+String formatDayMonth(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    final day = parsedDate.day;
+    final suffix = getDaySuffix(day);
+    final month = getMonthAbbreviation(parsedDate.month);
+    return '$day$suffix $month';
+  }
+
+  String formatWeekday(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    
+    if (parsedDate == today) {
+      return 'TODAY';
+    } else if (parsedDate == today.add(const Duration(days: 1))) {
+      return 'TOMORROW';
+    } else {
+      return getWeekdayAbbreviation(parsedDate.weekday);
+    }
+  }
+
+  String getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  }
+
+  String getMonthAbbreviation(int month) {
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    return months[month - 1];
+  }
+
+  String getWeekdayAbbreviation(int weekday) {
+    const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    return weekdays[weekday - 1];
+  }
+

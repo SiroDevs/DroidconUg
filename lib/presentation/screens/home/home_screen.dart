@@ -18,6 +18,7 @@ import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
 
 part 'home_view.dart';
+part 'widgets/dates_header.dart';
 part 'widgets/session_card.dart';
 part 'widgets/speakers_carousel.dart';
 part 'widgets/sessions_preview.dart';
