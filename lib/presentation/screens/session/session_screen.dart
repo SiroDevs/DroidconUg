@@ -9,6 +9,7 @@ import '../../theme/theme_colors.dart';
 import '../../widgets/action/session_card.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
+import '../speaker/speaker_screen.dart';
 
 part 'session_view.dart';
 part 'widgets/parallel_sessions.dart';

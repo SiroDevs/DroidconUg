@@ -9,7 +9,7 @@ abstract class DatabaseRepository {
 
   Future<void> removeAllBookmarks();
 
-  Future<List<Link>> fetchLinks();
+  Future<List<Link>> fetchLinks(String speaker);
 
   Future<void> saveLink(Link link);
 
@@ -24,6 +24,8 @@ abstract class DatabaseRepository {
   Future<List<SessionExt>> fetchSessions();
 
   Future<Session?> fetchSessionById(String id);
+
+  Future<List<SessionExt>> fetchSessionsBySpeaker(String id);
 
   Future<void> saveSession(Session session);
 

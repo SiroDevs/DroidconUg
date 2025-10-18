@@ -282,15 +282,16 @@ class _$LinksDao extends LinksDao {
   }
 
   @override
-  Future<List<Link>> fetchLinks() async {
+  Future<List<Link>> fetchLinks(String speaker) async {
     return _queryAdapter.queryList(
-      'SELECT * FROM links',
+      'SELECT * FROM links WHERE speakerId = ?1',
       mapper: (Map<String, Object?> row) => Link(
         id: row['id'] as int?,
         speakerId: row['speakerId'] as String?,
         title: row['title'] as String?,
         url: row['url'] as String?,
       ),
+      arguments: [speaker],
     );
   }
 
@@ -409,6 +410,30 @@ class _$SessionsDao extends SessionsDao {
             : (row['bookmarked'] as int) != 0,
       ),
       arguments: [id],
+    );
+  }
+
+  @override
+  Future<List<SessionExt>> fetchSessionsBySpeaker(String speaker) async {
+    return _queryAdapter.queryList(
+      'SELECT * FROM session_views WHERE speakerId = ?1',
+      mapper: (Map<String, Object?> row) => SessionExt(
+        sessionId: row['sessionId'] as String?,
+        speakerId: row['speakerId'] as String?,
+        roomId: row['roomId'] as int?,
+        venue: row['venue'] as String?,
+        firstName: row['firstName'] as String?,
+        lastName: row['lastName'] as String?,
+        fullName: row['fullName'] as String?,
+        avatar: row['avatar'] as String?,
+        title: row['title'] as String?,
+        startsAt: row['startsAt'] as String?,
+        endsAt: row['endsAt'] as String?,
+        bookmarked: row['bookmarked'] == null
+            ? null
+            : (row['bookmarked'] as int) != 0,
+      ),
+      arguments: [speaker],
     );
   }
 

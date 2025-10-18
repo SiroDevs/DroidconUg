@@ -44,8 +44,8 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<List<Link>> fetchLinks() async {
-    return _appDB.linksDao.fetchLinks();
+  Future<List<Link>> fetchLinks(String speaker) async {
+    return _appDB.linksDao.fetchLinks(speaker);
   }
 
   @override
@@ -84,8 +84,13 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<Session?> fetchSessionById(String sessionId) async {
-    return _appDB.sessionsDao.findSessionById(sessionId);
+  Future<List<SessionExt>> fetchSessionsBySpeaker(String speaker) async {
+    return _appDB.sessionsDao.fetchSessionsBySpeaker(speaker);
+  }
+
+  @override
+  Future<Session?> fetchSessionById(String id) async {
+    return _appDB.sessionsDao.findSessionById(id);
   }
 
   @override

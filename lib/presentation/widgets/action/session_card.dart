@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -10,12 +9,14 @@ class SessionCard extends StatelessWidget {
   final List<SessionExt> sessions;
   final SessionExt session;
   final bool isCompact;
+  final bool showSpeaker;
 
   const SessionCard({
     super.key,
     required this.sessions,
     required this.session,
     this.isCompact = false,
+    this.showSpeaker = true,
   });
 
   @override
@@ -93,10 +94,8 @@ class SessionCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SessionScreen(
-              session: session,
-              sessions: sessions,
-            ),
+            builder: (context) =>
+                SessionScreen(session: session, sessions: sessions),
           ),
         );
       },
@@ -131,8 +130,7 @@ class SessionCard extends StatelessWidget {
                     ),
 
               const SizedBox(height: 2),
-
-              speakerWidget,
+              if (showSpeaker) ...[speakerWidget],
             ],
           ),
         ),

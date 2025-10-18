@@ -8,8 +8,8 @@ abstract class LinksDao {
   @Query('SELECT * FROM ${AppConstants.linksTable} WHERE id = :id')
   Future<Link?> findLinkById(int id);
 
-  @Query('SELECT * FROM ${AppConstants.linksTable}')
-  Future<List<Link>> fetchLinks();
+  @Query('SELECT * FROM ${AppConstants.linksTable} WHERE speakerId = :speaker')
+  Future<List<Link>> fetchLinks(String speaker);
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertLink(Link link);

@@ -11,6 +11,7 @@ import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
 import '../../widgets/action/session_card.dart';
+import '../speaker/speaker_screen.dart';
 
 part 'home_view.dart';
 part 'widgets/dates_header.dart';
@@ -69,17 +70,13 @@ class HomeScreenState extends State<HomeScreen> {
             fetched: (droidcon) {
               return Scaffold(
                 appBar: appBar,
-                body: HomeView(
-                  sessions: droidcon.sessions,
-                ),
+                body: HomeView(sessions: droidcon.sessions),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () => _showSpeakersBottomSheet(droidcon.speakers),
                   backgroundColor: ThemeColors.primary,
                   foregroundColor: Colors.white,
                   child: Badge(
-                    label: Text(
-                      droidcon.speakers.length.toString(),
-                    ),
+                    label: Text(droidcon.speakers.length.toString()),
                     child: const Icon(Icons.people_alt_outlined),
                   ),
                 ),
@@ -118,5 +115,11 @@ class HomeScreenState extends State<HomeScreen> {
 
   void _handleSpeakerTap(Speaker speaker) {
     Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SpeakerScreen(speaker: speaker.id!),
+      ),
+    );
   }
 }

@@ -9,6 +9,9 @@ abstract class SessionsDao {
   @Query('SELECT * FROM ${AppConstants.sessionsTable} WHERE id = :id')
   Future<Session?> findSessionById(String id);
 
+  @Query('SELECT * FROM ${AppConstants.sessionTableViews} WHERE speakerId = :speaker')
+  Future<List<SessionExt>> fetchSessionsBySpeaker(String speaker);
+
   @Query('SELECT * FROM ${AppConstants.sessionTableViews}')
   Future<List<SessionExt>> fetchSessions();
 
