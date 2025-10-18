@@ -12,7 +12,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.sirodaves.droidconug"
+    namespace = "com.sirodevs.droidconug"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.sirodaves.droidconug"
+        applicationId = "com.sirodevs.droidconug"
         minSdkVersion 24
         targetSdkVersion 36
         compileSdkVersion 36
