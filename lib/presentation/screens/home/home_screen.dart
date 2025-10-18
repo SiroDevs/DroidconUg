@@ -20,6 +20,7 @@ import '../../widgets/progress/skeleton.dart';
 part 'home_view.dart';
 part 'widgets/dates_header.dart';
 part 'widgets/session_card.dart';
+part 'widgets/speakers_bottom_sheet.dart';
 part 'widgets/speakers_carousel.dart';
 part 'widgets/sessions_preview.dart';
 
@@ -80,6 +81,17 @@ class HomeScreenState extends State<HomeScreen> {
                   sessions: droidcon.sessions,
                   rooms: droidcon.rooms,
                 ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => _showSpeakersBottomSheet(droidcon.speakers),
+                  backgroundColor: ThemeColors.primary,
+                  foregroundColor: Colors.white,
+                  child: Badge(
+                    label: Text(
+                      droidcon.speakers.length.toString(),
+                    ),
+                    child: const Icon(Icons.people_alt_outlined),
+                  ),
+                ),
               );
             },
             bookmarked: (bookmarked) => Scaffold(
@@ -99,5 +111,21 @@ class HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  void _showSpeakersBottomSheet(List<Speaker> speakers) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SpeakersBottomSheet(
+        speakers: speakers,
+        onSpeakerTap: _handleSpeakerTap,
+      ),
+    );
+  }
+
+  void _handleSpeakerTap(Speaker speaker) {
+    Navigator.pop(context);
   }
 }
