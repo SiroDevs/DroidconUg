@@ -31,6 +31,8 @@ abstract class DatabaseRepository {
 
   Future<List<Speaker>> fetchSpeakers();
 
+  Future<Speaker?> fetchSpeakerById(String id);
+
   Future<void> saveSpeaker(Speaker speaker);
 
   Future<void> removeAllSpeakers();

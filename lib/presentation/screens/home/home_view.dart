@@ -2,9 +2,8 @@ part of 'home_screen.dart';
 
 class HomeView extends StatefulWidget {
   final List<SessionExt> sessions;
-  final List<Room> rooms;
 
-  const HomeView({super.key, required this.sessions, required this.rooms});
+  const HomeView({super.key, required this.sessions});
 
   @override
   State<HomeView> createState() => HomeViewState();
@@ -92,7 +91,10 @@ class HomeViewState extends State<HomeView> {
           const SizedBox(width: 5),
           Expanded(
             child: sessions.length == 1
-                ? SessionCard(session: sessions.first)
+                ? SessionCard(
+                    sessions: sessions,
+                    session: sessions.first,
+                  )
                 : _buildParallelSessions(sessions),
           ),
         ],
@@ -141,7 +143,11 @@ class HomeViewState extends State<HomeView> {
           children: sessions.map((session) {
             return SizedBox(
               width: cardWidth,
-              child: SessionCard(session: session, isCompact: true),
+              child: SessionCard(
+                sessions: sessions,
+                session: session,
+                isCompact: true,
+              ),
             );
           }).toList(),
         );

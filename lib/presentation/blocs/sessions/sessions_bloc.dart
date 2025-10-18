@@ -4,10 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../core/di/injectable.dart';
 import '../../../core/utils/app_util.dart';
 import '../../../core/utils/date_util.dart';
-import '../../../domain/entity/droidcon.dart';
 import '../../../domain/entity/models.dart';
 import '../../../domain/repository/database_repository.dart';
-import '../../../domain/repository/home_repository.dart';
 
 part 'sessions_event.dart';
 part 'sessions_state.dart';
@@ -16,20 +14,19 @@ part 'sessions_bloc.freezed.dart';
 
 class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
   SessionsBloc() : super(const _SessionsState()) {
-    on<FetchData>(_onFetchData);
+    on<FetchSpeaker>(_onFetchSpeaker);
     on<BookmarkSession>(_onBookmarkSession);
   }
 
-  final _homeRepo = HomeRepository();
   final _dbRepo = getIt<DatabaseRepository>();
 
-  void _onFetchData(FetchData event, Emitter<SessionsState> emit) async {
+  void _onFetchSpeaker(FetchSpeaker event, Emitter<SessionsState> emit) async {
     emit(const ProgressState());
 
     try {
-      final droidcon = await _homeRepo.fetchLocalData();
-      if (droidcon.hasData) {
-        emit(DataFetched(droidcon));
+      final speaker = await _dbRepo.fetchSpeakerById(event.id);
+      if (speaker != null) {
+        emit(SpeakerFetched(speaker));
       } else {
         emit(const FailureState("No data available"));
       }

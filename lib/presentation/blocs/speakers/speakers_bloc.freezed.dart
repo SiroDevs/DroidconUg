@@ -313,15 +313,15 @@ extension SpeakersStatePatterns on SpeakersState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SpeakersState value)?  initial,TResult Function( LoadedState value)?  loaded,TResult Function( ProgressState value)?  progress,TResult Function( SuccessState value)?  success,TResult Function( DataFetched value)?  fetched,TResult Function( Bookmarked value)?  bookmarked,TResult Function( NoInternetState value)?  noInternet,TResult Function( FailureState value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SpeakersState value)?  initial,TResult Function( LoadedState value)?  loaded,TResult Function( ProgressState value)?  progress,TResult Function( SuccessState value)?  success,TResult Function( SpeakerFetched value)?  speakerFetched,TResult Function( Bookmarked value)?  bookmarked,TResult Function( NoInternetState value)?  noInternet,TResult Function( FailureState value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _SpeakersState() when initial != null:
 return initial(_that);case LoadedState() when loaded != null:
 return loaded(_that);case ProgressState() when progress != null:
 return progress(_that);case SuccessState() when success != null:
-return success(_that);case DataFetched() when fetched != null:
-return fetched(_that);case Bookmarked() when bookmarked != null:
+return success(_that);case SpeakerFetched() when speakerFetched != null:
+return speakerFetched(_that);case Bookmarked() when bookmarked != null:
 return bookmarked(_that);case NoInternetState() when noInternet != null:
 return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
@@ -342,15 +342,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SpeakersState value)  initial,required TResult Function( LoadedState value)  loaded,required TResult Function( ProgressState value)  progress,required TResult Function( SuccessState value)  success,required TResult Function( DataFetched value)  fetched,required TResult Function( Bookmarked value)  bookmarked,required TResult Function( NoInternetState value)  noInternet,required TResult Function( FailureState value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SpeakersState value)  initial,required TResult Function( LoadedState value)  loaded,required TResult Function( ProgressState value)  progress,required TResult Function( SuccessState value)  success,required TResult Function( SpeakerFetched value)  speakerFetched,required TResult Function( Bookmarked value)  bookmarked,required TResult Function( NoInternetState value)  noInternet,required TResult Function( FailureState value)  failure,}){
 final _that = this;
 switch (_that) {
 case _SpeakersState():
 return initial(_that);case LoadedState():
 return loaded(_that);case ProgressState():
 return progress(_that);case SuccessState():
-return success(_that);case DataFetched():
-return fetched(_that);case Bookmarked():
+return success(_that);case SpeakerFetched():
+return speakerFetched(_that);case Bookmarked():
 return bookmarked(_that);case NoInternetState():
 return noInternet(_that);case FailureState():
 return failure(_that);case _:
@@ -370,15 +370,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SpeakersState value)?  initial,TResult? Function( LoadedState value)?  loaded,TResult? Function( ProgressState value)?  progress,TResult? Function( SuccessState value)?  success,TResult? Function( DataFetched value)?  fetched,TResult? Function( Bookmarked value)?  bookmarked,TResult? Function( NoInternetState value)?  noInternet,TResult? Function( FailureState value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SpeakersState value)?  initial,TResult? Function( LoadedState value)?  loaded,TResult? Function( ProgressState value)?  progress,TResult? Function( SuccessState value)?  success,TResult? Function( SpeakerFetched value)?  speakerFetched,TResult? Function( Bookmarked value)?  bookmarked,TResult? Function( NoInternetState value)?  noInternet,TResult? Function( FailureState value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _SpeakersState() when initial != null:
 return initial(_that);case LoadedState() when loaded != null:
 return loaded(_that);case ProgressState() when progress != null:
 return progress(_that);case SuccessState() when success != null:
-return success(_that);case DataFetched() when fetched != null:
-return fetched(_that);case Bookmarked() when bookmarked != null:
+return success(_that);case SpeakerFetched() when speakerFetched != null:
+return speakerFetched(_that);case Bookmarked() when bookmarked != null:
 return bookmarked(_that);case NoInternetState() when noInternet != null:
 return noInternet(_that);case FailureState() when failure != null:
 return failure(_that);case _:
@@ -398,14 +398,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( Droidcon droidcon)?  fetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loaded,TResult Function()?  progress,TResult Function()?  success,TResult Function( Droidcon droidcon)?  speakerFetched,TResult Function( bool bookmarked)?  bookmarked,TResult Function()?  noInternet,TResult Function( String feedback)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SpeakersState() when initial != null:
 return initial();case LoadedState() when loaded != null:
 return loaded();case ProgressState() when progress != null:
 return progress();case SuccessState() when success != null:
-return success();case DataFetched() when fetched != null:
-return fetched(_that.droidcon);case Bookmarked() when bookmarked != null:
+return success();case SpeakerFetched() when speakerFetched != null:
+return speakerFetched(_that.droidcon);case Bookmarked() when bookmarked != null:
 return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
 return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
@@ -426,14 +426,14 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( Droidcon droidcon)  fetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loaded,required TResult Function()  progress,required TResult Function()  success,required TResult Function( Droidcon droidcon)  speakerFetched,required TResult Function( bool bookmarked)  bookmarked,required TResult Function()  noInternet,required TResult Function( String feedback)  failure,}) {final _that = this;
 switch (_that) {
 case _SpeakersState():
 return initial();case LoadedState():
 return loaded();case ProgressState():
 return progress();case SuccessState():
-return success();case DataFetched():
-return fetched(_that.droidcon);case Bookmarked():
+return success();case SpeakerFetched():
+return speakerFetched(_that.droidcon);case Bookmarked():
 return bookmarked(_that.bookmarked);case NoInternetState():
 return noInternet();case FailureState():
 return failure(_that.feedback);case _:
@@ -453,14 +453,14 @@ return failure(_that.feedback);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( Droidcon droidcon)?  fetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loaded,TResult? Function()?  progress,TResult? Function()?  success,TResult? Function( Droidcon droidcon)?  speakerFetched,TResult? Function( bool bookmarked)?  bookmarked,TResult? Function()?  noInternet,TResult? Function( String feedback)?  failure,}) {final _that = this;
 switch (_that) {
 case _SpeakersState() when initial != null:
 return initial();case LoadedState() when loaded != null:
 return loaded();case ProgressState() when progress != null:
 return progress();case SuccessState() when success != null:
-return success();case DataFetched() when fetched != null:
-return fetched(_that.droidcon);case Bookmarked() when bookmarked != null:
+return success();case SpeakerFetched() when speakerFetched != null:
+return speakerFetched(_that.droidcon);case Bookmarked() when bookmarked != null:
 return bookmarked(_that.bookmarked);case NoInternetState() when noInternet != null:
 return noInternet();case FailureState() when failure != null:
 return failure(_that.feedback);case _:
@@ -602,8 +602,8 @@ String toString() {
 /// @nodoc
 
 
-class DataFetched implements SpeakersState {
-  const DataFetched(this.droidcon);
+class SpeakerFetched implements SpeakersState {
+  const SpeakerFetched(this.droidcon);
   
 
  final  Droidcon droidcon;
@@ -612,13 +612,13 @@ class DataFetched implements SpeakersState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DataFetchedCopyWith<DataFetched> get copyWith => _$DataFetchedCopyWithImpl<DataFetched>(this, _$identity);
+$SpeakerFetchedCopyWith<SpeakerFetched> get copyWith => _$SpeakerFetchedCopyWithImpl<SpeakerFetched>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataFetched&&(identical(other.droidcon, droidcon) || other.droidcon == droidcon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SpeakerFetched&&(identical(other.droidcon, droidcon) || other.droidcon == droidcon));
 }
 
 
@@ -627,15 +627,15 @@ int get hashCode => Object.hash(runtimeType,droidcon);
 
 @override
 String toString() {
-  return 'SpeakersState.fetched(droidcon: $droidcon)';
+  return 'SpeakersState.speakerFetched(droidcon: $droidcon)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DataFetchedCopyWith<$Res> implements $SpeakersStateCopyWith<$Res> {
-  factory $DataFetchedCopyWith(DataFetched value, $Res Function(DataFetched) _then) = _$DataFetchedCopyWithImpl;
+abstract mixin class $SpeakerFetchedCopyWith<$Res> implements $SpeakersStateCopyWith<$Res> {
+  factory $SpeakerFetchedCopyWith(SpeakerFetched value, $Res Function(SpeakerFetched) _then) = _$SpeakerFetchedCopyWithImpl;
 @useResult
 $Res call({
  Droidcon droidcon
@@ -646,17 +646,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$DataFetchedCopyWithImpl<$Res>
-    implements $DataFetchedCopyWith<$Res> {
-  _$DataFetchedCopyWithImpl(this._self, this._then);
+class _$SpeakerFetchedCopyWithImpl<$Res>
+    implements $SpeakerFetchedCopyWith<$Res> {
+  _$SpeakerFetchedCopyWithImpl(this._self, this._then);
 
-  final DataFetched _self;
-  final $Res Function(DataFetched) _then;
+  final SpeakerFetched _self;
+  final $Res Function(SpeakerFetched) _then;
 
 /// Create a copy of SpeakersState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? droidcon = null,}) {
-  return _then(DataFetched(
+  return _then(SpeakerFetched(
 null == droidcon ? _self.droidcon : droidcon // ignore: cast_nullable_to_non_nullable
 as Droidcon,
   ));

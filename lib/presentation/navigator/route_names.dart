@@ -7,6 +7,4 @@ class RouteNames {
   static const signup = 'signup';
   static const account = 'account';
   static const home = 'home';
-  static const sessions = 'sessions';
-  static const speakers = 'speakers';
 }

@@ -6,7 +6,7 @@ import '../../../../domain/entity/speaker.dart';
 @dao
 abstract class SpeakersDao {
   @Query('SELECT * FROM ${AppConstants.speakersTable} WHERE id = :id')
-  Future<Speaker?> findSpeakerById(int id);
+  Future<Speaker?> findSpeakerById(String id);
 
   @Query('SELECT * FROM ${AppConstants.speakersTable}')
   Future<List<Speaker>> fetchSpeakers();

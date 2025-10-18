@@ -10,7 +10,7 @@ class SessionsState with _$SessionsState {
 
   const factory SessionsState.success() = SuccessState;
 
-  const factory SessionsState.fetched(Droidcon droidcon) = DataFetched;
+  const factory SessionsState.fetched(Speaker speaker) = SpeakerFetched;
 
   const factory SessionsState.bookmarked(bool bookmarked) = Bookmarked;
 

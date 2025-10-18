@@ -34,17 +34,12 @@ class SpeakersBottomSheet extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Text(
-                  'Speakers',
+                Text(
+                  '${speakers.length} Speakers',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                const SizedBox(width: 8),
-                Chip(
-                  label: Text('${speakers.length}'),
-                  backgroundColor: ThemeColors.primary.withOpacity(0.1),
                 ),
                 const Spacer(),
                 IconButton(
@@ -55,7 +50,6 @@ class SpeakersBottomSheet extends StatelessWidget {
             ),
           ),
           
-          // Search Bar
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
@@ -67,12 +61,11 @@ class SpeakersBottomSheet extends StatelessWidget {
                 ),
               ),
               onChanged: (value) {
-                // Implement search functionality
+                //To do Implement search functionality
               },
             ),
           ),
           
-          // Speakers List
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -93,7 +86,7 @@ class SpeakersBottomSheet extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   subtitle: speaker.tagLine != null 
-                      ? Text(speaker.tagLine!)
+                      ? Text(speaker.tagLine!, style: TextStyle(fontSize: 14),)
                       : null,
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () => onSpeakerTap(speaker),

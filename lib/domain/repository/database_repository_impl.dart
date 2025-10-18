@@ -64,6 +64,11 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
+  Future<Speaker?> fetchSpeakerById(String id) async {
+    return _appDB.speakersDao.findSpeakerById(id);
+  }
+
+  @override
   Future<void> saveSpeaker(Speaker speaker) async {
     return _appDB.speakersDao.insertSpeaker(speaker);
   }

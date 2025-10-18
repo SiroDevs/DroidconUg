@@ -29,7 +29,7 @@ class SpeakersBloc extends Bloc<SpeakersEvent, SpeakersState> {
     try {
       final droidcon = await _homeRepo.fetchLocalData();
       if (droidcon.hasData) {
-        emit(DataFetched(droidcon));
+        emit(SpeakerFetched(droidcon));
       } else {
         emit(const FailureState("No data available"));
       }

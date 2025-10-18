@@ -1,28 +1,20 @@
-import 'dart:math';
-
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
 import '../../blocs/home/home_bloc.dart';
-import '../../navigator/route_names.dart';
 import '../../theme/theme_colors.dart';
-import '../../theme/theme_styles.dart';
 import '../../widgets/action/theme_button.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
+import '../../widgets/action/session_card.dart';
 
 part 'home_view.dart';
 part 'widgets/dates_header.dart';
-part 'widgets/session_card.dart';
 part 'widgets/speakers_bottom_sheet.dart';
-part 'widgets/speakers_carousel.dart';
-part 'widgets/sessions_preview.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -79,7 +71,6 @@ class HomeScreenState extends State<HomeScreen> {
                 appBar: appBar,
                 body: HomeView(
                   sessions: droidcon.sessions,
-                  rooms: droidcon.rooms,
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () => _showSpeakersBottomSheet(droidcon.speakers),

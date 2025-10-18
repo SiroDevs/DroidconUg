@@ -1,10 +1,22 @@
-part of '../home_screen.dart';
+
+import 'package:flutter/material.dart';
+import 'package:styled_widget/styled_widget.dart';
+
+import '../../../core/utils/date_util.dart';
+import '../../../domain/entity/models.dart';
+import '../../screens/session/session_screen.dart';
 
 class SessionCard extends StatelessWidget {
+  final List<SessionExt> sessions;
   final SessionExt session;
   final bool isCompact;
 
-  const SessionCard({super.key, required this.session, this.isCompact = false});
+  const SessionCard({
+    super.key,
+    required this.sessions,
+    required this.session,
+    this.isCompact = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,22 +78,40 @@ class SessionCard extends StatelessWidget {
           ),
           overflow: TextOverflow.ellipsis,
         ).expanded(),
+        Icon(
+          session.bookmarked == true ? Icons.bookmark : Icons.bookmark_border,
+          size: 16,
+          color: session.bookmarked == true
+              ? Theme.of(context).primaryColor
+              : Colors.grey[400],
+        ),
       ],
     );
 
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Container(
-        padding: const EdgeInsets.all(7),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.inverseSurface,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            [
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SessionScreen(
+              session: session,
+              sessions: sessions,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Container(
+          padding: const EdgeInsets.all(7),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.inverseSurface,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
                 session.title ?? 'No Title',
                 style: TextStyle(
@@ -89,31 +119,22 @@ class SessionCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
-                maxLines: isCompact ? 2 : 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-              ).expanded(),
-              Icon(
-                session.bookmarked == true
-                    ? Icons.bookmark
-                    : Icons.bookmark_border,
-                size: 16,
-                color: session.bookmarked == true
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey[400],
               ),
-            ].toRow(),
 
-            const SizedBox(height: 2),
-            isCompact
-                ? Column(children: [timeWidget, venueWidget])
-                : Row(
-                    children: [timeWidget.expanded(), venueWidget.expanded()],
-                  ),
+              const SizedBox(height: 2),
+              isCompact
+                  ? Column(children: [timeWidget, venueWidget])
+                  : Row(
+                      children: [timeWidget.expanded(), venueWidget.expanded()],
+                    ),
 
-            const SizedBox(height: 2),
+              const SizedBox(height: 2),
 
-            speakerWidget,
-          ],
+              speakerWidget,
+            ],
+          ),
         ),
       ),
     );

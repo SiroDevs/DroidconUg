@@ -10,7 +10,7 @@ class SpeakersState with _$SpeakersState {
 
   const factory SpeakersState.success() = SuccessState;
 
-  const factory SpeakersState.fetched(Droidcon droidcon) = DataFetched;
+  const factory SpeakersState.speakerFetched(Droidcon droidcon) = SpeakerFetched;
 
 
   const factory SpeakersState.bookmarked(bool bookmarked) = Bookmarked;

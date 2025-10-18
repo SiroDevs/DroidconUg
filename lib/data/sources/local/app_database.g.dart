@@ -480,7 +480,7 @@ class _$SpeakersDao extends SpeakersDao {
   final InsertionAdapter<Speaker> _speakerInsertionAdapter;
 
   @override
-  Future<Speaker?> findSpeakerById(int id) async {
+  Future<Speaker?> findSpeakerById(String id) async {
     return _queryAdapter.query(
       'SELECT * FROM speakers WHERE id = ?1',
       mapper: (Map<String, Object?> row) => Speaker(
