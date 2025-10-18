@@ -23,6 +23,8 @@ abstract class DatabaseRepository {
 
   Future<List<SessionExt>> fetchSessions();
 
+  Future<Session?> fetchSessionById(String id);
+
   Future<void> saveSession(Session session);
 
   Future<void> bookmarkSession(String id, bool bookmark, String updated);

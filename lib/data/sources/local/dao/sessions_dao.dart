@@ -7,7 +7,7 @@ import '../../../../domain/entity/session_ext.dart';
 @dao
 abstract class SessionsDao {
   @Query('SELECT * FROM ${AppConstants.sessionsTable} WHERE id = :id')
-  Future<Session?> findSessionById(int id);
+  Future<Session?> findSessionById(String id);
 
   @Query('SELECT * FROM ${AppConstants.sessionTableViews}')
   Future<List<SessionExt>> fetchSessions();

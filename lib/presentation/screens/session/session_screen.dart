@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
@@ -12,6 +13,7 @@ import '../../widgets/progress/general_progress.dart';
 part 'session_view.dart';
 part 'widgets/parallel_sessions.dart';
 part 'widgets/room_schedule.dart';
+part 'widgets/session_info.dart';
 part 'widgets/session_meta.dart';
 part 'widgets/session_speaker.dart';
 
@@ -41,9 +43,7 @@ class SessionScreenState extends State<SessionScreen> {
     // Fetch speaker data when screen loads
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_currentSession.speakerId != null) {
-        context.read<SessionsBloc>().add(
-          FetchSpeaker(_currentSession.speakerId!),
-        );
+        context.read<SessionsBloc>().add(FetchData(_currentSession));
       }
     });
   }
@@ -55,7 +55,7 @@ class SessionScreenState extends State<SessionScreen> {
 
     // Fetch speaker for the new session
     if (newSession.speakerId != null) {
-      context.read<SessionsBloc>().add(FetchSpeaker(newSession.speakerId!));
+      context.read<SessionsBloc>().add(FetchData(newSession));
     }
 
     _scrollController.animateTo(
@@ -97,8 +97,7 @@ class SessionScreenState extends State<SessionScreen> {
     final parallelSessions = _getParallelSessions();
 
     return BlocProvider(
-      create: (context) =>
-          SessionsBloc()..add(FetchSpeaker(_currentSession.speakerId!)),
+      create: (context) => SessionsBloc()..add(FetchData(_currentSession)),
       child: BlocConsumer<SessionsBloc, SessionsState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -120,7 +119,7 @@ class SessionScreenState extends State<SessionScreen> {
         builder: (context, state) {
           return state.maybeWhen(
             progress: () => const Scaffold(body: CircularProgress()),
-            fetched: (speaker) => Scaffold(
+            fetched: (session, speaker) => Scaffold(
               body: SessionView(
                 currentSession: _currentSession,
                 roomSessions: roomSessions,
@@ -128,7 +127,8 @@ class SessionScreenState extends State<SessionScreen> {
                 scrollController: _scrollController,
                 onSessionTap: _updateSession,
                 onToggleBookmark: _toggleBookmark,
-                speaker: speaker,
+                sessionData: session,
+                speakerData: speaker,
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: _shareSession,

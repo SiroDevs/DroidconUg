@@ -10,11 +10,12 @@ class SessionsState with _$SessionsState {
 
   const factory SessionsState.success() = SuccessState;
 
-  const factory SessionsState.fetched(Speaker speaker) = SpeakerFetched;
+  const factory SessionsState.fetched(Session session, Speaker speaker) =
+      DataFetched;
 
   const factory SessionsState.bookmarked(bool bookmarked) = Bookmarked;
 
   const factory SessionsState.noInternet() = NoInternetState;
-  
+
   const factory SessionsState.failure(String feedback) = FailureState;
 }

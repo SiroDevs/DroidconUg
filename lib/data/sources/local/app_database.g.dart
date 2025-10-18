@@ -392,7 +392,7 @@ class _$SessionsDao extends SessionsDao {
   final InsertionAdapter<Session> _sessionInsertionAdapter;
 
   @override
-  Future<Session?> findSessionById(int id) async {
+  Future<Session?> findSessionById(String id) async {
     return _queryAdapter.query(
       'SELECT * FROM sessions WHERE id = ?1',
       mapper: (Map<String, Object?> row) => Session(

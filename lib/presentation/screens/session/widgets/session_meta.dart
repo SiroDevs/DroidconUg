@@ -11,24 +11,39 @@ class SessionMeta extends StatelessWidget {
       elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
+        child: Column(
           children: [
-            _buildInfoItem(
-              icon: Icons.access_time,
-              title: 'Time',
-              value: _formatTimeRange(session.startsAt, session.endsAt),
+            Text(
+              _formatDate(session.startsAt),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: ThemeColors.primary,
+              ),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(width: 16),
-            _buildInfoItem(
-              icon: Icons.location_on,
-              title: 'Venue',
-              value: session.venue ?? 'TBA',
-            ),
-            const SizedBox(width: 16),
-            _buildInfoItem(
-              icon: Icons.schedule,
-              title: 'Duration',
-              value: _calculateDuration(session.startsAt, session.endsAt),
+            const SizedBox(height: 5),
+
+            Row(
+              children: [
+                _buildInfoItem(
+                  icon: Icons.access_time,
+                  title: 'Time',
+                  value: _formatTimeRange(session.startsAt, session.endsAt),
+                ),
+                const SizedBox(width: 10),
+                _buildInfoItem(
+                  icon: Icons.location_on,
+                  title: 'Room',
+                  value: session.venue ?? 'TBA',
+                ),
+                const SizedBox(width: 10),
+                _buildInfoItem(
+                  icon: Icons.schedule,
+                  title: 'Duration',
+                  value: _calculateDuration(session.startsAt, session.endsAt),
+                ),
+              ],
             ),
           ],
         ),
@@ -36,16 +51,24 @@ class SessionMeta extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoItem({required IconData icon, required String title, required String value}) {
+  Widget _buildInfoItem({
+    required IconData icon,
+    required String title,
+    required String value,
+  }) {
     return Expanded(
       child: Column(
         children: [
-          Icon(icon, size: 20, color: ThemeColors.primary),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
+          [
+            const SizedBox().expanded(),
+            Icon(icon, size: 20, color: ThemeColors.primary),
+            const SizedBox(height: 5),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox().expanded()
+          ].toRow(),
           const SizedBox(height: 2),
           Text(
             value,
@@ -55,6 +78,63 @@ class SessionMeta extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _formatDate(String? dateString) {
+    if (dateString == null) return 'Date TBA';
+    try {
+      final date = DateTime.parse(dateString);
+      return _formatDateToCustomString(date);
+    } catch (e) {
+      return 'Date TBA';
+    }
+  }
+
+  String _formatDateToCustomString(DateTime date) {
+    final weekday = _getWeekdayAbbreviation(date.weekday);
+    final day = date.day;
+    final month = _getMonthAbbreviation(date.month);
+    final year = date.year;
+    final daySuffix = _getDaySuffix(day);
+
+    return '$weekday, $day$daySuffix $month, $year';
+  }
+
+  String _getWeekdayAbbreviation(int weekday) {
+    const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return weekdays[weekday - 1];
+  }
+
+  String _getMonthAbbreviation(int month) {
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return months[month - 1];
+  }
+
+  String _getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) return 'th';
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
   }
 
   String _formatTimeRange(String? startsAt, String? endsAt) {
@@ -79,7 +159,7 @@ class SessionMeta extends StatelessWidget {
       final duration = end.difference(start);
       final hours = duration.inHours;
       final minutes = duration.inMinutes.remainder(60);
-      
+
       if (hours > 0) {
         return '${hours}h ${minutes}m';
       } else {

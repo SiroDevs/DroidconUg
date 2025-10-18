@@ -7,7 +7,8 @@ class SessionView extends StatelessWidget {
   final ScrollController scrollController;
   final Function(SessionExt) onSessionTap;
   final VoidCallback onToggleBookmark;
-  final Speaker speaker;
+  final Session sessionData;
+  final Speaker speakerData;
 
   const SessionView({
     super.key,
@@ -17,7 +18,8 @@ class SessionView extends StatelessWidget {
     required this.scrollController,
     required this.onSessionTap,
     required this.onToggleBookmark,
-    required this.speaker,
+    required this.sessionData,
+    required this.speakerData,
   });
 
   @override
@@ -66,8 +68,10 @@ class SessionView extends StatelessWidget {
                 const SizedBox(height: 10),
                 SessionMeta(session: currentSession),
                 const SizedBox(height: 10),
+                SessionInfo(session: sessionData),
+                const SizedBox(height: 10),
 
-                SessionSpeaker(speaker: speaker),
+                SessionSpeaker(speaker: speakerData),
 
                 const SizedBox(height: 10),
                 if (parallelSessions.isNotEmpty) ...[
@@ -82,13 +86,13 @@ class SessionView extends StatelessWidget {
           ),
         ),
 
-        SliverToBoxAdapter(
-          child: RoomSchedule(
-            sessions: roomSessions,
-            currentSession: currentSession,
-            onSessionTap: onSessionTap,
-          ),
-        ),
+        // SliverToBoxAdapter(
+        //   child: RoomSchedule(
+        //     sessions: roomSessions,
+        //     currentSession: currentSession,
+        //     onSessionTap: onSessionTap,
+        //   ),
+        // ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
       ],
     );
@@ -101,8 +105,8 @@ class SessionView extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            ThemeColors.primary.withValues(alpha: 0.8),
-            ThemeColors.primary.withValues(alpha: 0.6),
+            ThemeColors.secondary,
+            ThemeColors.secondaryDark,
           ],
         ),
       ),

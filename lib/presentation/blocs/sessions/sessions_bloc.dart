@@ -14,19 +14,20 @@ part 'sessions_bloc.freezed.dart';
 
 class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
   SessionsBloc() : super(const _SessionsState()) {
-    on<FetchSpeaker>(_onFetchSpeaker);
+    on<FetchData>(_onFetchData);
     on<BookmarkSession>(_onBookmarkSession);
   }
 
   final _dbRepo = getIt<DatabaseRepository>();
 
-  void _onFetchSpeaker(FetchSpeaker event, Emitter<SessionsState> emit) async {
+  void _onFetchData(FetchData event, Emitter<SessionsState> emit) async {
     emit(const ProgressState());
 
     try {
-      final speaker = await _dbRepo.fetchSpeakerById(event.id);
-      if (speaker != null) {
-        emit(SpeakerFetched(speaker));
+      final speaker = await _dbRepo.fetchSpeakerById(event.session.speakerId!);
+      final session = await _dbRepo.fetchSessionById(event.session.sessionId!);
+      if (session != null && speaker != null) {
+        emit(DataFetched(session, speaker));
       } else {
         emit(const FailureState("No data available"));
       }

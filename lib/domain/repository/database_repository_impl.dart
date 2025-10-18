@@ -84,6 +84,11 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
+  Future<Session?> fetchSessionById(String sessionId) async {
+    return _appDB.sessionsDao.findSessionById(sessionId);
+  }
+
+  @override
   Future<void> saveSession(Session session) async {
     return _appDB.sessionsDao.insertSession(session);
   }
