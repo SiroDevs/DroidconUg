@@ -16,6 +16,38 @@ Droidcon Uganda is an annual conference focused on Android development, offering
 
 The app is designed to help you navigate the event and stay up to date with the various activities happening during the conference.
 
+## ScreenShots
+### Android
+<table>
+<tr>
+<td><img src="screenshots/android/screenshot1.png" width="200px" /></td>
+<td><img src="screenshots/android/screenshot2.png" width="200px" /></td>
+<td><img src="screenshots/android/screenshot3.png" width="200px" /></td>
+<td><img src="screenshots/android/screenshot4.png" width="200px" /></td>
+<td><img src="screenshots/android/screenshot5.png" width="200px" /></td>
+</tr>
+</table>
+
+### iPhone
+<table>
+<tr>
+<td><img src="screenshots/iphone/screenshot1.png" width="200px" /></td>
+<td><img src="screenshots/iphone/screenshot2.png" width="200px" /></td>
+<td><img src="screenshots/iphone/screenshot3.png" width="200px" /></td>
+<td><img src="screenshots/iphone/screenshot4.png" width="200px" /></td>
+<td><img src="screenshots/iphone/screenshot5.png" width="200px" /></td>
+</tr>
+</table>
+
+### iPad
+<table>
+<tr>
+<td><img src="screenshots/ipad/screenshot1.png" width="200px" /></td>
+<td><img src="screenshots/ipad/screenshot2.png" width="200px" /></td>
+<td><img src="screenshots/ipad/screenshot3.png" width="200px" /></td>
+</tr>
+</table>
+
 ## Features
 
 - **Event Schedule**: Browse the conference program with sessions, dates, and times.
