@@ -1,4 +1,4 @@
-package com.sirodaves.droidconug
+package com.sirodevs.droidconug
 
 import io.flutter.embedding.android.FlutterActivity
 

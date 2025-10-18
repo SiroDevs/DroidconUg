@@ -5,11 +5,11 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../common/utils/app_util.dart';
-import '../../common/utils/constants/app_constants.dart';
-import '../../common/data/db/app_database.dart';
-import '../../common/repository/db/database_repository_impl.dart';
-import '../../common/repository/db/database_repository.dart';
+import '../../data/sources/local/app_database.dart';
+import '../../domain/repository/database_repository_impl.dart';
+import '../../domain/repository/database_repository.dart';
+import '../constants/app_constants.dart';
+import '../utils/app_util.dart';
 import 'injectable.config.dart';
 
 final getIt = GetIt.instance;
@@ -28,11 +28,11 @@ Future<void> configureDependencies(String environment) async {
 abstract class RegisterModule {
   @singleton
   @preResolve
-  Future<SharedPreferences> localStorage() => SharedPreferences.getInstance();
+  Future<SharedPreferences> prefRepo() => SharedPreferences.getInstance();
 
   @singleton
   @preResolve
-  Future<AppDatabase> provideAppDatabase() async => await $FloorAppDatabase
+  Future<AppDatabase> provideAppDatabase() async => await $FroomAppDatabase
       .databaseBuilder(await AppConstants.databaseFile)
       .build();
 
