@@ -1,14 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../domain/entity/models.dart';
 import '../../blocs/speakers/speakers_bloc.dart';
 import '../../theme/theme_colors.dart';
 import '../../widgets/action/session_card.dart';
 import '../../widgets/features/date_header.dart';
+import '../../widgets/features/speaker_avatar.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 

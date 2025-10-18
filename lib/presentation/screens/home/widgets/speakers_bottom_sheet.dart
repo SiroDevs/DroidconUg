@@ -4,7 +4,8 @@ class SpeakersBottomSheet extends StatelessWidget {
   final List<Speaker> speakers;
   final Function(Speaker) onSpeakerTap;
 
-  const SpeakersBottomSheet({super.key, 
+  const SpeakersBottomSheet({
+    super.key,
     required this.speakers,
     required this.onSpeakerTap,
   });
@@ -26,20 +27,14 @@ class SpeakersBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
+                bottom: BorderSide(color: Colors.grey[300]!, width: 1),
               ),
             ),
             child: Row(
               children: [
                 Text(
                   '${speakers.length} Speakers',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
                 IconButton(
@@ -49,7 +44,7 @@ class SpeakersBottomSheet extends StatelessWidget {
               ],
             ),
           ),
-          
+
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
@@ -65,7 +60,7 @@ class SpeakersBottomSheet extends StatelessWidget {
               },
             ),
           ),
-          
+
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -73,20 +68,17 @@ class SpeakersBottomSheet extends StatelessWidget {
               itemBuilder: (context, index) {
                 final speaker = speakers[index];
                 return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: speaker.avatar != null 
-                        ? NetworkImage(speaker.avatar!) 
-                        : null,
-                    child: speaker.avatar == null 
-                        ? const Icon(Icons.person)
-                        : null,
+                  leading: SpeakerAvatar(
+                    imageUrl: speaker.avatar,
+                    radius: 20,
+                    fallbackAsset: AppAssets.imgSpeaker,
                   ),
                   title: Text(
                     '${speaker.firstName} ${speaker.lastName}',
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  subtitle: speaker.tagLine != null 
-                      ? Text(speaker.tagLine!, style: TextStyle(fontSize: 14),)
+                  subtitle: speaker.tagLine != null
+                      ? Text(speaker.tagLine!, style: TextStyle(fontSize: 14))
                       : null,
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () => onSpeakerTap(speaker),
@@ -99,4 +91,3 @@ class SpeakersBottomSheet extends StatelessWidget {
     );
   }
 }
-

@@ -30,18 +30,12 @@ class SessionSpeaker extends StatelessWidget {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  // Avatar
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: speaker.avatar != null
-                        ? NetworkImage(speaker.avatar!)
-                        : null,
-                    child: speaker.avatar == null
-                        ? const Icon(Icons.person, size: 30)
-                        : null,
+                  SpeakerAvatar(
+                    imageUrl: speaker.avatar,
+                    radius: 20,
+                    fallbackAsset: AppAssets.imgSpeaker,
                   ),
                   const SizedBox(width: 16),
-                  // Speaker details
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
