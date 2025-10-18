@@ -32,17 +32,11 @@ class SessionView extends StatelessWidget {
           floating: false,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                currentSession.title ?? 'Session',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-              ),
+            title: Text(
+              currentSession.title ?? 'Session',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
             ),
             background: _buildSessionHeader(),
           ),
@@ -104,10 +98,7 @@ class SessionView extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            ThemeColors.secondary,
-            ThemeColors.secondaryDark,
-          ],
+          colors: [ThemeColors.secondary, ThemeColors.secondaryDark],
         ),
       ),
       child: Stack(

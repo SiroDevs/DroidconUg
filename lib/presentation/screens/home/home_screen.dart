@@ -7,6 +7,7 @@ import '../../../domain/entity/models.dart';
 import '../../blocs/home/home_bloc.dart';
 import '../../theme/theme_colors.dart';
 import '../../widgets/action/theme_button.dart';
+import '../../widgets/features/speaker_avatar.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';

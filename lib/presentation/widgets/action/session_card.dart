@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
 import '../../screens/session/session_screen.dart';
+import '../features/speaker_avatar.dart';
 
 class SessionCard extends StatelessWidget {
   final List<SessionExt> sessions;
@@ -43,28 +45,11 @@ class SessionCard extends StatelessWidget {
     ].toRow();
     var speakerWidget = Row(
       children: [
-        if (session.avatar != null && session.avatar!.isNotEmpty)
-          Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(session.avatar!),
-                fit: BoxFit.cover,
-              ),
-            ),
-          )
-        else
-          Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey[300],
-            ),
-            child: Icon(Icons.person, size: 12, color: Colors.grey[600]),
-          ),
+        SpeakerAvatar(
+          imageUrl: session.avatar,
+          radius: 20,
+          fallbackAsset: AppAssets.imgSpeaker,
+        ),
 
         const SizedBox(width: 8),
 

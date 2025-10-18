@@ -17,23 +17,32 @@ class SpeakerInfo extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 100,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: speaker.avatar != null
-                        ? DecorationImage(
-                            image: NetworkImage(speaker.avatar!),
-                            fit: BoxFit.cover,
-                          )
-                        : null,
-                    color: speaker.avatar == null ? Colors.grey[300] : null,
-                  ),
-                  child: speaker.avatar == null
-                      ? const Icon(Icons.person, size: 40, color: Colors.grey)
-                      : null,
+                SpeakerAvatar(
+                  imageUrl: speaker.avatar,
+                  radius: 50,
+                  circular: false,
+                  fallbackAsset: AppAssets.imgSpeaker,
                 ),
+                // Container(
+                //   width: 100,
+                //   height: 120,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     image: speaker.avatar != null
+                //         ? DecorationImage(
+                //             image: speaker.avatar != null
+                //                 ? NetworkImage(speaker.avatar!)
+                //                 : const AssetImage(AppAssets.imgSpeaker)
+                //                       as ImageProvider,
+                //             fit: BoxFit.cover,
+                //           )
+                //         : null,
+                //     color: speaker.avatar == null ? Colors.grey[300] : null,
+                //   ),
+                //   child: speaker.avatar == null
+                //       ? const Icon(Icons.person, size: 40, color: Colors.grey)
+                //       : null,
+                // ),
                 const SizedBox(width: 16),
 
                 Expanded(

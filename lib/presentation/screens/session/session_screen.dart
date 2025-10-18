@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
 import '../../blocs/sessions/sessions_bloc.dart';
 import '../../theme/theme_colors.dart';
 import '../../widgets/action/session_card.dart';
+import '../../widgets/features/speaker_avatar.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../speaker/speaker_screen.dart';
