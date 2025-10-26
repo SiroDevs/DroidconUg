@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   animated_text_kit: ^4.3.0
-  cached_network_image: ^3.4.1
   card_swiper: ^3.0.1
   connectivity_plus: ^7.0.0
   cupertino_icons: ^1.0.8
