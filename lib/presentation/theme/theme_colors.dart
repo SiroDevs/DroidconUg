@@ -6,20 +6,21 @@ class ThemeColors {
   static const primary = Color(0xFFff6e4d); // Main primary color
   static const primaryLight = Color(0xFFff9e7d); // Lighter variant
   static const primaryDark = Color(0xFFc53e1d); // Darker variant
-  static const primaryContainer = Color(
-    0xFFffdbd2,
-  ); 
-  
+  static const primaryContainer = Color(0xFFffdbd2);
+
   // Container color for light theme
 
   // Secondary Colors (based on #009688 - teal)
-  static const secondary = Color.fromARGB(255, 115, 207, 198); // Main secondary color
+  static const secondary = Color.fromARGB(
+    255,
+    115,
+    207,
+    198,
+  ); // Main secondary color
   static const secondaryLight = Color(0xFF52c7b8); // Lighter variant
   static const secondaryDark = Color(0xFF00675b); // Darker variant
-  static const secondaryContainer = Color(
-    0xFFb2dfdb,
-  ); 
-  
+  static const secondaryContainer = Color(0xFFb2dfdb);
+
   // Container color for light theme
 
   // Neutral Colors

@@ -16,7 +16,7 @@ class SpeakerAvatar extends StatelessWidget {
     super.key,
     this.imageUrl,
     this.radius = 20,
-    this.fallbackAsset= AppAssets.imgSpeaker,
+    this.fallbackAsset = AppAssets.imgSpeaker,
     this.fallbackWidget,
     this.fit = BoxFit.cover,
     this.backgroundColor,
@@ -26,7 +26,7 @@ class SpeakerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fallback = _buildFallback();
-    
+
     if (imageUrl == null || imageUrl!.isEmpty) {
       return fallback;
     }
@@ -43,13 +43,10 @@ class SpeakerAvatar extends StatelessWidget {
               width: radius * 2,
               height: radius * 2,
               decoration: BoxDecoration(
-                borderRadius: circular 
-                    ? BorderRadius.circular(radius) 
+                borderRadius: circular
+                    ? BorderRadius.circular(radius)
                     : BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: fit,
-                ),
+                image: DecorationImage(image: imageProvider, fit: fit),
                 color: backgroundColor,
               ),
             ),
@@ -63,8 +60,8 @@ class SpeakerAvatar extends StatelessWidget {
               width: radius * 2,
               height: radius * 2,
               decoration: BoxDecoration(
-                borderRadius: circular 
-                    ? BorderRadius.circular(radius) 
+                borderRadius: circular
+                    ? BorderRadius.circular(radius)
                     : BorderRadius.circular(8),
                 color: Colors.grey[300],
               ),
@@ -87,34 +84,23 @@ class SpeakerAvatar extends StatelessWidget {
                 ? AssetImage(fallbackAsset!)
                 : null,
             child: fallbackAsset == null
-                ? Icon(
-                    Icons.person,
-                    size: radius,
-                    color: Colors.grey[600],
-                  )
+                ? Icon(Icons.person, size: radius, color: Colors.grey[600])
                 : null,
           )
         : Container(
             width: radius * 2,
             height: radius * 2,
             decoration: BoxDecoration(
-              borderRadius: circular 
-                  ? BorderRadius.circular(radius) 
+              borderRadius: circular
+                  ? BorderRadius.circular(radius)
                   : BorderRadius.circular(8),
               color: backgroundColor ?? Colors.grey[300],
               image: fallbackAsset != null
-                  ? DecorationImage(
-                      image: AssetImage(fallbackAsset!),
-                      fit: fit,
-                    )
+                  ? DecorationImage(image: AssetImage(fallbackAsset!), fit: fit)
                   : null,
             ),
             child: fallbackAsset == null
-                ? Icon(
-                    Icons.person,
-                    size: radius,
-                    color: Colors.grey[600],
-                  )
+                ? Icon(Icons.person, size: radius, color: Colors.grey[600])
                 : null,
           );
   }

@@ -9,7 +9,9 @@ abstract class SessionsDao {
   @Query('SELECT * FROM ${AppConstants.sessionsTable} WHERE id = :id')
   Future<Session?> findSessionById(String id);
 
-  @Query('SELECT * FROM ${AppConstants.sessionTableViews} WHERE speakerId = :speaker')
+  @Query(
+    'SELECT * FROM ${AppConstants.sessionTableViews} WHERE speakerId = :speaker',
+  )
   Future<List<SessionExt>> fetchSessionsBySpeaker(String speaker);
 
   @Query('SELECT * FROM ${AppConstants.sessionTableViews}')
@@ -22,11 +24,7 @@ abstract class SessionsDao {
     'UPDATE ${AppConstants.sessionsTable} '
     'SET bookmark = :bookmark, updated = :updated WHERE id = :id',
   )
-  Future<void> bookmarkSession(
-    String id,
-    bool bookmark,
-    String updated,
-  );
+  Future<void> bookmarkSession(String id, bool bookmark, String updated);
 
   @Query("DELETE FROM ${AppConstants.sessionsTable}")
   Future<void> deleteAllSessions();

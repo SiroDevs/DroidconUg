@@ -8,13 +8,10 @@ class RoomResp {
   String? name;
   int? sort;
 
-  RoomResp({
-    this.id,
-    this.name,
-    this.sort,
-  });
+  RoomResp({this.id, this.name, this.sort});
 
-  factory RoomResp.fromJson(Map<String, dynamic> json) => _$RoomRespFromJson(json);
+  factory RoomResp.fromJson(Map<String, dynamic> json) =>
+      _$RoomRespFromJson(json);
 
   Map<String, dynamic> toJson() => _$RoomRespToJson(this);
 }

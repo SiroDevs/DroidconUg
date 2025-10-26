@@ -19,11 +19,12 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _goToNextScreen();
+    _goToNextScreen(context);
   }
 
-  Future<void> _goToNextScreen() async {
+  Future<void> _goToNextScreen(BuildContext context) async {
     await Future<void>.delayed(const Duration(seconds: 3));
+    if (!context.mounted) return;
     Navigator.pushNamedAndRemoveUntil(
       context,
       RouteNames.home,

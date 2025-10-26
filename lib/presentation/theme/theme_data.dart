@@ -30,10 +30,8 @@ class AppTheme {
         tertiaryContainer: ThemeColors.secondaryLight,
         surface: ThemeColors.surface,
         onSurface: ThemeColors.onSurface,
-        surfaceVariant: ThemeColors.surfaceVariant,
+        surfaceContainerHighest: ThemeColors.surfaceVariant,
         onSurfaceVariant: ThemeColors.onSurfaceVariant,
-        background: ThemeColors.background,
-        onBackground: ThemeColors.onBackground,
         error: ThemeColors.error,
         onError: ThemeColors.onError,
         errorContainer: ThemeColors.errorContainer,
@@ -59,9 +57,14 @@ class AppTheme {
         backgroundColor: ThemeColors.surface,
         indicatorColor: ThemeColors.primaryContainer,
         elevation: 3,
-        iconTheme: MaterialStateProperty.all(const IconThemeData(color: ThemeColors.primary)),
-        labelTextStyle: MaterialStateProperty.all(
-          const TextStyle(color: ThemeColors.primary, fontFamily: AppConstants.kFontFamily),
+        iconTheme: WidgetStateProperty.all(
+          const IconThemeData(color: ThemeColors.primary),
+        ),
+        labelTextStyle: WidgetStateProperty.all(
+          const TextStyle(
+            color: ThemeColors.primary,
+            fontFamily: AppConstants.kFontFamily,
+          ),
         ),
       ),
       cardTheme: const CardThemeData(
@@ -97,10 +100,8 @@ class AppTheme {
         tertiaryContainer: ThemeColors.primary,
         surface: ThemeColors.darkSurface,
         onSurface: ThemeColors.darkOnSurface,
-        surfaceVariant: ThemeColors.darkSurfaceVariant,
+        surfaceContainerHighest: ThemeColors.darkSurfaceVariant,
         onSurfaceVariant: ThemeColors.darkOnSurfaceVariant,
-        background: ThemeColors.darkBackground,
-        onBackground: ThemeColors.darkOnBackground,
         error: Color(0xFFFFB4AB),
         onError: Color(0xFF690005),
         errorContainer: Color(0xFF93000A),
@@ -125,9 +126,14 @@ class AppTheme {
         backgroundColor: ThemeColors.darkSurface,
         indicatorColor: ThemeColors.primaryDark,
         elevation: 3,
-        iconTheme: MaterialStateProperty.all(const IconThemeData(color: ThemeColors.darkOnSurface)),
-        labelTextStyle: MaterialStateProperty.all(
-          const TextStyle(color: ThemeColors.darkOnSurface, fontFamily: AppConstants.kFontFamily),
+        iconTheme: WidgetStateProperty.all(
+          const IconThemeData(color: ThemeColors.darkOnSurface),
+        ),
+        labelTextStyle: WidgetStateProperty.all(
+          const TextStyle(
+            color: ThemeColors.darkOnSurface,
+            fontFamily: AppConstants.kFontFamily,
+          ),
         ),
       ),
       cardTheme: const CardThemeData(
@@ -145,5 +151,5 @@ class AppTheme {
         foregroundColor: ThemeColors.darkBackground,
       ),
     );
-  }  
+  }
 }

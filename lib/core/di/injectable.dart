@@ -14,10 +14,7 @@ import 'injectable.config.dart';
 
 final getIt = GetIt.instance;
 
-@InjectableInit(
-  initializerName: r'initGetIt',
-  generateForDir: ['lib'],
-)
+@InjectableInit(initializerName: r'initGetIt', generateForDir: ['lib'])
 Future<void> configureDependencies(String environment) async {
   logger('Using environment: $environment');
   await getIt.initGetIt(environment: environment);

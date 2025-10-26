@@ -22,7 +22,7 @@ class PasswordInput extends StatefulWidget {
   final int maxInput;
 
   const PasswordInput({
-    Key? key,
+    super.key,
     this.iLabel = 'Password',
     this.iType = TextInputType.text,
     this.iController,
@@ -39,7 +39,7 @@ class PasswordInput extends StatefulWidget {
     this.isActive = true,
     this.bdRadius = 5,
     this.maxInput = 10,
-  }) : super(key: key);
+  });
 
   @override
   PasswordInputState createState() => PasswordInputState();
@@ -61,9 +61,7 @@ class PasswordInputState extends State<PasswordInput> {
         enabled: widget.isEnabled,
         readOnly: widget.isReadOnly!,
         onTap: widget.onTap,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(widget.maxInput),
-        ],
+        inputFormatters: [LengthLimitingTextInputFormatter(widget.maxInput)],
         obscureText: isPassword,
         decoration: InputDecoration(
           labelText: widget.iLabel,

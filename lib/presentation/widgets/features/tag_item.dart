@@ -7,10 +7,7 @@ import '../../theme/theme_styles.dart';
 class TagItem extends StatelessWidget {
   final String tagText;
 
-  const TagItem({
-    super.key,
-    required this.tagText,
-  });
+  const TagItem({super.key, required this.tagText});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +20,10 @@ class TagItem extends StatelessWidget {
             color: Theme.of(context).colorScheme.onSurface,
             borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),
-          child: Text(tagText,
-              style: TextStyles.headingStyle5.textColor(Colors.white)),
+          child: Text(
+            tagText,
+            style: TextStyles.headingStyle5.textColor(Colors.white),
+          ),
         );
       } else {
         return const SizedBox.shrink();

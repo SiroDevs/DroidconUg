@@ -8,13 +8,10 @@ class LinkResp {
   String? url;
   LinkType? linkType;
 
-  LinkResp({
-    this.title,
-    this.url,
-    this.linkType,
-  });
+  LinkResp({this.title, this.url, this.linkType});
 
-  factory LinkResp.fromJson(Map<String, dynamic> json) => _$LinkRespFromJson(json);
+  factory LinkResp.fromJson(Map<String, dynamic> json) =>
+      _$LinkRespFromJson(json);
 
   Map<String, dynamic> toJson() => _$LinkRespToJson(this);
 }
@@ -23,5 +20,5 @@ enum LinkType {
   @JsonValue('LinkedIn')
   linkedIn,
   @JsonValue('Twitter')
-  twitter
+  twitter,
 }

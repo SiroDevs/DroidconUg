@@ -31,7 +31,7 @@ class AppButton extends StatefulWidget {
   final BorderRadius borderRadius;
 
   const AppButton({
-    Key? key,
+    super.key,
     this.label = '',
     this.prefix = const SizedBox(),
     this.suffix = const SizedBox(),
@@ -61,7 +61,7 @@ class AppButton extends StatefulWidget {
     this.shape,
     this.outlineColor = Colors.transparent,
     this.borderRadius = const BorderRadius.all(Radius.circular(Sizes.sm)),
-  }) : super(key: key);
+  });
 
   @override
   AppButtonState createState() => AppButtonState();
@@ -107,11 +107,7 @@ class AppButtonState extends State<AppButton> {
             children: [
               widget.prefix,
               const SizedBox(width: 5),
-              Text(
-                widget.label,
-                style: txtStyle,
-                textAlign: TextAlign.center,
-              ),
+              Text(widget.label, style: txtStyle, textAlign: TextAlign.center),
               widget.centered ? const SizedBox() : const Spacer(),
               widget.suffix,
             ],
@@ -174,22 +170,21 @@ class AppButtonState extends State<AppButton> {
         fillColor: Colors.transparent,
         hoverColor: widget.hoverColor,
         highlightColor: widget.downColor,
-        focusColor: Colors.grey.withValues(alpha:0.35),
+        focusColor: Colors.grey.withValues(alpha: 0.35),
         constraints: BoxConstraints(
           minHeight: widget.bigMode ? 60 : 42,
           minWidth: widget.bigMode ? 160 : 78,
         ),
         onPressed: widget.onPressed,
-        shape: widget.shape ??
+        shape:
+            widget.shape ??
             RoundedRectangleBorder(
-                side: BorderSide(color: widget.outlineColor, width: 1.5),
-                borderRadius: widget.borderRadius),
+              side: BorderSide(color: widget.outlineColor, width: 1.5),
+              borderRadius: widget.borderRadius,
+            ),
         child: Opacity(
           opacity: widget.onPressed != null ? 1 : 0.7,
-          child: Padding(
-            padding: widget.padding,
-            child: childWidget,
-          ),
+          child: Padding(padding: widget.padding, child: childWidget),
         ),
       ),
     );
@@ -218,10 +213,7 @@ class DropDownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var labelWidget = Text(
       label,
-      style: const TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-      ),
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
     ).padding(left: 5, top: 15, bottom: 5);
 
     var inputWidget = Container(
@@ -263,10 +255,7 @@ class DropDownWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            labelWidget,
-            inputWidget,
-          ],
+          children: [labelWidget, inputWidget],
         ),
       );
     }
@@ -278,11 +267,7 @@ class IconTextBtn extends StatelessWidget {
   final String? title;
   final Function()? onPressed;
 
-  const IconTextBtn({
-    Key? key,
-    required this.title,
-    required this.onPressed,
-  }) : super(key: key);
+  const IconTextBtn({super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -292,9 +277,7 @@ class IconTextBtn extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onSurface,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
         ),
         child: Row(
           children: <Widget>[
@@ -304,9 +287,10 @@ class IconTextBtn extends StatelessWidget {
               child: Text(
                 title!,
                 style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

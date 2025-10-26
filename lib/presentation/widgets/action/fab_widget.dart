@@ -88,10 +88,7 @@ class ExpandableFabState extends State<ExpandableFab>
             onTap: toggle,
             child: const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.close,
-                color: ThemeColors.primary,
-              ),
+              child: Icon(Icons.close, color: ThemeColors.primary),
             ),
           ),
         ),
@@ -103,9 +100,11 @@ class ExpandableFabState extends State<ExpandableFab>
     final children = <Widget>[];
     final count = widget.children.length;
     final step = 90.0 / (count - 1);
-    for (var i = 0, angleInDegrees = 0.0;
-        i < count;
-        i++, angleInDegrees += step) {
+    for (
+      var i = 0, angleInDegrees = 0.0;
+      i < count;
+      i++, angleInDegrees += step
+    ) {
       children.add(
         ExpandingActionButton(
           directionInDegrees: angleInDegrees,
@@ -148,6 +147,7 @@ class ExpandableFabState extends State<ExpandableFab>
 @immutable
 class ExpandingActionButton extends StatelessWidget {
   const ExpandingActionButton({
+    super.key,
     required this.directionInDegrees,
     required this.maxDistance,
     required this.progress,
@@ -177,21 +177,14 @@ class ExpandingActionButton extends StatelessWidget {
           ),
         );
       },
-      child: FadeTransition(
-        opacity: progress,
-        child: child,
-      ),
+      child: FadeTransition(opacity: progress, child: child),
     );
   }
 }
 
 @immutable
 class ActionButton extends StatelessWidget {
-  const ActionButton({
-    super.key,
-    this.onPressed,
-    required this.icon,
-  });
+  const ActionButton({super.key, this.onPressed, required this.icon});
 
   final VoidCallback? onPressed;
   final Widget icon;
@@ -203,21 +196,14 @@ class ActionButton extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       color: ThemeColors.primary,
       elevation: 4.0,
-      child: IconButton(
-        onPressed: onPressed,
-        icon: icon,
-        color: Colors.white,
-      ),
+      child: IconButton(onPressed: onPressed, icon: icon, color: Colors.white),
     );
   }
 }
 
 @immutable
 class FakeItem extends StatelessWidget {
-  const FakeItem({
-    super.key,
-    required this.isBig,
-  });
+  const FakeItem({super.key, required this.isBig});
 
   final bool isBig;
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../theme/theme_colors.dart';
@@ -7,11 +6,7 @@ class DateHeader extends StatelessWidget {
   final String date;
   final int dayNumber;
 
-  const DateHeader({
-    super.key,
-    required this.date,
-    required this.dayNumber,
-  });
+  const DateHeader({super.key, required this.date, required this.dayNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +44,34 @@ class DateHeader extends StatelessWidget {
   }
 
   String _getMonthAbbreviation(int month) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     return months[month - 1];
   }
 
   String _getDaySuffix(int day) {
     if (day >= 11 && day <= 13) return 'th';
     switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd';
-      case 3: return 'rd';
-      default: return 'th';
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
     }
   }
 }

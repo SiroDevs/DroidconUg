@@ -8,10 +8,7 @@ class PaginationHandler {
   double boundaryOffset = 0.5;
   late Function loadAction;
 
-  void init({
-    Function? initAction,
-    required Function loadAction,
-  }) {
+  void init({Function? initAction, required Function loadAction}) {
     if (initAction != null) {
       initAction();
     }

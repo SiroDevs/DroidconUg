@@ -14,11 +14,17 @@ class RoomSchedule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex = sessions.indexWhere((s) => s.sessionId == currentSession.sessionId);
-    
+    final currentIndex = sessions.indexWhere(
+      (s) => s.sessionId == currentSession.sessionId,
+    );
+
     // Get previous and next sessions (excluding current)
-    final SessionExt? previousSession = currentIndex > 0 ? sessions[currentIndex - 1] : null;
-    final SessionExt? nextSession = currentIndex < sessions.length - 1 ? sessions[currentIndex + 1] : null;
+    final SessionExt? previousSession = currentIndex > 0
+        ? sessions[currentIndex - 1]
+        : null;
+    final SessionExt? nextSession = currentIndex < sessions.length - 1
+        ? sessions[currentIndex + 1]
+        : null;
 
     // Check if we have any sessions to show
     final hasPrevious = previousSession != null;
@@ -36,10 +42,7 @@ class RoomSchedule extends StatelessWidget {
               children: [
                 const Text(
                   'Room Schedule',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 _buildEmptySchedule(),
@@ -61,29 +64,26 @@ class RoomSchedule extends StatelessWidget {
             children: [
               const Text(
                 'Room Schedule',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              
+
               // Previous Session
               if (hasPrevious) ...[
                 _buildSessionSection(
                   title: 'Previous Session',
-                  session: previousSession!,
+                  session: previousSession,
                   isPrevious: true,
                   onTap: () => onSessionTap(previousSession),
                 ),
                 if (hasNext) const SizedBox(height: 20),
               ],
-              
+
               // Next Session
-              if (hasNext) 
+              if (hasNext)
                 _buildSessionSection(
                   title: 'Next Session',
-                  session: nextSession!,
+                  session: nextSession,
                   isPrevious: false,
                   onTap: () => onSessionTap(nextSession),
                 ),
@@ -122,11 +122,7 @@ class RoomSchedule extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        _TimelineItem(
-          session: session,
-          isPrevious: isPrevious,
-          onTap: onTap,
-        ),
+        _TimelineItem(session: session, isPrevious: isPrevious, onTap: onTap),
       ],
     );
   }
@@ -141,11 +137,7 @@ class RoomSchedule extends StatelessWidget {
       ),
       child: const Column(
         children: [
-          Icon(
-            Icons.schedule,
-            size: 40,
-            color: Colors.grey,
-          ),
+          Icon(Icons.schedule, size: 40, color: Colors.grey),
           SizedBox(height: 8),
           Text(
             'No other sessions in this room today',
@@ -185,7 +177,9 @@ class _TimelineItem extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             border: Border.all(
-              color: isPrevious ? Colors.grey[300]! : ThemeColors.primary.withOpacity(0.3),
+              color: isPrevious
+                  ? Colors.grey[300]!
+                  : ThemeColors.primary.withValues(alpha: 0.3),
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -229,10 +223,7 @@ class _TimelineItem extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         session.venue!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       ),
                     ],
                   ],

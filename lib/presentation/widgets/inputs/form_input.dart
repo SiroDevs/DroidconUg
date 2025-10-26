@@ -23,7 +23,7 @@ class FormInput extends StatefulWidget {
   final int maxInput;
 
   const FormInput({
-    Key? key,
+    super.key,
     this.iLabel = "",
     this.iType = TextInputType.text,
     this.iController,
@@ -41,7 +41,7 @@ class FormInput extends StatefulWidget {
     this.isMultiline = false,
     this.bdRadius = 5,
     this.maxInput = 20000,
-  }) : super(key: key);
+  });
 
   @override
   FormInputState createState() => FormInputState();
@@ -55,7 +55,7 @@ class FormInputState extends State<FormInput> {
     return Container(
       margin: const EdgeInsets.all(10),
       child: TextFormField(
-        controller: widget.iController, 
+        controller: widget.iController,
         keyboardType: widget.iType,
         autovalidateMode: widget.validationMode,
         validator: widget.iValidator,
@@ -64,9 +64,7 @@ class FormInputState extends State<FormInput> {
         enabled: widget.isEnabled,
         readOnly: widget.isReadOnly!,
         onTap: widget.onTap,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(widget.maxInput),
-        ],
+        inputFormatters: [LengthLimitingTextInputFormatter(widget.maxInput)],
         decoration: InputDecoration(
           labelText: widget.iLabel,
           prefixIcon: widget.prefix,
@@ -86,10 +84,7 @@ class FormInputState extends State<FormInput> {
             borderSide: BorderSide(color: foreColor),
           ),
         ),
-        style: TextStyle(
-          fontSize: 18,
-          color: foreColor,
-        ),
+        style: TextStyle(fontSize: 18, color: foreColor),
         //textInputAction: widget.isMultiline! ? TextInputAction.newline : TextInputAction.next,
         onChanged: widget.onChanged,
       ),

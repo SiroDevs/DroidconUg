@@ -14,12 +14,7 @@ class CustomSnackbar {
         SnackBar(
           duration: duration,
           backgroundColor: isSuccess ? Colors.green : Colors.red,
-          content: Text(
-            feedback,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
+          content: Text(feedback, style: TextStyle(color: Colors.white)),
         ),
       );
   }
