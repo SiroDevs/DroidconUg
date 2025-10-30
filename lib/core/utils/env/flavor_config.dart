@@ -27,19 +27,29 @@ class FlavorConfig {
     required Color color,
     required FlavorValues values,
     ThemeMode themeMode = ThemeMode.system,
-  }) =>
-      _instance =
-          FlavorConfig._internal(flavor, name, color, values, themeMode);
+  }) => _instance = FlavorConfig._internal(
+    flavor,
+    name,
+    color,
+    values,
+    themeMode,
+  );
 
   FlavorConfig._internal(
-      this.flavor, this.name, this.color, this.values, this.themeMode);
+    this.flavor,
+    this.name,
+    this.color,
+    this.values,
+    this.themeMode,
+  );
 
   static FlavorConfig get instance => _instance!;
 
   static bool get hasInstance => _instance != null;
 
   static bool isProd() =>
-      _instance!.flavor == Flavor.production || _instance!.flavor == Flavor.staging;
+      _instance!.flavor == Flavor.production ||
+      _instance!.flavor == Flavor.staging;
 
   static bool isDev() => _instance!.flavor == Flavor.develop;
 }

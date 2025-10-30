@@ -91,10 +91,7 @@ class HomeViewState extends State<HomeView> {
           const SizedBox(width: 5),
           Expanded(
             child: sessions.length == 1
-                ? SessionCard(
-                    sessions: sessions,
-                    session: sessions.first,
-                  )
+                ? SessionCard(sessions: sessions, session: sessions.first)
                 : _buildParallelSessions(sessions),
           ),
         ],

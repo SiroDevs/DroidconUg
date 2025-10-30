@@ -50,7 +50,8 @@ class RadioInputState extends State<RadioInput> {
     );
     if (widget.vertical!) {
       return Container(
-        margin: widget.margin ??
+        margin:
+            widget.margin ??
             const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -61,10 +62,8 @@ class RadioInputState extends State<RadioInput> {
               children: widget.options.map((option) {
                 return Row(
                   children: <Widget>[
-                    Radio(
-                      value: option,
+                    RadioGroup(
                       groupValue: _selectedOption,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       onChanged: (value) {
                         if (!widget.isReadOnly!) {
                           setState(() {
@@ -73,11 +72,12 @@ class RadioInputState extends State<RadioInput> {
                           });
                         }
                       },
+                      child: Radio(
+                        value: option,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
                     ),
-                    Text(
-                      option,
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    Text(option, style: const TextStyle(fontSize: 16)),
                   ],
                 );
               }).toList(),
@@ -87,7 +87,8 @@ class RadioInputState extends State<RadioInput> {
       );
     } else {
       return Container(
-        margin: widget.margin ??
+        margin:
+            widget.margin ??
             const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -98,10 +99,8 @@ class RadioInputState extends State<RadioInput> {
               children: widget.options.map((option) {
                 return Row(
                   children: <Widget>[
-                    Radio(
-                      value: option,
+                    RadioGroup(
                       groupValue: _selectedOption,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       onChanged: (value) {
                         if (!widget.isReadOnly!) {
                           setState(() {
@@ -110,11 +109,12 @@ class RadioInputState extends State<RadioInput> {
                           });
                         }
                       },
+                      child: Radio(
+                        value: option,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
                     ),
-                    Text(
-                      option,
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    Text(option, style: const TextStyle(fontSize: 16)),
                   ],
                 );
               }).toList(),

@@ -1,5 +1,5 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../core/constants/app_assets.dart';
 
@@ -16,7 +16,7 @@ class SpeakerAvatar extends StatelessWidget {
     super.key,
     this.imageUrl,
     this.radius = 20,
-    this.fallbackAsset= AppAssets.imgSpeaker,
+    this.fallbackAsset = AppAssets.imgSpeaker,
     this.fallbackWidget,
     this.fit = BoxFit.cover,
     this.backgroundColor,
@@ -26,51 +26,75 @@ class SpeakerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fallback = _buildFallback();
-    
+
     if (imageUrl == null || imageUrl!.isEmpty) {
       return fallback;
     }
 
-    return CachedNetworkImage(
-      imageUrl: imageUrl!,
-      imageBuilder: (context, imageProvider) => circular
-          ? CircleAvatar(
-              radius: radius,
-              backgroundImage: imageProvider,
-              backgroundColor: backgroundColor,
-            )
-          : Container(
-              width: radius * 2,
-              height: radius * 2,
-              decoration: BoxDecoration(
-                borderRadius: circular 
-                    ? BorderRadius.circular(radius) 
-                    : BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: fit,
-                ),
-                color: backgroundColor,
-              ),
-            ),
-      placeholder: (context, url) => circular
-          ? CircleAvatar(
-              radius: radius,
-              backgroundColor: Colors.grey[300],
-              child: const CircularProgressIndicator(strokeWidth: 2),
-            )
-          : Container(
-              width: radius * 2,
-              height: radius * 2,
-              decoration: BoxDecoration(
-                borderRadius: circular 
-                    ? BorderRadius.circular(radius) 
-                    : BorderRadius.circular(8),
-                color: Colors.grey[300],
-              ),
-              child: const CircularProgressIndicator(strokeWidth: 2),
-            ),
-      errorWidget: (context, url, error) => fallback,
+    return ExtendedImage.network(
+      imageUrl!,
+      width: radius * 2,
+      height: radius * 2,
+      fit: fit,
+      cache: true,
+      shape: circular ? BoxShape.circle : BoxShape.rectangle,
+      borderRadius: circular ? null : BorderRadius.circular(8),
+      loadStateChanged: (state) {
+        switch (state.extendedImageLoadState) {
+          case LoadState.loading:
+            return circular
+                ? CircleAvatar(
+                    radius: radius,
+                    backgroundColor: Colors.grey[300],
+                    child: const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  )
+                : Container(
+                    width: radius * 2,
+                    height: radius * 2,
+                    decoration: BoxDecoration(
+                      borderRadius: circular
+                          ? BorderRadius.circular(radius)
+                          : BorderRadius.circular(8),
+                      color: Colors.grey[300],
+                    ),
+                    alignment: Alignment.center,
+                    child: const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  );
+
+          case LoadState.completed:
+            return circular
+                ? CircleAvatar(
+                    radius: radius,
+                    backgroundImage: state.imageProvider,
+                    backgroundColor: backgroundColor,
+                  )
+                : Container(
+                    width: radius * 2,
+                    height: radius * 2,
+                    decoration: BoxDecoration(
+                      borderRadius: circular
+                          ? BorderRadius.circular(radius)
+                          : BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: state.imageProvider,
+                        fit: fit,
+                      ),
+                      color: backgroundColor,
+                    ),
+                  );
+
+          case LoadState.failed:
+            return fallback;
+        }
+      },
     );
   }
 
@@ -87,34 +111,23 @@ class SpeakerAvatar extends StatelessWidget {
                 ? AssetImage(fallbackAsset!)
                 : null,
             child: fallbackAsset == null
-                ? Icon(
-                    Icons.person,
-                    size: radius,
-                    color: Colors.grey[600],
-                  )
+                ? Icon(Icons.person, size: radius, color: Colors.grey[600])
                 : null,
           )
         : Container(
             width: radius * 2,
             height: radius * 2,
             decoration: BoxDecoration(
-              borderRadius: circular 
-                  ? BorderRadius.circular(radius) 
+              borderRadius: circular
+                  ? BorderRadius.circular(radius)
                   : BorderRadius.circular(8),
               color: backgroundColor ?? Colors.grey[300],
               image: fallbackAsset != null
-                  ? DecorationImage(
-                      image: AssetImage(fallbackAsset!),
-                      fit: fit,
-                    )
+                  ? DecorationImage(image: AssetImage(fallbackAsset!), fit: fit)
                   : null,
             ),
             child: fallbackAsset == null
-                ? Icon(
-                    Icons.person,
-                    size: radius,
-                    color: Colors.grey[600],
-                  )
+                ? Icon(Icons.person, size: radius, color: Colors.grey[600])
                 : null,
           );
   }

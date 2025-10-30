@@ -23,7 +23,7 @@ class DatesHeader extends StatelessWidget {
             final index = entry.key;
             final date = entry.value;
             final isSelected = selectedDate == date;
-            
+
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: _DateChip(
@@ -60,7 +60,9 @@ class _DateChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
-          color: isSelected ? ThemeColors.primary : Theme.of(context).colorScheme.inverseSurface,
+          color: isSelected
+              ? ThemeColors.primary
+              : Theme.of(context).colorScheme.inverseSurface,
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
             color: isSelected ? Colors.transparent : ThemeColors.primary,

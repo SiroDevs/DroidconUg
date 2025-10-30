@@ -10,10 +10,5 @@ class Link {
   String? title;
   String? url;
 
-  Link({
-    this.id,
-    this.speakerId,
-    this.title,
-    this.url,
-  });
+  Link({this.id, this.speakerId, this.title, this.url});
 }

@@ -17,17 +17,14 @@ Future<http.Response> makeApiGetRequest(
     logger('Api Request [GET]: $endpoint \nHeaders: ${json.encode(headers)}');
 
     final response = await http
-        .get(
-      Uri.parse(endpoint),
-      headers: headers,
-    )
+        .get(Uri.parse(endpoint), headers: headers)
         .timeout(
-      const Duration(seconds: 60),
-      onTimeout: () {
-        logger('Timeout occurred. Please try again later.');
-        return http.Response('Timeout occurred', 504);
-      },
-    );
+          const Duration(seconds: 60),
+          onTimeout: () {
+            logger('Timeout occurred. Please try again later.');
+            return http.Response('Timeout occurred', 504);
+          },
+        );
 
     // logger('Api Response: [${response.statusCode}] ${response.body}');
     logger('Api Response: [${response.statusCode}]');

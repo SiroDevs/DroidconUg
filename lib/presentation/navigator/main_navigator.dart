@@ -13,17 +13,20 @@ class MainNavigator extends StatefulWidget {
   @override
   MainNavigatorState createState() => MainNavigatorState();
 
-  static MainNavigationMixin of(BuildContext context,
-      {bool rootNavigator = false}) {
+  static MainNavigationMixin of(
+    BuildContext context, {
+    bool rootNavigator = false,
+  }) {
     final navigator = rootNavigator
         ? context.findRootAncestorStateOfType<MainNavigationMixin>()
         : context.findAncestorStateOfType<MainNavigationMixin>();
     assert(() {
       if (navigator == null) {
         throw FlutterError(
-            'MainNavigation operation requested with a context that does not include a MainNavigation.\n'
-            'The context used to push or pop routes from the MainNavigation must be that of a '
-            'widget that is a descendant of a MainNavigator widget.');
+          'MainNavigation operation requested with a context that does not include a MainNavigation.\n'
+          'The context used to push or pop routes from the MainNavigation must be that of a '
+          'widget that is a descendant of a MainNavigator widget.',
+        );
       }
       return true;
     }());
@@ -46,9 +49,7 @@ class MainNavigatorState extends State<MainNavigator> with MainNavigationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return TextScaleFactor(
-      child: widget.child ?? const SizedBox.shrink(),
-    );
+    return TextScaleFactor(child: widget.child ?? const SizedBox.shrink());
   }
 
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -70,11 +71,10 @@ class MainNavigatorState extends State<MainNavigator> with MainNavigationMixin {
     }
 
     MaterialPageRoute<void> createMaterialPageRoute(
-        WidgetBuilder builder, RouteSettings settings) {
-      return MaterialPageRoute<void>(
-        builder: builder,
-        settings: settings,
-      );
+      WidgetBuilder builder,
+      RouteSettings settings,
+    ) {
+      return MaterialPageRoute<void>(builder: builder, settings: settings);
     }
 
     WidgetBuilder? routeBuilder = getRouteBuilder(strippedPath!);

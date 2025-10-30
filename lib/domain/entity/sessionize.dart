@@ -9,9 +9,5 @@ class Sessionize {
   String? sessionId;
   String? speakerId;
 
-  Sessionize({
-    this.id,
-    this.sessionId,
-    this.speakerId,
-  });
+  Sessionize({this.id, this.sessionId, this.speakerId});
 }

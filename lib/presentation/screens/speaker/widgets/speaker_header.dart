@@ -29,15 +29,36 @@ class SpeakerHeader extends StatelessWidget {
       return _buildFallbackHeader();
     }
 
-    return CachedNetworkImage(
-      imageUrl: speaker.avatar!,
+    return ExtendedImage.network(
+      speaker.avatar!,
       fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,
-      placeholder: (context, url) => _buildLoadingHeader(),
-      errorWidget: (context, url, error) => _buildFallbackHeader(),
-      fadeInDuration: const Duration(milliseconds: 500),
-      fadeInCurve: Curves.easeIn,
+      cache: true,
+      handleLoadingProgress: true,
+      mode: ExtendedImageMode.none,
+      loadStateChanged: (state) {
+        switch (state.extendedImageLoadState) {
+          case LoadState.loading:
+            return _buildLoadingHeader();
+
+          case LoadState.completed:
+            return AnimatedOpacity(
+              opacity: 1.0,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+              child: ExtendedRawImage(
+                image: state.extendedImageInfo?.image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+            );
+
+          case LoadState.failed:
+            return _buildFallbackHeader();
+        }
+      },
     );
   }
 
@@ -60,9 +81,9 @@ class SpeakerHeader extends StatelessWidget {
 
   Widget _buildFallbackHeader() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: const AssetImage(AppAssets.imgSpeaker) as ImageProvider,
+          image: AssetImage(AppAssets.imgSpeaker),
           fit: BoxFit.cover,
         ),
       ),

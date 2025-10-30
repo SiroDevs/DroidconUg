@@ -95,7 +95,7 @@ dynamic tryJsonDecode(String source) {
 }
 
 Future<bool> isKeyboardShowing(BuildContext context) async {
-    return View.of(context).viewInsets.bottom > 0;
+  return View.of(context).viewInsets.bottom > 0;
 }
 
 Future<void> closeKeyboard(BuildContext context) async {
@@ -132,8 +132,11 @@ extension StringExtension on String {
   }
 }
 
-fieldFocusChange(
-    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+void fieldFocusChange(
+  BuildContext context,
+  FocusNode currentFocus,
+  FocusNode nextFocus,
+) {
   currentFocus.unfocus();
   FocusScope.of(context).requestFocus(nextFocus);
 }

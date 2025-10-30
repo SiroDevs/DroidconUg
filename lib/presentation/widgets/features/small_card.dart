@@ -30,7 +30,8 @@ class SmallCard extends StatelessWidget {
           child: Card(
             elevation: 0,
             shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,11 +43,8 @@ class SmallCard extends StatelessWidget {
                 ),
                 Text(
                   cardName,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
-                )
+                  style: const TextStyle(fontSize: 15, color: Colors.black),
+                ),
               ],
             ),
           ),
@@ -81,12 +79,8 @@ class PayCardx extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 1),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(
-              color: isSelected ? Colors.white : Colors.black,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
+            border: Border.all(color: isSelected ? Colors.white : Colors.black),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           height: height != 0 ? height : size.width / 2.1,
           child: Card(
@@ -99,17 +93,14 @@ class PayCardx extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  image,
-                  height: height - 40,
-                ),
+                Image.asset(image, height: height - 40),
                 Text(
                   cardName,
                   style: TextStyle(
                     fontSize: 12,
                     color: isSelected ? Colors.white : Colors.black,
                   ),
-                )
+                ),
               ],
             ),
           ),

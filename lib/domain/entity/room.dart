@@ -9,9 +9,5 @@ class Room {
   String? name;
   int? sort;
 
-  Room({
-    this.id,
-    this.name,
-    this.sort,
-  });
+  Room({this.id, this.name, this.sort});
 }
