@@ -5,10 +5,7 @@ import '../../../core/utils/env/flavor_config.dart';
 class TextScaleFactor extends StatelessWidget {
   final Widget child;
 
-  const TextScaleFactor({
-    required this.child,
-    Key? key,
-  }) : super(key: key);
+  const TextScaleFactor({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {

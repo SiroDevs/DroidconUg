@@ -21,19 +21,16 @@ class LargeCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
+                border: Border.all(color: Colors.black),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               width: MediaQuery.of(context).size.width - 28,
               height: 230,
               child: Card(
                 elevation: 0,
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,11 +39,8 @@ class LargeCard extends StatelessWidget {
                     Text(
                       cardName,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    )
+                      style: const TextStyle(fontSize: 15, color: Colors.black),
+                    ),
                   ],
                 ),
               ),

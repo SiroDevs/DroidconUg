@@ -1,5 +1,6 @@
 /// An [InputField] represents the value of a single form input field.
 /// It contains information about the [value] as well as validity.
+library;
 
 abstract class InputField<T, E> {
   const InputField._({required this.value, this.isPure = true});

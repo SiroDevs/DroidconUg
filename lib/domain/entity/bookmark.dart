@@ -9,10 +9,5 @@ class Bookmark {
   String? session;
   String? createdAt;
 
-  Bookmark({
-    this.id,
-    this.session,
-    this.createdAt,
-  });
+  Bookmark({this.id, this.session, this.createdAt});
 }
-

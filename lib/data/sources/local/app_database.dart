@@ -15,14 +15,7 @@ part 'app_database.g.dart';
 
 @Database(
   version: 2,
-  entities: [
-    Bookmark,
-    Link,
-    Room,
-    Session,
-    Speaker,
-    Sessionize,
-  ],
+  entities: [Bookmark, Link, Room, Session, Speaker, Sessionize],
   views: [SessionExt],
 )
 abstract class AppDatabase extends FroomDatabase {
@@ -35,7 +28,5 @@ abstract class AppDatabase extends FroomDatabase {
 }
 
 Future<AppDatabase> buildInMemoryDatabase() {
-  return $FroomAppDatabase
-      .inMemoryDatabaseBuilder()
-      .build();
+  return $FroomAppDatabase.inMemoryDatabaseBuilder().build();
 }

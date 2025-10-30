@@ -44,5 +44,4 @@ abstract class DatabaseRepository {
   Future<void> saveSessionize(Sessionize sessionizes);
 
   Future<void> removeAllSessionizes();
-
 }

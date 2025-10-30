@@ -67,7 +67,7 @@ class SessionMeta extends StatelessWidget {
               title,
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
-            const SizedBox().expanded()
+            const SizedBox().expanded(),
           ].toRow(),
           const SizedBox(height: 2),
           Text(

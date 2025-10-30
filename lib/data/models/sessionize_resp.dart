@@ -10,11 +10,7 @@ class SessionizeResp {
   final List<SpeakerResp>? speakers;
   final List<RoomResp>? rooms;
 
-  SessionizeResp({
-    this.sessions,
-    this.speakers,
-    this.rooms,
-  });
+  SessionizeResp({this.sessions, this.speakers, this.rooms});
 
   factory SessionizeResp.fromJson(Map<String, dynamic> json) =>
       _$SessionizeRespFromJson(json);

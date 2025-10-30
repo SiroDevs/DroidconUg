@@ -10,11 +10,7 @@ class SessionItem extends StatelessWidget {
   final Session session;
   final List<Room> rooms;
 
-  const SessionItem({
-    super.key,
-    required this.session,
-    required this.rooms,
-  });
+  const SessionItem({super.key, required this.session, required this.rooms});
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +37,7 @@ class SessionItem extends StatelessWidget {
           Text(
             session.title ?? "No Title",
             maxLines: 2,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Text(
             session.description ?? "No Description",
@@ -61,9 +54,7 @@ class SessionItem extends StatelessWidget {
                   tagText:
                       '${formatTime(session.startsAt!)} - ${formatTime(session.endsAt!)}',
                 ),
-                TagItem(
-                  tagText: '${getRoomName(rooms, session.roomId!)}',
-                ),
+                TagItem(tagText: '${getRoomName(rooms, session.roomId!)}'),
               ],
             ),
           ),
@@ -78,12 +69,7 @@ class SessionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: [
-              startTime,
-              rightContent,
-            ],
-          )
+          Row(children: [startTime, rightContent]),
         ],
       ),
     );

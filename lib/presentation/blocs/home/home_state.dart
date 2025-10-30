@@ -15,6 +15,6 @@ class HomeState with _$HomeState {
   const factory HomeState.bookmarked(bool bookmarked) = SessionBookmarked;
 
   const factory HomeState.noInternet() = NoInternetState;
-  
+
   const factory HomeState.failure(String feedback) = FailureState;
 }

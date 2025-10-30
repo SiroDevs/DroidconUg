@@ -6,7 +6,7 @@ class NetworkUtil {
   static Future<bool> hasInternetConnection() async {
     try {
       final connectivityResult = await _connectivity.checkConnectivity();
-      return connectivityResult != ConnectivityResult.none;
+      return !connectivityResult.contains(ConnectivityResult.none);
     } catch (e) {
       return false;
     }
@@ -29,7 +29,7 @@ class NetworkUtil {
 
   static Stream<bool> get onConnectivityChanged {
     return _connectivity.onConnectivityChanged.map(
-      (result) => result != ConnectivityResult.none,
+      (result) => !result.contains(ConnectivityResult.none),
     );
   }
 }
