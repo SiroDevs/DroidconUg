@@ -4,15 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
-import '../../blocs/home/home_bloc.dart';
-import '../../theme/theme_colors.dart';
+import '../bloc/home_bloc.dart';
+import '../../../core/theme/theme_colors.dart';
 import '../../widgets/action/theme_button.dart';
 import '../../widgets/features/speaker_avatar.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
 import '../../widgets/progress/skeleton.dart';
 import '../../widgets/action/session_card.dart';
-import '../speaker/speaker_screen.dart';
+import '../../speaker/view/speaker_screen.dart';
 
 part 'home_view.dart';
 part 'widgets/dates_header.dart';

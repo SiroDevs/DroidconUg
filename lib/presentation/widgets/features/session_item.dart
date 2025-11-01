@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../core/utils/utils.dart';
 import '../../../domain/entity/models.dart';
-import '../../theme/theme_styles.dart';
+import '../../../core/theme/theme_styles.dart';
 import 'tag_item.dart';
 
 class SessionItem extends StatelessWidget {

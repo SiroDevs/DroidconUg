@@ -5,13 +5,13 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
-import '../../blocs/sessions/sessions_bloc.dart';
-import '../../theme/theme_colors.dart';
+import '../bloc/sessions_bloc.dart';
+import '../../../core/theme/theme_colors.dart';
 import '../../widgets/action/session_card.dart';
 import '../../widgets/features/speaker_avatar.dart';
 import '../../widgets/progress/custom_snackbar.dart';
 import '../../widgets/progress/general_progress.dart';
-import '../speaker/speaker_screen.dart';
+import '../../speaker/view/speaker_screen.dart';
 
 part 'session_view.dart';
 part 'widgets/parallel_sessions.dart';

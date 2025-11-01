@@ -2,11 +2,11 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/constants/app_assets.dart';
-import '../../../core/constants/app_constants.dart';
-import '../../../core/utils/date_util.dart';
-import '../../navigator/route_names.dart';
-import '../../theme/theme_colors.dart';
+import '../../core/constants/app_assets.dart';
+import '../../core/constants/app_constants.dart';
+import '../../core/utils/date_util.dart';
+import '../../core/navigator/route_names.dart';
+import '../../core/theme/theme_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

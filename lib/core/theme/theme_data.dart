@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/app_constants.dart';
-import '../../core/utils/app_util.dart';
-import '../../core/di/injectable.dart';
+import '../constants/app_constants.dart';
+import '../utils/app_util.dart';
+import '../di/injectable.dart';
 import '../../domain/repository/preferences_repository.dart';
 import 'theme_colors.dart';
 

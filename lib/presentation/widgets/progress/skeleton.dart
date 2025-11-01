@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-import '../../theme/theme_colors.dart';
-import '../../theme/theme_styles.dart';
+import '../../../core/theme/theme_colors.dart';
+import '../../../core/theme/theme_styles.dart';
 
 class SkeletonLoading extends StatelessWidget {
   const SkeletonLoading({super.key});

@@ -1,4 +1,4 @@
-import 'package:droidconug/presentation/blocs/sessions/sessions_bloc.dart';
+import 'package:droidconug/presentation/session/bloc/sessions_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -6,7 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/utils/date_util.dart';
 import '../../../domain/entity/models.dart';
-import '../../screens/session/session_screen.dart';
+import '../../session/view/session_screen.dart';
 import '../features/speaker_avatar.dart';
 
 class SessionCard extends StatelessWidget {

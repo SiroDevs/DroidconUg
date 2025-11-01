@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'presentation/blocs/theme/theme_bloc.dart';
-import 'presentation/theme/theme_data.dart';
-import 'domain/repository/preferences_repository.dart';
 import 'core/di/injectable.dart';
-import 'presentation/navigator/main_navigator.dart';
+import 'domain/repository/preferences_repository.dart';
 import 'l10n/app_localizations.dart';
+import 'core/theme/bloc/theme_bloc.dart';
+import 'core/navigator/main_navigator.dart';
+import 'core/theme/theme_data.dart';
 
 class MyApp extends StatefulWidget {
   final Widget? home;

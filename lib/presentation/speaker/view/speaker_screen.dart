@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../domain/entity/models.dart';
-import '../../blocs/speakers/speakers_bloc.dart';
-import '../../theme/theme_colors.dart';
+import '../bloc/speakers_bloc.dart';
+import '../../../core/theme/theme_colors.dart';
 import '../../widgets/action/session_card.dart';
 import '../../widgets/features/date_header.dart';
 import '../../widgets/features/speaker_avatar.dart';
