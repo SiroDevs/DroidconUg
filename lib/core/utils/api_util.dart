@@ -40,3 +40,13 @@ Future<http.Response> makeApiGetRequest(
     }
   }
 }
+
+String getEffectiveImageUrl(String? url) {
+  if (url == null || url.isEmpty) return '';
+    
+    if (url.contains('sessionize.com')) {
+      return url.replaceAll('sessionize.com', 'cache.sessionize.com');
+    }
+    
+    return url;
+}

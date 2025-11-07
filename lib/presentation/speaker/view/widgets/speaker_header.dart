@@ -25,12 +25,10 @@ class SpeakerHeader extends StatelessWidget {
   }
 
   Widget _buildHeaderImage() {
-    if (speaker.avatar == null || speaker.avatar!.isEmpty) {
-      return _buildFallbackHeader();
-    }
-
+    final effectiveImageUrl = getEffectiveImageUrl(speaker.avatar);
+    
     return ExtendedImage.network(
-      speaker.avatar!,
+      effectiveImageUrl,
       fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,

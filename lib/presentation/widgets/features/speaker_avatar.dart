@@ -2,6 +2,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_assets.dart';
+import '../../../core/utils/api_util.dart';
+import '../../../core/utils/app_util.dart';
 
 class SpeakerAvatar extends StatelessWidget {
   final String? imageUrl;
@@ -25,18 +27,19 @@ class SpeakerAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fallback = _buildFallback();
-
-    if (imageUrl == null || imageUrl!.isEmpty) {
-      return fallback;
-    }
-
+    final effectiveImageUrl = getEffectiveImageUrl(imageUrl);
+    
     return ExtendedImage.network(
-      imageUrl!,
+      effectiveImageUrl,
       width: radius * 2,
       height: radius * 2,
       fit: fit,
       cache: true,
+      retries: 3,
+      timeRetry: const Duration(milliseconds: 500),
+      headers: const {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
       shape: circular ? BoxShape.circle : BoxShape.rectangle,
       borderRadius: circular ? null : BorderRadius.circular(8),
       loadStateChanged: (state) {
@@ -92,7 +95,12 @@ class SpeakerAvatar extends StatelessWidget {
                   );
 
           case LoadState.failed:
-            return fallback;
+            logger('❌ SpeakerAvatar - Failed to load: $effectiveImageUrl');
+            if (state.lastException != null) {
+              logger('❌ SpeakerAvatar - Exception: ${state.lastException}');
+              logger('❌ SpeakerAvatar - StackTrace: ${state.lastStack}');
+            }
+            return _buildFallback();
         }
       },
     );

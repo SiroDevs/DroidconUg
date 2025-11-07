@@ -5,6 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_assets.dart';
+import '../../../core/utils/api_util.dart';
 import '../../../domain/entity/models.dart';
 import '../bloc/speakers_bloc.dart';
 import '../../../core/theme/theme_colors.dart';
