@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'app.dart';
-import 'core/utils/app_util.dart';
-import 'core/utils/env/flavor_config.dart';
-import 'core/utils/env/environments.dart';
+import 'common/utils/app_util.dart';
+import 'common/utils/env/flavor_config.dart';
+import 'common/utils/env/environments.dart';
 import 'core/di/injectable.dart';
 
 Future<void> main() async {

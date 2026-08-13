@@ -1,6 +1,6 @@
 import 'package:froom/froom.dart';
 
-import '../../../../core/constants/app_constants.dart';
+import '../../../../common/utils/constants/app_constants.dart';
 import '../../../../domain/entity/sessionize.dart';
 
 @dao

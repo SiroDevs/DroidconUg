@@ -1,6 +1,6 @@
 import 'package:froom/froom.dart';
 
-import '../../core/constants/app_constants.dart';
+import '../../common/utils/constants/app_constants.dart';
 
 @DatabaseView(
   '${AppConstants.sessionsExtSql};',

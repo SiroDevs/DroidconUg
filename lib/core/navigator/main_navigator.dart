@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../presentation/home/view/home_screen.dart';
-import '../../presentation/splash/splash_screen.dart';
-import '../../presentation/widgets/text_scale_factor.dart';
+import '../../features/home/ui/home_screen.dart';
+import '../../features/splash/splash_screen.dart';
+import '../../common/widgets/text_scale_factor.dart';
 import 'route_names.dart';
 
 class MainNavigator extends StatefulWidget {

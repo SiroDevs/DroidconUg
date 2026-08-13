@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:http/http.dart';
 
-import '../core/constants/api_constants.dart';
+import '../common/utils/constants/api_constants.dart';
 import '../core/di/injectable.dart';
-import '../core/utils/api_util.dart';
-import '../core/utils/app_util.dart';
+import '../common/utils/api_util.dart';
+import '../common/utils/app_util.dart';
 import '../domain/entity/droidcon.dart';
 import '../domain/repository/database_repository.dart';
 

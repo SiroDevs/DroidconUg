@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 import '../../core/di/injectable.dart';
-import '../../core/utils/app_util.dart';
+import '../../common/utils/app_util.dart';
 import '../../data/home_client.dart';
 import '../../data/models/sessionize_resp.dart';
 import '../entity/droidcon.dart';
